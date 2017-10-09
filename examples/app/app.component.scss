@@ -1,0 +1,15 @@
+examples-list {
+    width: 300px;
+}
+
+.content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+::ng-deep main-layout-example, ::ng-deep document-layout-example {
+    flex: 1 1 100%;
+}
