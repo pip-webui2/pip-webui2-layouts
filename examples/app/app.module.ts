@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CustomBreakPointsProvider } from './custom-breakpoints';
 
 import { PipTestModule } from './pip-webui2-layouts';
 
@@ -34,7 +35,7 @@ const appRoutes: Routes = [
 
     RouterModule.forRoot(appRoutes, { useHash: true })
   ],
-  providers: [],
+  providers: [CustomBreakPointsProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
