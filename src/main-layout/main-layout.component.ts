@@ -1,8 +1,11 @@
-import { Directive, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { addResizeListener } from '../media/resize-layout.function';
 
-@Directive({ selector: '[pipMain]' })
-export class PipMainLayoutDirective implements OnInit, OnDestroy {
+@Component({ 
+    selector: 'pip-main',
+    template: '<ng-content></ng-content>'
+ })
+export class PipMainLayoutComponent implements OnInit, OnDestroy {
     @Input() public pipContainer;
     
     private listener: any;
@@ -13,11 +16,10 @@ export class PipMainLayoutDirective implements OnInit, OnDestroy {
         private elRef: ElementRef
     ) {
         renderer.setElementClass(elRef.nativeElement, 'pip-main', true);
+        this.listener = () => { this.onResize(); };
     }
 
     public ngOnInit() {
-        this.listener = () => { this.onResize(); };
-
         if (this.pipContainer != null) {
             let firstSym = this.pipContainer.substr(0, 1);
 
@@ -37,6 +39,6 @@ export class PipMainLayoutDirective implements OnInit, OnDestroy {
     }
 
     private onResize() {
-        console.log('!---- main layout resized ----!');
+        console.log('!---- main layout container resized ----!');
     }
 }

@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 
-import { PipMainLayoutDirective } from './main-layout.directive';
+import { PipMainLayoutComponent } from './main-layout.component';
 
 @NgModule({
   declarations: [
-    PipMainLayoutDirective
+    PipMainLayoutComponent
   ],
   imports: [
     
   ],
   exports: [  
-    PipMainLayoutDirective
+    PipMainLayoutComponent
   ],
   providers: [
-    PipMainLayoutDirective
+    PipMainLayoutComponent
   ]
 })
 export class PipMainLayoutModule { }
