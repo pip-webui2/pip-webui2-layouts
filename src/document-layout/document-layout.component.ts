@@ -1,6 +1,6 @@
 import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 
-@Component({ 
+@Component({
     selector: 'pip-document',
     styleUrls: ['./document-layout.component.scss'],
     template: '<div class="pip-document-content"><ng-content></ng-content></div>'
@@ -14,10 +14,10 @@ export class PipDocumentLayoutComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-        
+
     }
 
     public ngOnDestroy() {
-        
+
     }
 }
