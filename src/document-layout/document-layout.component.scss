@@ -19,7 +19,11 @@
   margin: 0 auto;
   width: 960px;
   max-width: 100%;
-  transition: all 0.35s ease;
+  transition: left, right, top 0.35s ease;
+
+  &.pip-with-toolbar {
+    margin-top: -48px;
+  }
 
   .pip-document-content {
     width: 100%;
