@@ -26,7 +26,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
         gutter: 16,
         columnWidth: '.pip-tile-sizer',
         itemSelector: '.pip-tile',
-        transitionDuration: '0.25s',
+        transitionDuration: '0.35s',
         fitWidth: false
     };
 
@@ -57,6 +57,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
         if (this.masonry) {
             this.masonry.destroy();
         }
+        removeResizeListener(this.elRef.nativeElement, this.listener);
     }
 
     private onResize(force: boolean = false) {
