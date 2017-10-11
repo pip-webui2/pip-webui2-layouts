@@ -1,7 +1,7 @@
 <div fxLayout="row" class="content" id="content-id">
   <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIdChange)="onListItemIndexChanged($event)">
   </examples-list>
-  <div fxFlex="grow" fxLayout="row">
+  <div fxFlex="grow" fxLayout="row" style="overflow: auto">
     <router-outlet></router-outlet>
   </div>
 </div>

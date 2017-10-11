@@ -22,6 +22,9 @@ export class AppComponent {
     },
     {
       name: 'Tiles', id: 'tiles', route: 'tiles'
+    },
+    {
+      name: 'Menu', id: 'menu', route: 'menu'
     }
   ];
 

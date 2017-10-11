@@ -1,0 +1,18 @@
+<div class="pip-main-menu" [ngClass]="{'pip-single-content': isSingle}">
+  <div class="pip-menu">
+    <mat-nav-list dense>
+      <mat-list-item>
+        <h3 md-line>One</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <h3 md-line>Two</h3>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+
+  <div class="pip-content-container">
+    <pip-document>
+        <mat-slide-toggle [(ngModel)]="isSingle">Single content</mat-slide-toggle>
+    </pip-document>
+  </div>
+</div>
