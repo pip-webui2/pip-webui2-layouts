@@ -15,5 +15,12 @@
 }
 
 pip-tiles.pip-mobile .pip-tile {
-    width: calc(100% - 32px);
+    width: calc(100% - 32px) !important;
+}
+
+.pip-multi-tiles-container {
+    overflow: auto;
+    .pip-tiles {
+        overflow: hidden;
+    }
 }
