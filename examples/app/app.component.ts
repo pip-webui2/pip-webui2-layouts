@@ -19,6 +19,9 @@ export class AppComponent {
     },
     {
       name: 'Document', id: 'document', route: 'document'
+    },
+    {
+      name: 'Tiles', id: 'tiles', route: 'tiles'
     }
   ];
 
