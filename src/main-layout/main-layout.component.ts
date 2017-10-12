@@ -1,5 +1,6 @@
 import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { addResizeListener } from '../media/resize-layout.function';
+import { PipMediaService } from '../media/shared/media.service';
 
 @Component({ 
     selector: 'pip-main',
@@ -13,7 +14,8 @@ export class PipMainLayoutComponent implements OnInit, OnDestroy {
 
     constructor(
         private renderer: Renderer,
-        private elRef: ElementRef
+        private elRef: ElementRef,
+        private service: PipMediaService 
     ) {
         renderer.setElementClass(elRef.nativeElement, 'pip-main', true);
         this.listener = () => { this.onResize(); };
@@ -32,6 +34,9 @@ export class PipMainLayoutComponent implements OnInit, OnDestroy {
         }
 
         addResizeListener(this.element, this.listener);
+        setTimeout(() => {
+            this.service.updateMainLayoutBreakpoints(this.elRef.nativeElement.offsetWidth);
+        });
     }
 
     public ngOnDestroy() {
@@ -39,6 +44,6 @@ export class PipMainLayoutComponent implements OnInit, OnDestroy {
     }
 
     private onResize() {
-        console.log('!---- main layout container resized ----!');
+        this.service.updateMainLayoutBreakpoints(this.elRef.nativeElement.offsetWidth);
     }
 }
