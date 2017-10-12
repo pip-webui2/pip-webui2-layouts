@@ -1,7 +1,20 @@
-<div fxLayout="row" class="content" id="content-id">
-  <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIdChange)="onListItemIndexChanged($event)">
-  </examples-list>
-  <div fxFlex="grow" fxLayout="row" style="overflow: auto">
-    <router-outlet></router-outlet>
-  </div>
+<div fxLayout="column" class="content" id="content-id">
+  <pip-sidenav>
+    <div type="nav" style="height: 100%">
+      <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIdChange)="onListItemIndexChanged($event)">
+      </examples-list>
+    </div>
+    <div type="body" fxFlexFill>
+      <pip-appbar>
+        <button mat-icon-button (click)="onMenuClick()">
+                  <mat-icon>menu</mat-icon>
+              </button> {{ list[listIndex].name }}
+      </pip-appbar>
+      <pip-content>
+        <pip-main fxFlex="grow" fxLayout="row" style="overflow: auto">
+          <router-outlet></router-outlet>
+        </pip-main>
+      </pip-content>
+    </div>
+  </pip-sidenav>
 </div>

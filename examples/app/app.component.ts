@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PipMediaService } from './pip-webui2-layouts';
+import { PipMediaService, PipSidenavService } from './pip-webui2-layouts';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,8 @@ import { PipMediaService } from './pip-webui2-layouts';
 })
 export class AppComponent {
   constructor(
-    media: PipMediaService
+    media: PipMediaService,
+    private sidenav: PipSidenavService
   ) {
     media.activate();
   }
@@ -32,5 +33,9 @@ export class AppComponent {
 
   public onListItemIndexChanged(index: number) {
     this.listIndex - index;
+  }
+
+  public onMenuClick() {
+    this.sidenav.toggleNav();
   }
 }
