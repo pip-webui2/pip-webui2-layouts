@@ -9,10 +9,11 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 export class ExamplesListComponent {
 	@Input() list: any[];
 	@Input() selectedItemIndex: number;
-	@Output() selectedItemIndexChange = new EventEmitter();
+	@Output() selectedItemIndexChange: EventEmitter<any> = new EventEmitter();
 
 	public onItemSelect(index: number): void {
 		this.selectedItemIndex = index;
+		console.log('this.selectedItemIndexChange', this.selectedItemIndexChange);
 		this.selectedItemIndexChange.emit(index);
     }
 }

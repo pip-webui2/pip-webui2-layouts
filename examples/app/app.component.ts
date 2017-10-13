@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { PipMediaService, PipSidenavService } from './pip-webui2-layouts';
+import { PipMediaService, PipSidenavService, PipAuxPanelService } from './pip-webui2-layouts';
+import { ObservableMedia } from "@angular/flex-layout";
+
+declare var _;
 
 @Component({
   selector: 'app-root',
@@ -8,13 +11,18 @@ import { PipMediaService, PipSidenavService } from './pip-webui2-layouts';
 })
 export class AppComponent {
   constructor(
-    media: PipMediaService,
-    private sidenav: PipSidenavService
+    public media: PipMediaService,
+    public globalMedia: ObservableMedia,
+    public sidenav: PipSidenavService,
+    private auxPanel: PipAuxPanelService
   ) {
     media.activate();
+    this.generateList();
   }
+  
+  public list: any[] = [];
 
-  public list: any[] = [
+  private _list: any[] = [
     {
       name: 'Main', id: 'main', route: 'main'
     },
@@ -33,9 +41,26 @@ export class AppComponent {
 
   public onListItemIndexChanged(index: number) {
     this.listIndex - index;
+    this.sidenav.closeMobileNav();
   }
 
   public onMenuClick() {
     this.sidenav.toggleNav();
   }
+
+  public onInfoClick() {
+    this.auxPanel.toggleAux();
+  }
+
+  private generateList() {
+    for (let i = 0; i < 8; i++) {
+      _.each(this._list, (item) => {
+        let copy = _.clone(item);
+        copy.name += ' ' + i;
+        this.list.push(copy);
+      });
+    }
+  }
+
+  
 }

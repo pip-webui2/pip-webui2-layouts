@@ -1,20 +1,32 @@
 <div fxLayout="column" class="content" id="content-id">
-  <pip-sidenav>
+  <pip-mobile-sidenav>
     <div type="nav" style="height: 100%">
-      <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIdChange)="onListItemIndexChanged($event)">
+      <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
       </examples-list>
     </div>
     <div type="body" fxFlexFill>
       <pip-appbar>
-        <button mat-icon-button (click)="onMenuClick()">
-                  <mat-icon>menu</mat-icon>
-              </button> {{ list[listIndex].name }}
+        <button mat-icon-button (click)="onMenuClick()" *ngIf="media.isMainActive('xs') || media.isMainActive('md')">
+            <mat-icon>{{ media.isMainActive('xs') ? 'menu' : sidenav.small ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+        </button> {{ list[this.listIndex].name }}
+        <div fxFlex="grow"></div>
+        <button mat-icon-button (click)="onInfoClick()">
+            <mat-icon>info</mat-icon>
+        </button>
       </pip-appbar>
       <pip-content>
-        <pip-main fxFlex="grow" fxLayout="row" style="overflow: auto">
-          <router-outlet></router-outlet>
+        <pip-main fxFlex="grow">
+          <pip-sidenav>
+            <div type="nav" style="height: 100%">
+              <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
+              </examples-list>
+            </div>
+            <div type="body" fxFlex="grow" fxLayout="row" style="overflow: auto">
+              <router-outlet></router-outlet>
+            </div>
+          </pip-sidenav>
         </pip-main>
       </pip-content>
     </div>
-  </pip-sidenav>
+  </pip-mobile-sidenav>
 </div>

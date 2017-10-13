@@ -6,6 +6,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuLayoutExampleComponent implements OnInit {
 	public isSingle: boolean = false;
+	public list: any[] = [];
 
-	ngOnInit() { }
+	ngOnInit() {
+		this.generateList();
+	 }
+
+	private generateList() {
+		for(let i = 0; i < 50; i++) {
+			this.list.push({ title: 'Item ' + i });
+		}
+	}
 }
