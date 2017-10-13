@@ -1,0 +1,9 @@
+<mat-sidenav-container class="pip-sidenav-container">
+  <mat-sidenav #mobileSidenav opened="false" class="pip-mobile-sidenav" align="start">
+    <ng-content select="[type=nav]"></ng-content>
+  </mat-sidenav>
+  <mat-sidenav #mobileAux opened="false" [mode]="auxMode$ | async" class="pip-mobile-aux" align="end">
+    <ng-content select="[type=aux]"></ng-content>
+  </mat-sidenav>
+  <ng-content select="[type=body]"></ng-content>
+</mat-sidenav-container>

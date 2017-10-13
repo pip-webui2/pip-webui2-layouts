@@ -6,11 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material'
 
 import { PipSidenavComponent } from './sidenav.component';
+import { PipSidenavMobileComponent } from './sidenav-mobile.component';
 import { PipSidenavService } from './shared/sidenav.service';
 
 @NgModule({
   declarations: [
-    PipSidenavComponent
+    PipSidenavComponent,
+    PipSidenavMobileComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +22,8 @@ import { PipSidenavService } from './shared/sidenav.service';
     MatSidenavModule
   ],
   exports: [
-    PipSidenavComponent
+    PipSidenavComponent,
+    PipSidenavMobileComponent
   ],
   providers: [
     PipSidenavService

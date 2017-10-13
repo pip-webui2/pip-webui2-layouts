@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -10,31 +10,67 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { ObservableMedia } from "@angular/flex-layout";
+
 @Injectable()
 export class PipSidenavService {
-    public _sidenav: MatSidenav;
-    private _side$: BehaviorSubject<string> = new BehaviorSubject('side');
+    public _mobileSidenav: MatSidenav;
+    public _desktopSidenav: MatSidenav;
+    private _mode$: BehaviorSubject<string> = new BehaviorSubject('side');
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-    public mode: string = 'side';
-    public small: boolean = false;
+    private _mode: string = 'side';
+    private _mobileSidenavAliases: string[] = ['xs'];
+    private _small: boolean = false;
+    private _small$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-    public constructor() { }
-
-    public get sidenav(): MatSidenav {
-        return this._sidenav;
+    public constructor(
+        private media: ObservableMedia
+    ) { }
+    
+    public set mobileSidenavAliases(aliases: string[]) {
+        this._mobileSidenavAliases = aliases;
     }
 
-    public set sidenav(sidenav: MatSidenav) {
-        this._sidenav = sidenav;
+    public get small() {
+        return this._small;
     }
 
-    public get side$(): Observable<string> {
-        return this._side$;
+    public set small(sm: boolean) {
+        this._small$.next(sm);
+        this._small = sm;
     }
 
-    public set side(s: string) {
-        this._side$.next(s);
-        this.mode = s;
+    public get small$(): Observable<boolean> {
+        return this._small$;
+    }
+
+    public get mobileSidenavAliases() {
+        return this._mobileSidenavAliases;
+    }
+
+    public get mobileSidenav(): MatSidenav {
+        return this._mobileSidenav;
+    }
+
+    public set mobileSidenav(sidenav: MatSidenav) {
+        this._mobileSidenav = sidenav;
+    }
+
+    public get desktopSidenav(): MatSidenav {
+        return this._desktopSidenav;
+    }
+
+    public set desktopSidenav(sidenav: MatSidenav) {
+        this._desktopSidenav = sidenav;
+    }
+
+    public get mode$(): Observable<string> {
+        return this._mode$;
+    }
+
+    public set mode(s: string) {
+        this._mode$.next(s);
+        this._mode = s;
     }
 
     public get opened$(): Observable<boolean> {
@@ -45,37 +81,74 @@ export class PipSidenavService {
         this._opened$.next(open);
     }
 
-    public toggleNav(sidenav: MatSidenav = this._sidenav) {
-        if (sidenav) {
-            sidenav.toggle();
-            /*if(!sidenav.opened) {
-                this.small = false;
-            }*/
-        } else { console.log('Sidenav not found'); }
+    private toggleSmall() {
+        this._small == true ? this.small = false : this.small = true;
     }
 
-    public openNav(sidenav: MatSidenav = this._sidenav) {
+    public toggleNav(sidenav?: MatSidenav) {
+        if (sidenav) {
+            sidenav.toggle();
+        } else { 
+            this.isMobile() ? this.toggleMobileNav() :  this.toggleDesktopNav()
+        }
+    }
+
+    public openNav(sidenav?: MatSidenav) {
         if (sidenav) {
             sidenav.open();
         } else {
-            console.log('Sidenav not found');
+            this.isMobile() ? this.openMobileNav() : this.openDesktopNav();
         }
     }
 
-    public closeNav(sidenav: MatSidenav = this._sidenav) {
+    public closeNav(sidenav?: MatSidenav) {
         if (sidenav) {
             sidenav.close();
         } else {
-            console.log('Sidenav not found');
+            this.isMobile() ? this.closeMobileNav() : this.closeDesktopNav();
         }
     }
 
-    public changeStateNav(sidenav: MatSidenav = this._sidenav) {
+    public toggleMobileNav() {
+        this._mobileSidenav ? this._mobileSidenav.toggle() : console.log('Mobile sidenav not found');
+    }
+
+    public openMobileNav() {
+        this._mobileSidenav ? this._mobileSidenav.open() : console.log('Mobile sidenav not found');
+    }
+
+    public closeMobileNav() {
+        this._mobileSidenav ? this._mobileSidenav.close() : console.log('Mobile sidenav not found');
+    }
+
+    public toggleDesktopNav() {
+        this._desktopSidenav ? this.toggleSmall() : console.log('Desktop sidenav not found');
+    }
+
+    public openDesktopNav() {
+        this._desktopSidenav ? this.small = false : console.log('Desktop sidenav not found');
+    }
+
+    public closeDesktopNav() {
+        this._desktopSidenav ? this.small = true : console.log('Desktop sidenav not found')
+    }
+
+    public changeStateNav(sidenav: MatSidenav = this._mobileSidenav) {
         if (sidenav) {
 
         } else {
             console.log('Sidenav not found');
         }
+    }
+
+    private isMobile() {
+        let is = false;
+
+        _.each(this._mobileSidenavAliases, (alias: string) => {
+            if (this.media.isActive(alias)) is = true;
+        });
+
+        return is;
     }
 
 }

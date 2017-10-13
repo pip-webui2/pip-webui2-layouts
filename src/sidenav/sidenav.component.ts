@@ -4,6 +4,7 @@ import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 
 import { PipSidenavService } from './shared/sidenav.service';
 
@@ -14,23 +15,21 @@ import { PipSidenavService } from './shared/sidenav.service';
 })
 
 export class PipSidenavComponent implements OnInit, AfterViewInit {
-	@ViewChild('mobileSidenav') sidenav: MatSidenav;
+	@ViewChild('desktopSidenav') sidenav: MatSidenav;
 	private _opened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-	private _side$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+	private _mode$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+	public mode: string = '';
+	public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 	public constructor(
 		private service: PipSidenavService,
 		private renderer: Renderer,
-		private elRef: ElementRef
+		private elRef: ElementRef,
+		private media: ObservableMedia
 	) {
 		renderer.setElementClass(elRef.nativeElement, 'pip-sidenav', true);
-
-		this.service.opened$.subscribe((isOpened) => {
-			this._opened$.next(isOpened);
-		});
-
-		this.service.side$.subscribe((mode) => {
-			this._side$.next(mode);
+		this.service.small$.subscribe((small) => {
+			this.small$.next(small);
 		});
 	}
 
@@ -38,14 +37,20 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 		return this._opened$;
 	}
 
-	public get side$(): Observable<string> {
-		return this._side$;
+	public get mode$(): Observable<string> {
+		return this._mode$;
 	}
 
-	ngOnInit() { }
+	ngOnInit() {
+		this.media.asObservable().subscribe((change: MediaChange) => {
+			if (!this.service.desktopSidenav) return;
+
+			if (this.service.mobileSidenavAliases.includes(change.mqAlias)) this.service.desktopSidenav.close();
+			else this.service.desktopSidenav.open();
+		});
+	}
 
 	ngAfterViewInit() {
-		this.service.sidenav = this.sidenav;
+		this.service.desktopSidenav = this.sidenav;
 	}
-
 }
