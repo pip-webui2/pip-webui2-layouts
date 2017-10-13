@@ -23,7 +23,6 @@ export class PipMediaService {
             });
         });
         this.setMainLayoutBreakpoints();
-        console.log('activated');
     }
 
     public updateMainLayoutBreakpoints(width: number) {
