@@ -20,11 +20,11 @@ import { TilesLayoutExampleModule } from './tiles-layout-example/tiles-layout-ex
 import { MainMenuLayoutExampleModule } from './main-menu-layout-example/main-menu-layout-example.module';
 
 const appRoutes: Routes = [
-  { path: 'main', component: MainLayoutExampleComponent },
+  //{ path: 'main', component: MainLayoutExampleComponent },
   { path: 'document', component: DocumentLayoutExampleComponent },
   { path: 'tiles', component: TilesLayoutExampleComponent },
   { path: 'menu', component: MainMenuLayoutExampleComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'main' }
+  { path: '', pathMatch: 'full', redirectTo: 'document' }
 ];
 
 @NgModule({

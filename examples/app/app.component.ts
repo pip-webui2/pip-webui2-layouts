@@ -23,9 +23,9 @@ export class AppComponent {
   public list: any[] = [];
 
   private _list: any[] = [
-    {
-      name: 'Main', id: 'main', route: 'main'
-    },
+    // {
+    //   name: 'Main', id: 'main', route: 'main'
+    // },
     {
       name: 'Document', id: 'document', route: 'document'
     },
@@ -53,7 +53,7 @@ export class AppComponent {
   }
 
   private generateList() {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
       _.each(this._list, (item) => {
         let copy = _.clone(item);
         copy.name += ' ' + i;
