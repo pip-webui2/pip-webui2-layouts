@@ -4,7 +4,8 @@ import { PipMediaService } from '../media/shared/media.service';
 
 @Component({ 
     selector: 'pip-main',
-    template: '<ng-content></ng-content>'
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./main-layout.component.scss']
  })
 export class PipMainLayoutComponent implements OnInit, OnDestroy {
     @Input() public pipContainer;
