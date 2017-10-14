@@ -1,4 +1,5 @@
 import { transition } from '@angular/animations';
+import * as _ from 'lodash';
 declare var require: any;
 
 import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
@@ -21,7 +22,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     private listener: any;
     private sizer: any;
     private prevContainerWidth: any = null;
-    
+
     public tilesOptions: MasonryOptions = {
         gutter: 16,
         columnWidth: '.pip-tile-sizer',
@@ -35,7 +36,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
         private elRef: ElementRef
     ) {
         renderer.setElementClass(elRef.nativeElement, 'pip-tiles', true);
-        this.listener = () => { this.onResize(); };
+        this.listener = () => { this.onResize(true); };
     }
 
     public ngOnInit() {
@@ -46,7 +47,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
         this.elRef.nativeElement
             .appendChild(this.sizer)
             .className = 'pip-tile-sizer';
-        
+
         setTimeout(() => {
             this.masonry = new masonry(this.container, this.tilesOptions);
             this.onResize(true);
@@ -61,8 +62,8 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     }
 
     private onResize(force: boolean = false) {
-        let width = this.elRef.nativeElement.parentElement.offsetWidth,
-            containerWidth;
+        let width = this.elRef.nativeElement.parentElement.offsetWidth;
+        let containerWidth;
 
         if (!this.isMobile && (width - 36) > this.columnWidth) {
             width = width - 24 * 2;
@@ -74,7 +75,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
                 columns--;
                 containerWidth = (Number(this.columnWidth) + 16) * columns - 16;
             }
-    
+
             if (columns < 1) {
                 containerWidth = width;
                 this.sizer.style['width'] = containerWidth + 'px';
