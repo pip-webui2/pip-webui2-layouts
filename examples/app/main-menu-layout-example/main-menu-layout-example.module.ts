@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatListModule, MatSlideToggleModule } from '@angular/material';
 
 import { MainMenuLayoutExampleComponent } from './main-menu-layout-example.component';
-import { PipDocumentLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
+import { PipDocumentLayoutModule, PipMediaModule, PipMainMenuLayoutModule } from '../pip-webui2-layouts';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { PipDocumentLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
     MatSlideToggleModule,
 
     PipMediaModule,
-    PipDocumentLayoutModule
+    PipDocumentLayoutModule,
+    PipMainMenuLayoutModule
   ],
   exports: [
     MainMenuLayoutExampleComponent
