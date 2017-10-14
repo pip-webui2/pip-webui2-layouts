@@ -21,9 +21,7 @@ export class AppComponent {
     media.activate();
     this.generateList();
     this.media.asObservableMain().subscribe((change: MediaMainChange) => {
-        console.log('update main aliases', change);
         this._showIcon$.next(change.aliases.includes('xs') || change.aliases.includes('md'));
-        console.log('this._showIcon$', this._showIcon$.value);
         this._icon$.next(change.aliases.includes('xs') ? 'menu' : this.sidenav.small ? 'chevron_right' : 'chevron_left');
     });
 
@@ -56,7 +54,6 @@ export class AppComponent {
   }
 
   public get showIcon$(): Observable<boolean> {
-    console.log('this._showIcon$', this._showIcon$.value);
     return this._showIcon$;
   }
 
