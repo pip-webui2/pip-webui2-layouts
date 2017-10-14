@@ -1,4 +1,4 @@
-.pip-main-menu {
+:host.pip-main-menu {
   z-index: 50;
   position: relative;
   width: 100%;
@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: row;
   align-items: initial;
-  >.pip-menu {
+  /deep/.pip-menu {
     position: absolute;
     transition: all 0.35s ease;
     border-right: none;
@@ -29,7 +29,7 @@
       width: 100%;
     }
   }
-  >.pip-content-container {
+  /deep/.pip-content-container {
     margin: 0;
     transition: all 0.35s ease;
     position: absolute;
@@ -58,18 +58,18 @@
     }
   }
   &.pip-single-content {
-    >.pip-menu {
+    /deep/.pip-menu {
       opacity: 0;
       z-index: -100;
     }
-    >.pip-content-container {
+    /deep/.pip-content-container {
       width: 100% !important;
       left: 0 !important;
     }
   }
 }
 
-.pip-main-xs {
+::ng-deep .pip-main-xs {
   .pip-main-menu {
     .pip-menu {
       width: 100%;
@@ -98,7 +98,7 @@
   }
 }
 
-.pip-main-gt-lg {
+::ng-deep .pip-main-gt-lg {
   .pip-main-menu {
     .pip-menu {
       width: 480px;
