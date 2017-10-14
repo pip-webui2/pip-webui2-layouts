@@ -5,9 +5,12 @@
       </examples-list>
     </div>
     <div type="body" fxFlexFill>
-      <pip-appbar>
-        <button mat-icon-button (click)="onMenuClick()" *ngIf="media.isMainActive('xs') || media.isMainActive('md')">
-            <mat-icon>{{ media.isMainActive('xs') ? 'menu' : sidenav.small ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      <pip-appbar [ngSwitch]="showIcon$ | async">
+        <button mat-icon-button (click)="onMenuClick()" *ngSwitchCase="true">
+            <mat-icon>{{ icon$ | async }}</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onMenuClick()" *ngSwitchCase="false">
+            <mat-icon>lightbulb_outline</mat-icon>
         </button> {{ list[this.listIndex].name }}
         <div fxFlex="grow"></div>
         <button mat-icon-button (click)="onInfoClick()">
