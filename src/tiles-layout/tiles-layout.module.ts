@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MasonryModule  } from 'angular2-masonry';
 
 import { PipTilesLayoutComponent } from './tiles-layout.component';
 
