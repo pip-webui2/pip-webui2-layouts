@@ -4,7 +4,6 @@ declare var require: any;
 
 import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { addResizeListener, removeResizeListener } from '../media/resize-layout.function';
-import { MasonryOptions } from 'angular2-masonry';
 
 var masonry = require('masonry-layout');
 
@@ -23,7 +22,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     private sizer: any;
     private prevContainerWidth: any = null;
 
-    public tilesOptions: MasonryOptions = {
+    public tilesOptions: any = {
         gutter: 16,
         columnWidth: '.pip-tile-sizer',
         itemSelector: '.pip-tile',
