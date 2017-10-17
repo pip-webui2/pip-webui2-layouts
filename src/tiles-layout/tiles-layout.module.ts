@@ -7,7 +7,6 @@ import { PipTilesLayoutComponent } from './tiles-layout.component';
     PipTilesLayoutComponent
   ],
   imports: [
-    MasonryModule
   ],
   exports: [  
     PipTilesLayoutComponent
