@@ -23,4 +23,8 @@ export class PipAppbarService {
     public changeClass(newClass: string) {
         this.class.next(newClass);
     }
+
+    public get shadowVisibility$(): Observable<boolean> {
+        return this.shadowVisibility;
+    }
 }
