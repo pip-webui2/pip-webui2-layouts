@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 import { Component, Input, OnInit, Renderer, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { AfterViewInit, ViewChild } from '@angular/core';
@@ -36,6 +38,16 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
 		return this._auxMode$;
 	}
 
+	private isAnyActive() {
+		let is = false;
+
+		_.each(this.service.mobileSidenavAliases, (alias) => {
+			if (this.media.isActive(alias)) is = true;
+		});
+
+		return is;
+	}
+
 	ngOnInit() {
 		this.auxService.mode$.subscribe((mode) => {
 			this._auxMode$.next(mode);
@@ -56,7 +68,9 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
 			if (this.service.mobileSidenavAliases.includes(change.mqAlias)) this.auxService.mode = null;
 			else this.auxService.mode = 'side';
 		});
-     }
+		
+		if (this.isAnyActive()) this.auxService.mode = null;
+	 }
 
 	ngAfterViewInit() {
         this.service.mobileSidenav = this.sidenav;
