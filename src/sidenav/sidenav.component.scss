@@ -63,44 +63,44 @@ mat-sidenav {
 
 // In main
 ::ng-deep .pip-main-md .pip-main {
-    .pip-sidenav-desktop-container.pip-small {
-      mat-sidenav {
-        max-width: 64px;
-        width: 64px;
-        min-width: 64px;
-      }
-       ::ng-deep mat-sidenav-content {
-        margin-left: 64px !important;
-      }
+  .pip-sidenav-desktop-container.pip-small {
+    mat-sidenav {
+      max-width: 64px;
+      width: 64px;
+      min-width: 64px;
+    }
+     ::ng-deep mat-sidenav-content {
+      margin-left: 64px !important;
     }
   }
-  
-  :host {
-    height: 100%;
-  }
-  
-  ::ng-deep .pip-main-sm .pip-main {
-    .pip-sidenav-desktop-container {
-      mat-sidenav {
-        max-width: 64px;
-        width: 64px;
-        min-width: 64px;
-      }
-      mat-sidenav-content {
-        margin-left: 64px !important;
-      }
+}
+
+ :host {
+  height: 100%;
+}
+
+ ::ng-deep .pip-main-sm .pip-main {
+  .pip-sidenav-desktop-container {
+    mat-sidenav {
+      max-width: 64px;
+      width: 64px;
+      min-width: 64px;
+    }
+    mat-sidenav-content {
+      margin-left: 64px !important;
     }
   }
-  
-  ::ng-deep .pip-main-xs .pip-main {
-    .pip-sidenav-desktop-container {
-      mat-sidenav {
-        max-width: 0px;
-        width: 0px;
-        min-width: 0px;
-      }
-      mat-sidenav-content {
-        margin-left: 0px !important;
-      }
+}
+
+ ::ng-deep .pip-main-xs .pip-main {
+  .pip-sidenav-desktop-container {
+    mat-sidenav {
+      max-width: 0px;
+      width: 0px;
+      min-width: 0px;
+    }
+    mat-sidenav-content {
+      margin-left: 0px !important;
     }
   }
+}
