@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, Renderer, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
@@ -25,12 +25,10 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 		private service: PipSidenavService,
 		private renderer: Renderer,
 		private elRef: ElementRef,
-		private media: ObservableMedia
+		private media: ObservableMedia,
+		private cd: ChangeDetectorRef
 	) {
 		renderer.setElementClass(elRef.nativeElement, 'pip-sidenav', true);
-		this.service.small$.subscribe((small) => {
-			this.small$.next(small);
-		});
 	}
 
 	public get opened$(): Observable<boolean> {
@@ -47,6 +45,11 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 
 			if (this.service.mobileSidenavAliases.includes(change.mqAlias)) this.service.desktopSidenav.close();
 			else this.service.desktopSidenav.open();
+		});
+
+		this.service.small$.subscribe((small) => {
+			this.small$.next(small);
+			this.cd.detectChanges();
 		});
 	}
 
