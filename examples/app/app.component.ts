@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PipMediaService, PipSidenavService, PipAuxPanelService, MediaMainChange } from './pip-webui2-layouts';
+import { PipMediaService, PipSidenavService, PipAppbarService, PipAuxPanelService, MediaMainChange } from './pip-webui2-layouts';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -16,13 +16,15 @@ export class AppComponent {
     public media: PipMediaService,
     public globalMedia: ObservableMedia,
     public sidenav: PipSidenavService,
-    private auxPanel: PipAuxPanelService
+    private auxPanel: PipAuxPanelService,
+    private appbar: PipAppbarService
   ) {
     media.activate();
     this.generateList();
     this.media.asObservableMain().subscribe((change: MediaMainChange) => {
         this._showIcon$.next(change.aliases.includes('xs') || change.aliases.includes('md'));
         this._icon$.next(change.aliases.includes('xs') ? 'menu' : this.sidenav.small ? 'chevron_right' : 'chevron_left');
+        this.appbar.changeShadowVisibility(change.aliases.includes('lt-lg'));
     });
 
     this.sidenav.small$.subscribe((small) => {
