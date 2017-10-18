@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, Renderer, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
@@ -26,7 +26,8 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
         private auxService: PipAuxPanelService,
 		private renderer: Renderer,
         private elRef: ElementRef,
-        private media: ObservableMedia
+		private media: ObservableMedia,
+		private cd: ChangeDetectorRef
 	) {
 		renderer.setElementClass(elRef.nativeElement, 'pip-mobile-sidenav', true);
 	}
@@ -36,9 +37,18 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit() {
-        this.auxService.mode$.subscribe((mode) => {
-            this._auxMode$.next(mode);
-        });
+		this.auxService.mode$.subscribe((mode) => {
+			this._auxMode$.next(mode);
+			this.cd.detectChanges();
+		});
+		
+		this.service.opened$.subscribe((opened) => {
+			this.cd.detectChanges();
+		});
+
+		this.auxService.opened$.subscribe(() => {
+			this.cd.detectChanges();
+		});
 
         this.media.asObservable().subscribe((change: MediaChange) => {
 			if (!this.auxService.mobileAuxPanel) return;

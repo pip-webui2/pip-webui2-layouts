@@ -99,6 +99,7 @@ export class PipSidenavService {
         } else {
             this.isMobile() ? this.openMobileNav() : this.openDesktopNav();
         }
+        this.opened = true;
     }
 
     public closeNav(sidenav?: MatSidenav) {
@@ -107,10 +108,16 @@ export class PipSidenavService {
         } else {
             this.isMobile() ? this.closeMobileNav() : this.closeDesktopNav();
         }
+        this.opened = false;
     }
 
     public toggleMobileNav() {
-        this._mobileSidenav ? this._mobileSidenav.toggle() : console.log('Mobile sidenav not found');
+        if (this._mobileSidenav) {
+            this._mobileSidenav.toggle();
+            this.opened = !this._mobileSidenav.opened;
+        } else {
+            console.log('Mobile sidenav not found');
+        }
     }
 
     public openMobileNav() {
