@@ -26,7 +26,7 @@ export class PipAuxPanelService {
     public constructor(
         private media: ObservableMedia
     ) { }
-    
+
     public set mobileAuxPanelAliases(aliases: string[]) {
         this._mobileAuxPanelAliases = aliases;
     }
@@ -67,7 +67,7 @@ export class PipAuxPanelService {
     public toggleAux(auxPanel?: MatSidenav) {
         if (auxPanel) {
             auxPanel.toggle();
-        } else { 
+        } else {
             this.toggleMobileAux();
         }
     }
@@ -89,15 +89,22 @@ export class PipAuxPanelService {
     }
 
     public toggleMobileAux() {
-        this._mobileAuxPanel ? this._mobileAuxPanel.toggle() : console.log('auxPanel not found');
+        if (this._mobileAuxPanel) {
+            this._mobileAuxPanel.toggle();
+            this.opened = !this._mobileAuxPanel.opened;
+        } else { 
+            console.log('auxPanel not found'); 
+        }
     }
 
     public openMobileAux() {
         this._mobileAuxPanel ? this._mobileAuxPanel.open() : console.log('auxPanel not found');
+        this.opened = true;
     }
 
     public closeMobileAux() {
         this._mobileAuxPanel ? this._mobileAuxPanel.close() : console.log('auxPanel not found');
+        this.opened = false;
     }
 
     public changeStateAux(auxPanel: MatSidenav = this._mobileAuxPanel) {
