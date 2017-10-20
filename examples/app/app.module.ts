@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomBreakPointsProvider } from './custom-breakpoints';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
 
 import { PipTestModule, PipAppbarShadowModule, PipAppbarModule, PipSidenavModule, PipAuxPanelModule, PipContentLayoutModule, PipMainLayoutModule } from './pip-webui2-layouts';
 
 import { ExampleListModule } from './examples-list/examples-list.module';
+import { ToggleMediumSidenavModule } from './toggle-medium-sidenav/toggle-medium-sidenav.module';
 import { AppComponent } from './app.component';
 import { MainLayoutExampleComponent } from './main-layout-example/main-layout-example.component';
 import { DocumentLayoutExampleComponent } from './document-layout-example/document-layout-example.component';
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
+    MatToolbarModule,
 
     PipTestModule,
     PipAppbarShadowModule,
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     PipMainLayoutModule,
 
     ExampleListModule,
+    ToggleMediumSidenavModule,
     MainLayoutExampleModule,
     DocumentLayoutExampleModule,
     TilesLayoutExampleModule,

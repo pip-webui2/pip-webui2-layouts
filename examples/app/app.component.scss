@@ -9,3 +9,8 @@
 ::ng-deep main-layout-example, ::ng-deep document-layout-example, ::ng-deep tiles-layout-example, ::ng-deep main-menu-layout-example {
     flex: 1 1 100%;
 }
+
+.app-icon {
+    margin-left: -5px;
+    margin-right: 16px;
+}

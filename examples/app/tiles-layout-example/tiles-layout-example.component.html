@@ -1,34 +1,25 @@
 <div class="pip-multi-tiles-container">
-  <div style="width: 100%; height: 30px; background: lightgreen; font-family: Roboto">
+  <mat-toolbar color="accent">
     <h4>First title</h4>
-  </div>
+  </mat-toolbar>
   <pip-tiles [isMobile]="media.isActive('lt-md')">
-    <div class="pip-tile" *ngFor="let tile of tiles">
-      <div style="margin: 8px">
-        <h3>{{ tile.title }}</h3>
-        <img style="margin-top: 8px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw6KNcvzNDdDw32Y7Kvnc7zwP6tqwuFLEVJmjsyhQD-X7ls-Z5" width="100%" alt="">
-        <div style="margin-top: 8px">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </div>
+    <div class="pip-tile" *ngFor="let tile of tiles" >
+      <h3 style="margin: 16px 8px">{{ tile.title }}</h3>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw6KNcvzNDdDw32Y7Kvnc7zwP6tqwuFLEVJmjsyhQD-X7ls-Z5"
+        width="100%" alt="">
     </div>
   </pip-tiles>
-  <div style="width: 100%; height: 30px; background: #00FBFF; font-family: Roboto">
+  <mat-toolbar color="accent">
     <h4>Second title</h4>
-  </div>
+  </mat-toolbar>
   <pip-tiles columnWidth="200" [isMobile]="media.isActive('xs')">
     <div class="pip-tile pip-tile-narrow" *ngFor="let tile of tiles">
       <div style="margin: 8px">
         <h3>{{ tile.title }}</h3>
-        <img style="margin-top: 8px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw6KNcvzNDdDw32Y7Kvnc7zwP6tqwuFLEVJmjsyhQD-X7ls-Z5" width="100%" alt="">
+        <img style="margin-top: 8px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw6KNcvzNDdDw32Y7Kvnc7zwP6tqwuFLEVJmjsyhQD-X7ls-Z5"
+          width="100%" alt="">
         <div style="margin-top: 8px">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
         </div>
       </div>
     </div>

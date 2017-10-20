@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-import { MatListModule, MatSlideToggleModule } from '@angular/material';
+import { MatListModule, MatSlideToggleModule, MatTabsModule } from '@angular/material';
 
 import { MainMenuLayoutExampleComponent } from './main-menu-layout-example.component';
-import { PipDocumentLayoutModule, PipMediaModule, PipMainMenuLayoutModule } from '../pip-webui2-layouts';
+import { PipDocumentLayoutModule, PipTilesLayoutModule, PipMediaModule, PipMainMenuLayoutModule } from '../pip-webui2-layouts';
 
 @NgModule({
   declarations: [
@@ -18,9 +18,11 @@ import { PipDocumentLayoutModule, PipMediaModule, PipMainMenuLayoutModule } from
     ReactiveFormsModule,
     MatListModule,
     MatSlideToggleModule,
+    MatTabsModule,
 
     PipMediaModule,
     PipDocumentLayoutModule,
+    PipTilesLayoutModule,
     PipMainMenuLayoutModule
   ],
   exports: [

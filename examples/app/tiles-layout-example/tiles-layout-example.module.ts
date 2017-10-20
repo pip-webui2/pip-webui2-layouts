@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
+import { MatToolbarModule } from '@angular/material';
+
 import { TilesLayoutExampleComponent } from './tiles-layout-example.component';
 import { PipTilesLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
 
@@ -15,6 +17,7 @@ import { PipTilesLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    MatToolbarModule,
 
     PipTilesLayoutModule
   ],

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { PipMediaService, PipSidenavService, PipAppbarService, PipAuxPanelService, MediaMainChange } from './pip-webui2-layouts';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 import { Observable } from 'rxjs/Observable';
@@ -11,27 +11,31 @@ declare var _;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(
     public media: PipMediaService,
     public globalMedia: ObservableMedia,
     public sidenav: PipSidenavService,
     private auxPanel: PipAuxPanelService,
-    private appbar: PipAppbarService
+    private appbar: PipAppbarService,
+    private cd: ChangeDetectorRef
   ) {
     media.activate();
     this.generateList();
+  }
+
+  public ngOnInit() {
     this.media.asObservableMain().subscribe((change: MediaMainChange) => {
-        this._showIcon$.next(change.aliases.includes('xs') || change.aliases.includes('md'));
-        this._icon$.next(change.aliases.includes('xs') ? 'menu' : this.sidenav.small ? 'chevron_right' : 'chevron_left');
-        this.appbar.changeShadowVisibility(change.aliases.includes('lt-lg'));
+      this._showIcon$.next(change.aliases.includes('xs'));
+      this.appbar.shadowVisibility = change.aliases.includes('lt-lg');
+      this.cd.detectChanges();
     });
 
     this.sidenav.small$.subscribe((small) => {
-       this._icon$.next(small ? 'chevron_right' : 'chevron_left');
+      this.cd.detectChanges();
     });
   }
-  
+
   public list: any[] = [];
 
   private _list: any[] = [
@@ -39,27 +43,22 @@ export class AppComponent {
     //   name: 'Main', id: 'main', route: 'main'
     // },
     {
-      name: 'Document', id: 'document', route: 'document'
+      name: 'Document', id: 'document', route: 'document', icon: 'description'
     },
     {
-      name: 'Tiles', id: 'tiles', route: 'tiles'
+      name: 'Tiles', id: 'tiles', route: 'tiles', icon: 'view_module'
     },
     {
-      name: 'Menu', id: 'menu', route: 'menu'
+      name: 'Menu', id: 'menu', route: 'menu', icon: 'view_quilt'
     }
   ];
   private _showIcon$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private _icon$: BehaviorSubject<string> = new BehaviorSubject<string>('menu')
-  
-  public get icon$(): Observable<string> {
-    return this._icon$;
-  }
 
   public get showIcon$(): Observable<boolean> {
     return this._showIcon$;
   }
 
-// media.isMainActive('xs') ? 'menu' : sidenav.small ? 'chevron_right' : 'chevron_left'
+  // media.isMainActive('xs') ? 'menu' : sidenav.small ? 'chevron_right' : 'chevron_left'
   public listIndex: number = 0;
 
   public onListItemIndexChanged(index: number) {
@@ -76,14 +75,8 @@ export class AppComponent {
   }
 
   private generateList() {
-    for (let i = 0; i < 9; i++) {
-      _.each(this._list, (item) => {
-        let copy = _.clone(item);
-        copy.name += ' ' + i;
-        this.list.push(copy);
-      });
-    }
+    this.list = this._list;
   }
 
-  
+
 }

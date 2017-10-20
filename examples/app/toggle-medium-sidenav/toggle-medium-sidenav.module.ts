@@ -7,11 +7,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatListModule, MatIconModule } from '@angular/material';
 
-import { ExamplesListComponent } from './examples-list.component';
+import { ToggleMediumSidenavComponent } from './toggle-medium-sidenav.component';
 
 @NgModule({
   declarations: [
-    ExamplesListComponent
+    ToggleMediumSidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -23,8 +23,8 @@ import { ExamplesListComponent } from './examples-list.component';
     MatIconModule
   ],
   exports: [
-    ExamplesListComponent
+    ToggleMediumSidenavComponent
   ],
   providers: [],
 })
-export class ExampleListModule { }
+export class ToggleMediumSidenavModule { }

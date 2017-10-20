@@ -21,7 +21,7 @@ export class TilesLayoutExampleComponent implements OnInit {
     }
 
     private createTiles() {
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 6; i++) {
             this.tiles.push({ title: 'Tile number ' + i });
         }
     }
