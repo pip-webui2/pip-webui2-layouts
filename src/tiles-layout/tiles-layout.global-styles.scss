@@ -11,12 +11,12 @@
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.26);
     border-radius: 2px;
     margin: 8px;
-    transition: width 0.35s;
-    overflow: auto;
+    //transition: width 0.35s;
+    overflow: hidden;
 }
 
-pip-tiles.pip-mobile .pip-tile {
-    width: calc(100% - 32px) !important;
+pip-tiles .pip-mobile .pip-tile {
+    width: calc(100% - 16px) !important;
 }
 
 .pip-multi-tiles-container {

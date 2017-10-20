@@ -2,7 +2,7 @@ import { transition } from '@angular/animations';
 import * as _ from 'lodash';
 declare var require: any;
 
-import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { addResizeListener, removeResizeListener } from '../media/resize-layout.function';
 
 var masonry = require('masonry-layout');
@@ -15,6 +15,7 @@ var masonry = require('masonry-layout');
 export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     @Input() columnWidth: number | string;
     @Input() isMobile: boolean;
+    @Input() animation: boolean = true;
 
     private container: any;
     private masonry: any;
@@ -26,13 +27,14 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
         gutter: 16,
         columnWidth: '.pip-tile-sizer',
         itemSelector: '.pip-tile',
-        transitionDuration: '0.35s',
+        transitionDuration: '0s',
         fitWidth: false
     };
 
     constructor(
         private renderer: Renderer,
-        private elRef: ElementRef
+        private elRef: ElementRef,
+        private cd: ChangeDetectorRef
     ) {
         renderer.setElementClass(elRef.nativeElement, 'pip-tiles', true);
         this.listener = () => { this.onResize(true); };
@@ -40,10 +42,10 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.columnWidth = this.columnWidth != null ? Math.floor(Number(this.columnWidth)) : 440;
-        this.container = this.elRef.nativeElement;
+        this.container = this.elRef.nativeElement.querySelector('.pip-tiles-content');
         addResizeListener(this.elRef.nativeElement, this.listener);
         this.sizer = document.createElement('div');
-        this.elRef.nativeElement
+        this.container
             .appendChild(this.sizer)
             .className = 'pip-tile-sizer';
 
@@ -51,6 +53,11 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
             this.masonry = new masonry(this.container, this.tilesOptions);
             this.onResize(true);
         });
+
+        if (this.animation == true)
+            setTimeout(() => {
+                this.elRef.nativeElement.classList.add('animation');
+            }, 1000);
     }
 
     public ngOnDestroy() {
@@ -63,7 +70,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     private onResize(force: boolean = false) {
         let width = this.elRef.nativeElement.parentElement.offsetWidth;
         let containerWidth;
-
+    
         if (!this.isMobile && (width - 36) > this.columnWidth) {
             width = width - 24 * 2;
 
@@ -82,7 +89,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
                 this.sizer.style['width'] = Number(this.columnWidth) + 'px';
             }
 
-            //this.container.style['width'] = (containerWidth + 10) + 'px';
+            this.container.style['width'] = (containerWidth + 10) + 'px';
             this.container.classList.remove('pip-mobile');
         } else {
             width = width - 16 * 2;
@@ -90,13 +97,15 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
 
             this.sizer.style['width'] = containerWidth + 'px';
             // +10 to avoid precision related error
-            //this.container.style['width'] = (containerWidth + 10) + 'px';
+            this.container.style['width'] = (containerWidth + 10) + 'px';
             this.container.classList.add('pip-mobile');
         }
 
         if (this.prevContainerWidth != containerWidth || force) {
             this.prevContainerWidth = containerWidth;
-            this.masonry.layout();
+            setTimeout(() => {
+                this.masonry.layout();
+            }, 400);
         }
     }
 }
