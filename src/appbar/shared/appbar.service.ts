@@ -10,21 +10,25 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class PipAppbarService {
-    public class = new BehaviorSubject<string>(''); 
+    private _class$ = new BehaviorSubject<string>(''); 
     public visibility = new BehaviorSubject<boolean>(true);
-    public shadowVisibility = new BehaviorSubject<boolean>(false);
+    private _shadowVisibility$ = new BehaviorSubject<boolean>(false);
 
     public constructor() {}
 
-    public changeShadowVisibility(visible: boolean) {
-        this.shadowVisibility.next(visible);
+    public set shadowVisibility(visible: boolean) {
+        this._shadowVisibility$.next(visible);
     }
 
-    public changeClass(newClass: string) {
-        this.class.next(newClass);
+    public set class(newClass: string) {
+        this._class$.next(newClass);
+    }
+
+    public get class$(): BehaviorSubject<string> {
+        return this._class$;
     }
 
     public get shadowVisibility$(): Observable<boolean> {
-        return this.shadowVisibility;
+        return this._shadowVisibility$;
     }
 }
