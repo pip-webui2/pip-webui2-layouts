@@ -1,14 +1,8 @@
 import * as _ from 'lodash';
 import { Injectable, isDevMode } from '@angular/core';
-import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MatSidenav } from '@angular/material';
-
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 
 import { ObservableMedia } from "@angular/flex-layout";
 
