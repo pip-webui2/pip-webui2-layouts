@@ -1,6 +1,7 @@
 import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { addResizeListener } from '../media/resize-layout.function';
 import { PipMediaService } from '../media/shared/media.service';
+import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 
 @Component({ 
     selector: 'pip-main',
@@ -16,7 +17,8 @@ export class PipMainLayoutComponent implements OnInit, OnDestroy {
     constructor(
         private renderer: Renderer,
         private elRef: ElementRef,
-        private service: PipMediaService 
+        private service: PipMediaService,
+        private rightnavService: PipRightnavService
     ) {
         renderer.setElementClass(elRef.nativeElement, 'pip-main', true);
         this.listener = () => { this.onResize(); };
@@ -38,6 +40,9 @@ export class PipMainLayoutComponent implements OnInit, OnDestroy {
         setTimeout(() => {
             this.service.updateMainLayoutBreakpoints(this.elRef.nativeElement.offsetWidth);
         });
+        this.rightnavService.opened$.subscribe(() => {
+            if (this.rightnavService._desktopRightnav) this.onResize();
+        });
     }
 
     public ngOnDestroy() {
@@ -45,6 +50,7 @@ export class PipMainLayoutComponent implements OnInit, OnDestroy {
     }
 
     private onResize() {
-        this.service.updateMainLayoutBreakpoints(this.elRef.nativeElement.offsetWidth);
+        let rightnavWidth = this.rightnavService._desktopRightnav.opened ? this.rightnavService._desktopRightnav['_elementRef'].nativeElement.offsetWidth : 0;
+        this.service.updateMainLayoutBreakpoints(this.elRef.nativeElement.offsetWidth - rightnavWidth);
     }
 }
