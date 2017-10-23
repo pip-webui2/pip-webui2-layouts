@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { PipMediaService, PipSidenavService, PipAppbarService, PipAuxPanelService, MediaMainChange } from './pip-webui2-layouts';
+import { PipMediaService, PipSidenavService, PipAppbarService, PipRightnavService, MediaMainChange } from './pip-webui2-layouts';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     public media: PipMediaService,
     public globalMedia: ObservableMedia,
     public sidenav: PipSidenavService,
-    private auxPanel: PipAuxPanelService,
+    private auxPanel: PipRightnavService,
     private appbar: PipAppbarService,
     private cd: ChangeDetectorRef
   ) {
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
   }
 
   public onInfoClick() {
-    this.auxPanel.toggleAux();
+    this.auxPanel.toggleRightnav();
   }
 
   private generateList() {
