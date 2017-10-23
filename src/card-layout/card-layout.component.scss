@@ -1,0 +1,33 @@
+:host {
+  box-sizing: border-box;
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  place-content: center;
+  align-items: center;
+  /deep/ .mat-card {
+    min-width: 300px;
+    .mat-input-container {
+      width: 100%;
+    }
+  }
+  &.pip-transparent-card {
+    /deep/ .mat-card {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+}
+
+::ng-deep .pip-main-xs,
+ ::ng-deep .pip-xs {
+  pip-card {
+    .mat-card {
+      width: 100%;
+      height: 100%;
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+  }
+}
