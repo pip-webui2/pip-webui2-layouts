@@ -107,3 +107,16 @@ mat-sidenav.pip-sidenav {
     }
   }
 }
+
+// Not active
+
+:host.pip-sidenav-not-active {
+  mat-sidenav.pip-sidenav {
+    max-width: 0px !important;
+    width: 0px !important;
+    min-width: 0px !important;
+  }
+  .pip-sidenav-desktop-container ::ng-deep mat-sidenav-content {
+    margin-left: 0px !important;
+  }
+}

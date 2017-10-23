@@ -28,9 +28,7 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 		private elRef: ElementRef,
 		private media: ObservableMedia,
 		private cd: ChangeDetectorRef
-	) {
-		renderer.setElementClass(elRef.nativeElement, 'pip-sidenav', true);
-	}
+	) { }
 
 	public get opened$(): Observable<boolean> {
 		return this._opened$;
@@ -39,13 +37,11 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 	ngOnInit() {
 		this.media.asObservable().subscribe((change: MediaChange) => {
 			if (this.service.mobileSidenavAliases.includes(change.mqAlias)) {
-				if (this.service.desktopSidenav) this.service.desktopSidenav.close();
 				if (this.rightnavService.desktopRightnav && this.rightnavService.desktopRightnav.opened && this.rightnavService.mobileRightnav) {
 					this.rightnavService.closeDesktopRightnav();
 					this.rightnavService.mobileRightnav.open();
 				}
 			} else {
-				if (this.service.desktopSidenav) this.service.desktopSidenav.open();
 				if (this.rightnavService.mobileRightnav && this.rightnavService.mobileRightnav.opened) {
 					if (this.rightnavService.desktopRightnav) this.rightnavService.desktopRightnav.open();
 					this.rightnavService.mobileRightnav.close();
@@ -60,6 +56,14 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 
 		this.rightnavService.opened$.subscribe((opened) => {
 			this.cd.detectChanges();
+		});
+
+		this.service.active$.subscribe((active) => {
+			if (!this.sidenav) return;
+
+			if (active && !this.sidenav.opened) this.sidenav.open();
+			if (!active && this.sidenav.opened) this.sidenav.close();
+			this.elRef.nativeElement.classList[active ? 'remove' : 'add']('pip-sidenav-not-active');
 		});
 	}
 

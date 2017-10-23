@@ -23,6 +23,7 @@ export class PipSidenavService {
     private _mobileSidenavAliases: string[] = ['xs'];
     private _small: boolean = false;
     private _small$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _active$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
     public constructor(
         private media: PipMediaService
@@ -82,11 +83,30 @@ export class PipSidenavService {
         this._opened$.next(open);
     }
 
+    public get active$(): Observable<boolean> {
+        return this._active$;
+    }
+
+    public set active(active: boolean) {
+        this._active$.next(active);
+    }
+    
+    public isActive(): boolean {
+        if (this._active$.getValue() == true) { return true; }
+        else {
+            console.log('Sidenav is not active');
+
+            return false;
+        }
+    }
+
     private toggleSmall() {
         this._small == true ? this.small = false : this.small = true;
     }
 
     public toggleNav(sidenav?: MatSidenav) {
+        if (!this.isActive()) return;
+
         if (sidenav) {
             sidenav.toggle();
         } else { 
@@ -95,6 +115,8 @@ export class PipSidenavService {
     }
 
     public openNav(sidenav?: MatSidenav) {
+        if (!this.isActive()) return;
+
         if (sidenav) {
             sidenav.open();
         } else {
@@ -104,6 +126,8 @@ export class PipSidenavService {
     }
 
     public closeNav(sidenav?: MatSidenav) {
+        if (!this.isActive()) return;
+
         if (sidenav) {
             sidenav.close();
         } else {
@@ -113,6 +137,8 @@ export class PipSidenavService {
     }
 
     public toggleMobileNav() {
+        if (!this.isActive()) return;
+
         if (this._mobileSidenav) {
             this._mobileSidenav.toggle();
             this.opened = !this._mobileSidenav.opened;
