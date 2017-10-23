@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-// import { MatButtonModule, MatInputModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
 
 import { MainLayoutExampleComponent } from './main-layout-example.component';
 import { PipMainLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
@@ -17,6 +17,7 @@ import { PipMainLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    MatToolbarModule,
 
     PipMainLayoutModule,
     PipMediaModule

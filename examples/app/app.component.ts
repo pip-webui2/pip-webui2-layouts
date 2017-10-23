@@ -39,9 +39,9 @@ export class AppComponent implements OnInit {
   public list: any[] = [];
 
   private _list: any[] = [
-    // {
-    //   name: 'Main', id: 'main', route: 'main'
-    // },
+    {
+      name: 'Media query', id: 'media', route: 'media', icon: 'visibility'
+    },
     {
       name: 'Document', id: 'document', route: 'document', icon: 'description'
     },

@@ -23,7 +23,7 @@ import { MainMenuLayoutExampleModule } from './main-menu-layout-example/main-men
 import { CardLayoutExampleModule } from './card-layout-example/card-layout-example.module';
 
 const appRoutes: Routes = [
-  //{ path: 'main', component: MainLayoutExampleComponent },
+  { path: 'media', component: MainLayoutExampleComponent },
   { path: 'document', component: DocumentLayoutExampleComponent },
   { path: 'tiles', component: TilesLayoutExampleComponent },
   { path: 'menu', component: MainMenuLayoutExampleComponent },
