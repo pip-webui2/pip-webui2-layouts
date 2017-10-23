@@ -50,6 +50,9 @@ export class AppComponent implements OnInit {
     },
     {
       name: 'Menu', id: 'menu', route: 'menu', icon: 'view_quilt'
+    },
+    {
+      name: 'Card', id: 'card', route: 'card', icon: 'view_array'
     }
   ];
   private _showIcon$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
