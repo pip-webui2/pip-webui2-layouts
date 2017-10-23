@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { PipSidenavService } from './shared/sidenav.service';
-import { PipAuxPanelService } from '../aux-panel/shared/aux-panel.service';
+import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 
 @Component({
@@ -19,13 +19,11 @@ import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 
 export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
     @ViewChild('mobileSidenav') sidenav: MatSidenav;
-    @ViewChild('mobileAux') auxPanel: MatSidenav;
-	private _auxMode$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-	public mode: string = '';
+    @ViewChild('mobileRightnav') rightnav: MatSidenav;
 
 	public constructor(
         private service: PipSidenavService,
-        private auxService: PipAuxPanelService,
+        private rightnavService: PipRightnavService,
 		private renderer: Renderer,
         private elRef: ElementRef,
 		private media: ObservableMedia,
@@ -34,47 +32,19 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
 		renderer.setElementClass(elRef.nativeElement, 'pip-mobile-sidenav', true);
 	}
 
-	public get auxMode$(): Observable<string> {
-		return this._auxMode$;
-	}
-
-	private isAnyActive() {
-		let is = false;
-
-		_.each(this.service.mobileSidenavAliases, (alias) => {
-			if (this.media.isActive(alias)) is = true;
-		});
-
-		return is;
-	}
-
 	ngOnInit() {
-		this.auxService.mode$.subscribe((mode) => {
-			this._auxMode$.next(mode);
-			this.cd.detectChanges();
-		});
-		
 		this.service.opened$.subscribe((opened) => {
 			this.cd.detectChanges();
 		});
 
-		this.auxService.opened$.subscribe(() => {
+		this.rightnavService.opened$.subscribe(() => {
 			this.cd.detectChanges();
 		});
-
-        this.media.asObservable().subscribe((change: MediaChange) => {
-			if (!this.auxService.mobileAuxPanel) return;
-
-			if (this.service.mobileSidenavAliases.includes(change.mqAlias)) this.auxService.mode = null;
-			else this.auxService.mode = 'side';
-		});
-		
-		if (this.isAnyActive()) this.auxService.mode = null;
 	 }
 
 	ngAfterViewInit() {
         this.service.mobileSidenav = this.sidenav;
-        this.auxService.mobileAuxPanel = this.auxPanel;
+        this.rightnavService.mobileRightnav = this.rightnav;
 	}
 
 }

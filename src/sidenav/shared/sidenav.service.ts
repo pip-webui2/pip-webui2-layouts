@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { ObservableMedia } from "@angular/flex-layout";
+import { PipMediaService } from '../../media/shared/media.service'
 
 @Injectable()
 export class PipSidenavService {
@@ -24,7 +25,7 @@ export class PipSidenavService {
     private _small$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     public constructor(
-        private media: ObservableMedia
+        private media: PipMediaService
     ) { }
     
     public set mobileSidenavAliases(aliases: string[]) {
@@ -152,7 +153,7 @@ export class PipSidenavService {
         let is = false;
 
         _.each(this._mobileSidenavAliases, (alias: string) => {
-            if (this.media.isActive(alias)) is = true;
+            if (this.media.isMainActive(alias)) is = true;
         });
 
         return is;
