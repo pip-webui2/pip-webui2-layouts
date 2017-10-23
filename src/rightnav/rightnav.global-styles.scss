@@ -1,0 +1,17 @@
+.pip-rightnav {
+    overflow: hidden !important;
+
+    [type=rightnav] {
+        padding: 0 !important;
+        height: 100%;
+    }
+
+    .pip-rightnav-title {
+        overflow: hidden !important;
+    }
+
+    .pip-rightnav-content {
+        overflow-y: auto !important;
+        overflow-x: hidden;
+    }
+}
