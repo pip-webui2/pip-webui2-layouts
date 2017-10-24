@@ -53,6 +53,9 @@ export class AppComponent implements OnInit {
     },
     {
       name: 'Card', id: 'card', route: 'card', icon: 'view_array'
+    },
+    {
+      name: 'Scrollable', id: 'scrollable', route: 'scrollable', icon: 'view_day'
     }
   ];
   private _showIcon$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
