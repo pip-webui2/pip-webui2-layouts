@@ -2,10 +2,10 @@ import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angu
 
 @Component({
     selector: 'pip-content',
-    styleUrls: ['./content-layout.component.scss'],
+    styleUrls: ['./content-canvas.component.scss'],
     template: '<ng-content></ng-content>'
 })
-export class PipContentLayoutComponent implements OnInit, OnDestroy {
+export class PipContentCanvasComponent implements OnInit, OnDestroy {
     constructor(
         private renderer: Renderer,
         private elRef: ElementRef
