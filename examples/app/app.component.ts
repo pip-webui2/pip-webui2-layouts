@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     public media: PipMediaService,
     public globalMedia: ObservableMedia,
     public sidenav: PipSidenavService,
-    private auxPanel: PipRightnavService,
+    private rightnav: PipRightnavService,
     private appbar: PipAppbarService,
     private cd: ChangeDetectorRef
   ) {
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
   }
 
   public onInfoClick() {
-    this.auxPanel.toggleRightnav();
+    this.rightnav.toggleRightnav();
   }
 
   private generateList() {
