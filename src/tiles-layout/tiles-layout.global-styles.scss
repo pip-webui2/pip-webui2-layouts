@@ -21,6 +21,7 @@ pip-tiles .pip-mobile .pip-tile {
 
 .pip-multi-tiles-container {
     overflow: auto;
+    height: 100%;
     .pip-tiles {
         overflow: hidden;
     }
