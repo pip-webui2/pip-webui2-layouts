@@ -9,3 +9,4 @@ export * from './sidenav/index';
 export * from './rightnav/index';
 export * from './content-canvas/index';
 export * from './card-layout/index';
+export * from './scrollable-layout/index';
