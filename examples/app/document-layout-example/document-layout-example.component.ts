@@ -9,4 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class DocumentLayoutExampleComponent implements OnInit {
 
 	ngOnInit() { }
+
+	public onItemClick(e) {
+		console.log(e);
+		let cl = e.srcElement.classList;
+		cl.contains('opened') ? cl.remove('opened') : cl.add('opened');
+	}
 }

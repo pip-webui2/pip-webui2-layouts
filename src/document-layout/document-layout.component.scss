@@ -24,6 +24,11 @@
     margin-top: -64px;
   }
 
+  &.pip-transparent-document {
+    background: transparent !important;
+    box-shadow: none;
+  }
+
   .pip-document-content {
     width: 100%;
     padding: 16px;
