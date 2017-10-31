@@ -1,28 +1,29 @@
-# PipWebui2SampleLib
+# <img src="https://github.com/pip-webui/pip-webui/raw/master/doc/Logo.png" alt="Pip.WebUI Logo" style="max-width:30%"> <br/> Responsive content layouts
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.3.
+![](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## Development server
+Development responsible applications requires to organization content the way that can fit available screen from small phones to large desktops. In Line-of-Business applications with tens screens and dialogs implementaing responsive layouts can be time consuming and error prone task. To make it more productive Pip.WebUI.Layouts module provides a set of universal responsible layouts that can help to organize content in number of different ways: as full-screen content, documents, tiles, dialogs and more.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### The structural parts of the application page
 
-## Code scaffolding
+**App bar** is a special kind of toolbar that’s used for branding, navigation, search, and actions.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+**Side nav** is left side panel that shows ideally navigation- or identity-based content. 
 
-## Build
+**Right nav** is right side panel that should show secondary content to the main content on a page.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+**Content canvas** is part that placed under app bar and between side navs. It contains main application's content.
 
-## Running unit tests
+**Main layout** is structural part that contains only **content canvas** or **side nav and content canvas** and serves to determine the width of the responsive content of the application page.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Layouts
 
-## Running end-to-end tests
+**Card layout** places small content at the center of the screen in a card. On phones the content is extended to the whole screen.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+**Document layout** places content as a document with fixed width and full height centered on the screen. On tables and phones the content occupies the whole screen.
 
-## Further help
+**Tiles layout** is used to present multiple items in tiles that arranged on the screen in one or several columns.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+**Menu layout** combines menu that adds on the left hand side to switch between documents and **Document layout**, **Tile layout**. On phones the menu occupies the entire screen and user switches between menu and document back and forth. 
+
+**Scrollable layout** 
