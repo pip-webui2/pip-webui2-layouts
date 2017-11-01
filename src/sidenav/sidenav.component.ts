@@ -36,6 +36,8 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 
 	ngOnInit() {
 		this.media.asObservable().subscribe((change: MediaChange) => {
+			if (this.rightnavService.onlyMobile === true) return;
+
 			if (this.service.mobileSidenavAliases.includes(change.mqAlias)) {
 				if (this.rightnavService.desktopRightnav && this.rightnavService.desktopRightnav.opened && this.rightnavService.mobileRightnav) {
 					this.rightnavService.closeDesktopRightnav();

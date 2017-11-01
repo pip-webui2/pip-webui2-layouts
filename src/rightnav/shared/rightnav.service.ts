@@ -26,6 +26,14 @@ export class PipRightnavService {
         return this._mobileRightnavAliases;
     }
 
+    public set onlyMobile(only: boolean) {
+        this._onlyMobile = only;
+    }
+
+    public get onlyMobile() {
+        return this._onlyMobile;
+    }
+
     public get mobileRightnav(): MatSidenav {
         return this._mobileRightnav;
     }
