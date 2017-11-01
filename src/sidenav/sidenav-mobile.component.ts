@@ -21,6 +21,8 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
     @ViewChild('mobileSidenav') sidenav: MatSidenav;
     @ViewChild('mobileRightnav') rightnav: MatSidenav;
 
+	public mode$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+
 	public constructor(
         private service: PipSidenavService,
         private rightnavService: PipRightnavService,
@@ -38,6 +40,11 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
 		});
 
 		this.rightnavService.opened$.subscribe(() => {
+			this.cd.detectChanges();
+		});
+
+		this.media.asObservable().subscribe((change: MediaChange) => {
+			this.mode$.next(this.rightnavService.mobileRightnavAliases.includes(change.mqAlias) ? null : 'side');
 			this.cd.detectChanges();
 		});
 	 }
