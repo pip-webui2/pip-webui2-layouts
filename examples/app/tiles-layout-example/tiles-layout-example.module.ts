@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material';
 
 import { TilesLayoutExampleComponent } from './tiles-layout-example.component';
-import { PipTilesLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
+import { PipTilesLayoutModule, PipMediaModule, PipTopShadowModule } from '../pip-webui2-layouts';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { PipTilesLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
     ReactiveFormsModule,
     MatToolbarModule,
 
-    PipTilesLayoutModule
+    PipTilesLayoutModule,
+    PipTopShadowModule
   ],
   exports: [
     TilesLayoutExampleComponent
