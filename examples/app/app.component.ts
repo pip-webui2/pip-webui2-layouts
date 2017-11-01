@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { PipMediaService, PipSidenavService, PipAppbarService, PipRightnavService, MediaMainChange } from './pip-webui2-layouts';
+import { PipMediaService, PipSidenavService, PipRightnavService, MediaMainChange } from './pip-webui2-layouts';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
     public globalMedia: ObservableMedia,
     public sidenav: PipSidenavService,
     private rightnav: PipRightnavService,
-    private appbar: PipAppbarService,
     private cd: ChangeDetectorRef
   ) {
     media.activate();
@@ -27,7 +26,6 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.media.asObservableMain().subscribe((change: MediaMainChange) => {
       this._showIcon$.next(change.aliases.includes('xs'));
-      this.appbar.shadowVisibility = change.aliases.includes('lt-lg');
       this.cd.detectChanges();
     });
 
