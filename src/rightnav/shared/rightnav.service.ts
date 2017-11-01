@@ -10,6 +10,7 @@ import { ObservableMedia } from "@angular/flex-layout";
 export class PipRightnavService {
     public _mobileRightnav: MatSidenav;
     public _desktopRightnav: MatSidenav;
+    private _onlyMobile: boolean = true;
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
     private _mobileRightnavAliases: string[] = ['xs'];
 
@@ -120,6 +121,8 @@ export class PipRightnavService {
     }
 
     private isMobile() {
+        if (this._onlyMobile === true) return true;
+
         let is = false;
 
         _.each(this._mobileRightnavAliases, (alias: string) => {
