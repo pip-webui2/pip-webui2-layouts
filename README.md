@@ -32,4 +32,4 @@ Development responsible applications requires to organization content the way th
 
 **Media** is used to evaluate whether a given media query is true or false given the current device's screen / window size. It has media queries for full device's screen / window and for **main layout**.
 
-**Layouts** serves to control **app bar**, **side nav** and **right nav**.
+**Layouts** serves to control **app bar**, **side nav**, **right nav** and **content canvas**.
