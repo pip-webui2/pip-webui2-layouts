@@ -14,7 +14,7 @@ var masonry = require('masonry-layout');
 })
 export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     @Input() columnWidth: number | string;
-    @Input() isMobile: boolean;
+    @Input() stretch: boolean;
     @Input() animation: boolean = true;
 
     private container: any;
@@ -70,8 +70,8 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     private onResize(force: boolean = false) {
         let width = this.elRef.nativeElement.parentElement.offsetWidth;
         let containerWidth;
-    
-        if (!this.isMobile && (width - 36) > this.columnWidth) {
+
+        if (!this.stretch && (width - 32) > this.columnWidth) {
             width = width - 24 * 2;
 
             let columns = Math.floor(width / Number(this.columnWidth));
@@ -90,15 +90,10 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
             }
 
             this.container.style['width'] = (containerWidth + 10) + 'px';
-            this.container.classList.remove('pip-mobile');
+            this.container.classList.remove('pip-stretch');
         } else {
-            width = width - 16 * 2;
-            containerWidth = width;
-
-            this.sizer.style['width'] = containerWidth + 'px';
-            // +10 to avoid precision related error
-            this.container.style['width'] = (containerWidth + 10) + 'px';
-            this.container.classList.add('pip-mobile');
+            this.container.style['width'] = '100%';
+            this.container.classList.add('pip-stretch')
         }
 
         if (this.prevContainerWidth != containerWidth || force) {
