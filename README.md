@@ -26,4 +26,10 @@ Development responsible applications requires to organization content the way th
 
 **Menu layout** combines menu that adds on the left hand side to switch between documents and **Document layout**, **Tile layout**. On phones the menu occupies the entire screen and user switches between menu and document back and forth. 
 
-**Scrollable layout** 
+**Scrollable layout** provides container for elements and makes inclusions scrollable or not scrollable.
+
+### Services
+
+**Media** is used to evaluate whether a given media query is true or false given the current device's screen / window size. It has media queries for full device's screen / window and for **main layout**.
+
+**Layouts** serves to control **app bar**, **side nav** and **right nav**.
