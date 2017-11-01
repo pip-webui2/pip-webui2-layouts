@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material';
 
 import { PipAppbarComponent } from './appbar.component';
-import { PipAppbarService } from './shared/appbar.service';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,6 @@ import { PipAppbarService } from './shared/appbar.service';
   exports: [
     PipAppbarComponent
   ],
-  providers: [
-    PipAppbarService
-  ],
+  providers: [],
 })
 export class PipAppbarModule { }
