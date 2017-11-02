@@ -5,19 +5,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material';
 
-import { PipTopShadowComponent } from './top-shadow.component';
+import { PipShadowComponent } from './shadow.component';
 
 @NgModule({
   declarations: [
-    PipTopShadowComponent
+    PipShadowComponent
   ],
   imports: [
 
   ],
   exports: [
-    PipTopShadowComponent
+    PipShadowComponent
   ],
   providers: [
   ],
 })
-export class PipTopShadowModule { }
+export class PipShadowModule { }

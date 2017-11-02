@@ -1,4 +1,6 @@
-<pip-top-shadow visible="true"></pip-top-shadow>
+<pip-shadow visible="true" attachmentSide="top"></pip-shadow>
+<pip-shadow visible="true" attachmentSide="left"></pip-shadow>
+<pip-shadow visible="true" attachmentSide="right"></pip-shadow>
 <div fxFlex="fill" fxLayout="column">
   <nav mat-tab-nav-bar color="primary">
     <a mat-tab-link *ngFor="let link of navLinks; let i = index" [active]="i == selectedIndex" (click)="onLinkClick(i)">

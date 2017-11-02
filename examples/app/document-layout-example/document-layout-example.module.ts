@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material';
 
 import { DocumentLayoutExampleComponent } from './document-layout-example.component';
-import { PipDocumentLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
+import { PipDocumentLayoutModule, PipMediaModule, PipShadowModule } from '../pip-webui2-layouts';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { PipDocumentLayoutModule, PipMediaModule } from '../pip-webui2-layouts';
     MatToolbarModule,
 
     PipDocumentLayoutModule,
-    PipMediaModule
+    PipMediaModule,
+    PipShadowModule
   ],
   exports: [
     DocumentLayoutExampleComponent

@@ -4,7 +4,7 @@ export * from './tiles-layout/index';
 export * from './main-menu-layout/index';
 export * from './media/index';
 export * from './appbar/index';
-export * from './top-shadow/index';
+export * from './shadow/index';
 export * from './sidenav/index';
 export * from './rightnav/index';
 export * from './content-canvas/index';

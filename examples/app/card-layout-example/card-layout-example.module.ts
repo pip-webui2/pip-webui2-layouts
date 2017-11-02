@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatToolbarModule, MatSlideToggleModule, MatCardModule, MatButtonModule, MatInputModule } from '@angular/material';
 
 import { CardLayoutExampleComponent } from './card-layout-example.component';
-import { PipCardLayoutModule, PipMediaModule, PipTopShadowModule } from '../pip-webui2-layouts';
+import { PipCardLayoutModule, PipMediaModule, PipShadowModule } from '../pip-webui2-layouts';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { PipCardLayoutModule, PipMediaModule, PipTopShadowModule } from '../pip-
 
     PipCardLayoutModule,
     PipMediaModule,
-    PipTopShadowModule
+    PipShadowModule
   ],
   exports: [
     CardLayoutExampleComponent
