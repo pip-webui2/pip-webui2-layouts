@@ -8,46 +8,46 @@ import { ObservableMedia } from "@angular/flex-layout";
 
 @Injectable()
 export class PipRightnavService {
-    public _mobileRightnav: MatSidenav;
-    public _desktopRightnav: MatSidenav;
-    private _onlyMobile: boolean = true;
+    public _floatingRightnav: MatSidenav;
+    public _fixedRightnav: MatSidenav;
+    private _onlyFloating: boolean = true;
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-    private _mobileRightnavAliases: string[] = ['xs'];
+    private _floatingRightnavAliases: string[] = ['xs'];
 
     public constructor(
         private media: ObservableMedia
     ) { }
 
-    public set mobileRightnavAliases(aliases: string[]) {
-        this._mobileRightnavAliases = aliases;
+    public set floatingRightnavAliases(aliases: string[]) {
+        this._floatingRightnavAliases = aliases;
     }
 
-    public get mobileRightnavAliases() {
-        return this._mobileRightnavAliases;
+    public get floatingRightnavAliases() {
+        return this._floatingRightnavAliases;
     }
 
-    public set onlyMobile(only: boolean) {
-        this._onlyMobile = only;
+    public set onlyFloating(only: boolean) {
+        this._onlyFloating = only;
     }
 
-    public get onlyMobile() {
-        return this._onlyMobile;
+    public get onlyFloating() {
+        return this._onlyFloating;
     }
 
-    public get mobileRightnav(): MatSidenav {
-        return this._mobileRightnav;
+    public get floatingRightnav(): MatSidenav {
+        return this._floatingRightnav;
     }
 
-    public set mobileRightnav(rightnav: MatSidenav) {
-        this._mobileRightnav = rightnav;
+    public set floatingRightnav(rightnav: MatSidenav) {
+        this._floatingRightnav = rightnav;
     }
 
-    public set desktopRightnav(rightnav: MatSidenav) {
-        this._desktopRightnav = rightnav;
+    public set fixedRightnav(rightnav: MatSidenav) {
+        this._fixedRightnav = rightnav;
     }
 
-    public get desktopRightnav(): MatSidenav {
-        return this._desktopRightnav;
+    public get fixedRightnav(): MatSidenav {
+        return this._fixedRightnav;
     }
 
     public get opened$(): Observable<boolean> {
@@ -62,7 +62,7 @@ export class PipRightnavService {
         if (rightnav) {
             rightnav.toggle();
         } else {
-            this.isMobile() ? this.toggleMobileRightnav() : this.toggleDesktopRightnav();
+            this.isFloating() ? this.toggleFloatingRightnav() : this.toggleFixedRightnav();
         }
     }
 
@@ -70,7 +70,7 @@ export class PipRightnavService {
         if (rightnav) {
             rightnav.open();
         } else {
-            this.isMobile() ? this.openMobileRightnav() : this.openDesktopRightnav();
+            this.isFloating() ? this.openFloatingRightnav() : this.openFixedRightnav();
         }
     }
 
@@ -78,49 +78,49 @@ export class PipRightnavService {
         if (rightnav) {
             rightnav.close();
         } else {
-            this.isMobile() ? this.closeMobileRightnav() : this.closeDesktopRightnav();
+            this.isFloating() ? this.closeFloatingRightnav() : this.closeFixedRightnav();
         }
     }
 
-    public toggleMobileRightnav() {
-        if (this._mobileRightnav) {
-            this._mobileRightnav.toggle();
-            this.opened = !this._mobileRightnav.opened;
+    public toggleFloatingRightnav() {
+        if (this._floatingRightnav) {
+            this._floatingRightnav.toggle();
+            this.opened = !this._floatingRightnav.opened;
         } else { 
             console.log('rightnav not found'); 
         }
     }
 
-    public toggleDesktopRightnav() {
-        if (this._desktopRightnav) {
-            this._desktopRightnav.toggle();
-            this.opened = !this._desktopRightnav.opened;
+    public toggleFixedRightnav() {
+        if (this._fixedRightnav) {
+            this._fixedRightnav.toggle();
+            this.opened = !this._fixedRightnav.opened;
         } else { 
             console.log('rightnav not found'); 
         }
     }
 
-    public openMobileRightnav() {
-        this._mobileRightnav ? this._mobileRightnav.open() : console.log('rightnav not found');
+    public openFloatingRightnav() {
+        this._floatingRightnav ? this._floatingRightnav.open() : console.log('rightnav not found');
         this.opened = true;
     }
 
-    public closeMobileRightnav() {
-        this._mobileRightnav ? this._mobileRightnav.close() : console.log('rightnav not found');
+    public closeFloatingRightnav() {
+        this._floatingRightnav ? this._floatingRightnav.close() : console.log('rightnav not found');
         this.opened = false;
     }
 
-    public openDesktopRightnav() {
-        this._desktopRightnav ? this._desktopRightnav.open() : console.log('rightnav not found');
+    public openFixedRightnav() {
+        this._fixedRightnav ? this._fixedRightnav.open() : console.log('rightnav not found');
         this.opened = true;
     }
 
-    public closeDesktopRightnav() {
-        this._desktopRightnav ? this._desktopRightnav.close() : console.log('rightnav not found');
+    public closeFixedRightnav() {
+        this._fixedRightnav ? this._fixedRightnav.close() : console.log('rightnav not found');
         this.opened = false;
     }
 
-    public changeStateRightnav(rightnav: MatSidenav = this._mobileRightnav) {
+    public changeStateRightnav(rightnav: MatSidenav = this._floatingRightnav) {
         if (rightnav) {
 
         } else {
@@ -128,12 +128,12 @@ export class PipRightnavService {
         }
     }
 
-    private isMobile() {
-        if (this._onlyMobile === true) return true;
+    private isFloating() {
+        if (this._onlyFloating === true) return true;
 
         let is = false;
 
-        _.each(this._mobileRightnavAliases, (alias: string) => {
+        _.each(this._floatingRightnavAliases, (alias: string) => {
             if (this.media.isActive(alias)) is = true;
         });
 
