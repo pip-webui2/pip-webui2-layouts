@@ -15,12 +15,12 @@ import { PipMediaService } from '../../media/shared/media.service'
 
 @Injectable()
 export class PipSidenavService {
-    public _mobileSidenav: MatSidenav;
-    public _desktopSidenav: MatSidenav;
+    public _floatingSidenav: MatSidenav;
+    public _fixedSidenav: MatSidenav;
     private _mode$: BehaviorSubject<string> = new BehaviorSubject('side');
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
     private _mode: string = 'side';
-    private _mobileSidenavAliases: string[] = ['xs'];
+    private _floatingSidenavAliases: string[] = ['xs'];
     private _small: boolean = false;
     private _small$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     private _active$: BehaviorSubject<boolean> = new BehaviorSubject(true);
@@ -29,8 +29,8 @@ export class PipSidenavService {
         private media: PipMediaService
     ) { }
     
-    public set mobileSidenavAliases(aliases: string[]) {
-        this._mobileSidenavAliases = aliases;
+    public set floatingSidenavAliases(aliases: string[]) {
+        this._floatingSidenavAliases = aliases;
     }
 
     public get small() {
@@ -46,24 +46,24 @@ export class PipSidenavService {
         return this._small$;
     }
 
-    public get mobileSidenavAliases() {
-        return this._mobileSidenavAliases;
+    public get floatingSidenavAliases() {
+        return this._floatingSidenavAliases;
     }
 
-    public get mobileSidenav(): MatSidenav {
-        return this._mobileSidenav;
+    public get floatingSidenav(): MatSidenav {
+        return this._floatingSidenav;
     }
 
-    public set mobileSidenav(sidenav: MatSidenav) {
-        this._mobileSidenav = sidenav;
+    public set floatingSidenav(sidenav: MatSidenav) {
+        this._floatingSidenav = sidenav;
     }
 
-    public get desktopSidenav(): MatSidenav {
-        return this._desktopSidenav;
+    public get fixedSidenav(): MatSidenav {
+        return this._fixedSidenav;
     }
 
-    public set desktopSidenav(sidenav: MatSidenav) {
-        this._desktopSidenav = sidenav;
+    public set fixedSidenav(sidenav: MatSidenav) {
+        this._fixedSidenav = sidenav;
     }
 
     public get mode$(): Observable<string> {
@@ -110,7 +110,7 @@ export class PipSidenavService {
         if (sidenav) {
             sidenav.toggle();
         } else { 
-            this.isMobile() ? this.toggleMobileNav() :  this.toggleDesktopNav()
+            this.isFloating() ? this.toggleFloatingNav() :  this.toggleFixedNav()
         }
     }
 
@@ -120,7 +120,7 @@ export class PipSidenavService {
         if (sidenav) {
             sidenav.open();
         } else {
-            this.isMobile() ? this.openMobileNav() : this.openDesktopNav();
+            this.isFloating() ? this.openFloatingNav() : this.openFixedNav();
         }
         this.opened = true;
     }
@@ -131,43 +131,43 @@ export class PipSidenavService {
         if (sidenav) {
             sidenav.close();
         } else {
-            this.isMobile() ? this.closeMobileNav() : this.closeDesktopNav();
+            this.isFloating() ? this.closeFloatingNav() : this.closeFixedNav();
         }
         this.opened = false;
     }
 
-    public toggleMobileNav() {
+    public toggleFloatingNav() {
         if (!this.isActive()) return;
 
-        if (this._mobileSidenav) {
-            this._mobileSidenav.toggle();
-            this.opened = !this._mobileSidenav.opened;
+        if (this._floatingSidenav) {
+            this._floatingSidenav.toggle();
+            this.opened = !this._floatingSidenav.opened;
         } else {
-            console.log('Mobile sidenav not found');
+            console.log('Floating sidenav not found');
         }
     }
 
-    public openMobileNav() {
-        this._mobileSidenav ? this._mobileSidenav.open() : console.log('Mobile sidenav not found');
+    public openFloatingNav() {
+        this._floatingSidenav ? this._floatingSidenav.open() : console.log('Floating sidenav not found');
     }
 
-    public closeMobileNav() {
-        this._mobileSidenav ? this._mobileSidenav.close() : console.log('Mobile sidenav not found');
+    public closeFloatingNav() {
+        this._floatingSidenav ? this._floatingSidenav.close() : console.log('Floating sidenav not found');
     }
 
-    public toggleDesktopNav() {
-        this._desktopSidenav ? this.toggleSmall() : console.log('Desktop sidenav not found');
+    public toggleFixedNav() {
+        this._fixedSidenav ? this.toggleSmall() : console.log('Fixed sidenav not found');
     }
 
-    public openDesktopNav() {
-        this._desktopSidenav ? this.small = false : console.log('Desktop sidenav not found');
+    public openFixedNav() {
+        this._fixedSidenav ? this.small = false : console.log('Fixed sidenav not found');
     }
 
-    public closeDesktopNav() {
-        this._desktopSidenav ? this.small = true : console.log('Desktop sidenav not found')
+    public closeFixedNav() {
+        this._fixedSidenav ? this.small = true : console.log('Fixed sidenav not found')
     }
 
-    public changeStateNav(sidenav: MatSidenav = this._mobileSidenav) {
+    public changeStateNav(sidenav: MatSidenav = this._floatingSidenav) {
         if (sidenav) {
 
         } else {
@@ -175,10 +175,10 @@ export class PipSidenavService {
         }
     }
 
-    private isMobile() {
+    private isFloating() {
         let is = false;
 
-        _.each(this._mobileSidenavAliases, (alias: string) => {
+        _.each(this._floatingSidenavAliases, (alias: string) => {
             if (this.media.isMainActive(alias)) is = true;
         });
 
