@@ -10,14 +10,14 @@ import { PipSidenavService } from './shared/sidenav.service';
 import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 
 @Component({
-	selector: 'pip-sidenav',
-	templateUrl: 'sidenav.component.html',
-	styleUrls: ['./sidenav.component.scss']
+	selector: 'pip-sidenav-fixed',
+	templateUrl: 'sidenav-fixed.component.html',
+	styleUrls: ['./sidenav-fixed.component.scss']
 })
 
-export class PipSidenavComponent implements OnInit, AfterViewInit {
-	@ViewChild('desktopSidenav') sidenav: MatSidenav;
-	@ViewChild('desktopRightnav') rightnav: MatSidenav;
+export class PipSidenavFixedComponent implements OnInit, AfterViewInit {
+	@ViewChild('fixedSidenav') sidenav: MatSidenav;
+	@ViewChild('fixedRightnav') rightnav: MatSidenav;
 	private _opened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -36,17 +36,17 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 
 	ngOnInit() {
 		this.media.asObservable().subscribe((change: MediaChange) => {
-			if (this.rightnavService.onlyMobile === true) return;
+			if (this.rightnavService.onlyFloating === true) return;
 
-			if (this.service.mobileSidenavAliases.includes(change.mqAlias)) {
-				if (this.rightnavService.desktopRightnav && this.rightnavService.desktopRightnav.opened && this.rightnavService.mobileRightnav) {
-					this.rightnavService.closeDesktopRightnav();
-					this.rightnavService.mobileRightnav.open();
+			if (this.service.floatingSidenavAliases.includes(change.mqAlias)) {
+				if (this.rightnavService.fixedRightnav && this.rightnavService.fixedRightnav.opened && this.rightnavService.floatingRightnav) {
+					this.rightnavService.closeFixedRightnav();
+					this.rightnavService.floatingRightnav.open();
 				}
 			} else {
-				if (this.rightnavService.mobileRightnav && this.rightnavService.mobileRightnav.opened) {
-					if (this.rightnavService.desktopRightnav) this.rightnavService.desktopRightnav.open();
-					this.rightnavService.mobileRightnav.close();
+				if (this.rightnavService.floatingRightnav && this.rightnavService.floatingRightnav.opened) {
+					if (this.rightnavService.fixedRightnav) this.rightnavService.fixedRightnav.open();
+					this.rightnavService.floatingRightnav.close();
 				}
 			}
 		});
@@ -70,7 +70,7 @@ export class PipSidenavComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		this.service.desktopSidenav = this.sidenav;
-		this.rightnavService.desktopRightnav = this.rightnav;
+		this.service.fixedSidenav = this.sidenav;
+		this.rightnavService.fixedRightnav = this.rightnav;
 	}
 }

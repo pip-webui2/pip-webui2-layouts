@@ -1,8 +1,8 @@
 <mat-sidenav-container class="pip-sidenav-container">
-  <mat-sidenav #mobileSidenav opened="false" class="pip-mobile-sidenav" align="start">
+  <mat-sidenav #floatingSidenav opened="false" class="pip-sidenav-floating" align="start">
     <ng-content select="[type=nav]"></ng-content>
   </mat-sidenav>
-  <mat-sidenav #mobileRightnav opened="false" [mode]="mode$ | async" class="pip-rightnav" align="end">
+  <mat-sidenav #floatingRightnav opened="false" [mode]="mode$ | async" class="pip-rightnav" align="end">
     <ng-content select="[type=rightnav]"></ng-content>
   </mat-sidenav>
   <ng-content select="[type=body]"></ng-content>

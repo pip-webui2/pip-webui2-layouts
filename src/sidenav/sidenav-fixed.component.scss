@@ -20,7 +20,7 @@ mat-sidenav.pip-sidenav {
 
 // Out main
 ::ng-deep .pip-md {
-  .pip-sidenav-desktop-container.pip-small {
+  .pip-sidenav-fixed-container.pip-small {
     mat-sidenav.pip-sidenav {
       max-width: 64px;
       width: 64px;
@@ -40,7 +40,7 @@ mat-sidenav.pip-sidenav {
 }
 
 ::ng-deep .pip-sm {
-  .pip-sidenav-desktop-container {
+  .pip-sidenav-fixed-container {
     mat-sidenav.pip-sidenav {
       max-width: 64px;
       width: 64px;
@@ -53,7 +53,7 @@ mat-sidenav.pip-sidenav {
 }
 
 ::ng-deep .pip-xs {
-  .pip-sidenav-desktop-container {
+  .pip-sidenav-fixed-container {
     mat-sidenav.pip-sidenav {
       max-width: 0px;
       width: 0px;
@@ -67,7 +67,7 @@ mat-sidenav.pip-sidenav {
 
 // In main
 ::ng-deep .pip-main-md .pip-main {
-  .pip-sidenav-desktop-container.pip-small {
+  .pip-sidenav-fixed-container.pip-small {
     mat-sidenav.pip-sidenav {
       max-width: 64px;
       width: 64px;
@@ -84,7 +84,7 @@ mat-sidenav.pip-sidenav {
 }
 
  ::ng-deep .pip-main-sm .pip-main {
-  .pip-sidenav-desktop-container {
+  .pip-sidenav-fixed-container {
     mat-sidenav.pip-sidenav {
       max-width: 64px;
       width: 64px;
@@ -97,7 +97,7 @@ mat-sidenav.pip-sidenav {
 }
 
  ::ng-deep .pip-main-xs .pip-main {
-  .pip-sidenav-desktop-container {
+  .pip-sidenav-fixed-container {
     mat-sidenav.pip-sidenav {
       max-width: 0px;
       width: 0px;
@@ -117,7 +117,7 @@ mat-sidenav.pip-sidenav {
     width: 0px !important;
     min-width: 0px !important;
   }
-  .pip-sidenav-desktop-container ::ng-deep mat-sidenav-content {
+  .pip-sidenav-fixed-container ::ng-deep mat-sidenav-content {
     margin-left: 0px !important;
   }
 }

@@ -5,14 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material'
 
-import { PipSidenavComponent } from './sidenav.component';
-import { PipSidenavMobileComponent } from './sidenav-mobile.component';
+import { PipSidenavFixedComponent } from './sidenav-fixed.component';
+import { PipSidenavFloatingComponent } from './sidenav-floating.component';
 import { PipSidenavService } from './shared/sidenav.service';
 
 @NgModule({
   declarations: [
-    PipSidenavComponent,
-    PipSidenavMobileComponent
+    PipSidenavFixedComponent,
+    PipSidenavFloatingComponent
   ],
   imports: [
     BrowserModule,
@@ -22,8 +22,8 @@ import { PipSidenavService } from './shared/sidenav.service';
     MatSidenavModule
   ],
   exports: [
-    PipSidenavComponent,
-    PipSidenavMobileComponent
+    PipSidenavFixedComponent,
+    PipSidenavFloatingComponent
   ],
   providers: [
     PipSidenavService

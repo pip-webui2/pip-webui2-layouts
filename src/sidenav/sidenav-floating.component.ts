@@ -12,14 +12,14 @@ import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 
 @Component({
-	selector: 'pip-mobile-sidenav',
-	templateUrl: 'sidenav-mobile.component.html',
-	styleUrls: ['./sidenav-mobile.component.scss']
+	selector: 'pip-floating-sidenav',
+	templateUrl: 'sidenav-floating.component.html',
+	styleUrls: ['./sidenav-floating.component.scss']
 })
 
-export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
-    @ViewChild('mobileSidenav') sidenav: MatSidenav;
-    @ViewChild('mobileRightnav') rightnav: MatSidenav;
+export class PipSidenavFloatingComponent implements OnInit, AfterViewInit {
+    @ViewChild('floatingSidenav') sidenav: MatSidenav;
+    @ViewChild('floatingRightnav') rightnav: MatSidenav;
 
 	public mode$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
@@ -31,7 +31,7 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
 		private media: ObservableMedia,
 		private cd: ChangeDetectorRef
 	) {
-		renderer.setElementClass(elRef.nativeElement, 'pip-mobile-sidenav', true);
+		renderer.setElementClass(elRef.nativeElement, 'pip-floating-sidenav', true);
 	}
 
 	ngOnInit() {
@@ -44,14 +44,14 @@ export class PipSidenavMobileComponent implements OnInit, AfterViewInit {
 		});
 
 		this.media.asObservable().subscribe((change: MediaChange) => {
-			this.mode$.next(this.rightnavService.mobileRightnavAliases.includes(change.mqAlias) ? null : 'side');
+			this.mode$.next(this.rightnavService.floatingRightnavAliases.includes(change.mqAlias) ? null : 'side');
 			this.cd.detectChanges();
 		});
 	 }
 
 	ngAfterViewInit() {
-        this.service.mobileSidenav = this.sidenav;
-        this.rightnavService.mobileRightnav = this.rightnav;
+        this.service.floatingSidenav = this.sidenav;
+        this.rightnavService.floatingRightnav = this.rightnav;
 	}
 
 }
