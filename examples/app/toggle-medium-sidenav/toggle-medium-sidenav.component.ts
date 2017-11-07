@@ -35,6 +35,6 @@ export class ToggleMediumSidenavComponent implements OnInit {
 	}
 
 	public toggleClick() {
-		this.sidenav.toggleDesktopNav();
+		this.sidenav.toggleFixedNav();
 	}
 }

@@ -61,7 +61,7 @@
       </pip-appbar>
       <pip-content>
         <pip-main fxFlex="grow">
-          <pip-sidenav>
+          <pip-sidenav-fixed>
             <div type="nav" style="height: 100%">
               <toggle-medium-sidenav></toggle-medium-sidenav>
               <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
@@ -70,7 +70,7 @@
             <div type="body" fxFlex="grow" fxLayout="row" style="overflow: hidden;">
               <router-outlet></router-outlet>
             </div>
-          </pip-sidenav>
+          </pip-sidenav-fixed>
         </pip-main>
       </pip-content>
     </div>

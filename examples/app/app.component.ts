@@ -1,8 +1,9 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, AfterViewInit } from '@angular/core';
 import { PipMediaService, PipSidenavService, PipRightnavService, MediaMainChange } from './pip-webui2-layouts';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ActivatedRoute, Router } from '@angular/router';
 
 declare var _;
 
@@ -11,13 +12,14 @@ declare var _;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     public media: PipMediaService,
     public globalMedia: ObservableMedia,
     public sidenav: PipSidenavService,
     private rightnav: PipRightnavService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {
     media.activate();
     this.generateList();
@@ -31,6 +33,12 @@ export class AppComponent implements OnInit {
 
     this.sidenav.small$.subscribe((small) => {
       this.cd.detectChanges();
+    });
+  }
+
+  public ngAfterViewInit() {
+    setTimeout(() => {
+      this.setListIndex();
     });
   }
 
@@ -62,12 +70,11 @@ export class AppComponent implements OnInit {
     return this._showIcon$;
   }
 
-  // media.isMainActive('xs') ? 'menu' : sidenav.small ? 'chevron_right' : 'chevron_left'
   public listIndex: number = 0;
 
   public onListItemIndexChanged(index: number) {
-    this.listIndex - index;
-    this.sidenav.closeMobileNav();
+    this.listIndex = index;
+    this.sidenav.closeFloatingNav();
   }
 
   public onMenuClick() {
@@ -82,5 +89,13 @@ export class AppComponent implements OnInit {
     this.list = this._list;
   }
 
+  private setListIndex() {
+    let url = this.router.url;
 
+    let index = _.findIndex(this.list, (item) => {
+      return url.includes(item.route);
+    });
+
+    if (index > -1 && this.list.length > 0) this.listIndex = index;
+  }
 }
