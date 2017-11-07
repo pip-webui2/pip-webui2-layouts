@@ -41,7 +41,7 @@ export class PipMainLayoutComponent implements OnInit, OnDestroy {
             this.service.updateMainLayoutBreakpoints(this.elRef.nativeElement.offsetWidth);
         });
         this.rightnavService.opened$.subscribe(() => {
-            if (this.rightnavService._desktopRightnav) this.onResize();
+            if (this.rightnavService._fixedRightnav) this.onResize();
         });
     }
 
@@ -50,7 +50,7 @@ export class PipMainLayoutComponent implements OnInit, OnDestroy {
     }
 
     private onResize() {
-        let rightnavWidth = this.rightnavService._desktopRightnav.opened ? this.rightnavService._desktopRightnav['_elementRef'].nativeElement.offsetWidth : 0;
+        let rightnavWidth = this.rightnavService._fixedRightnav.opened ? this.rightnavService._fixedRightnav['_elementRef'].nativeElement.offsetWidth : 0;
         this.service.updateMainLayoutBreakpoints(this.elRef.nativeElement.offsetWidth - rightnavWidth);
     }
 }
