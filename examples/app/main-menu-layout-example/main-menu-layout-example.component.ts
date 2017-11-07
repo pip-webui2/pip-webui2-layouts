@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Host } from '@angular/core';
 import { ObservableMedia } from "@angular/flex-layout";
+import { PipMediaService } from '../pip-webui2-layouts';
+import { AppComponent } from '../app.component';
 
 @Component({
 	selector: 'main-menu-layout-example',
@@ -11,9 +13,11 @@ export class MainMenuLayoutExampleComponent implements OnInit {
 	public list: any[] = [];
 	public selectedIndex: number = 0;
 	public tiles = [];
+	public itemIndex: number = 0;
 
 	constructor(
-		public media: ObservableMedia
+		public media: PipMediaService,
+		@Host() private parent: AppComponent
 	) { }
 
 	public navLinks: any[] = [
@@ -40,5 +44,18 @@ export class MainMenuLayoutExampleComponent implements OnInit {
         for (let i = 0; i < 6; i++) {
             this.tiles.push({ title: 'Tile number ' + i });
         }
-    }
+	}
+	
+	public onItemClick(index) {
+		this.itemIndex = index;
+		if (this.media.isMainActive('xs')) {
+			this.isSingle = true;
+			this.parent.showIcon = 'back';
+			this.parent.onBackClick = () => {
+				this.isSingle = false;
+				this.parent.onBackClick = null;
+				this.parent.showIcon = 'menu';
+			}
+		}
+	}
 }

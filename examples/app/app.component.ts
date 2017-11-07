@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   public ngOnInit() {
     this.media.asObservableMain().subscribe((change: MediaMainChange) => {
-      this._showIcon$.next(change.aliases.includes('xs'));
+      this._showIcon$.next(change.aliases.includes('xs') ? 'menu' : 'app');
       this.cd.detectChanges();
     });
 
@@ -43,6 +43,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public list: any[] = [];
+  public onBackClick: Function = null;
 
   private _list: any[] = [
     {
@@ -64,9 +65,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       name: 'Scrollable', id: 'scrollable', route: 'scrollable', icon: 'view_day'
     }
   ];
-  private _showIcon$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private _showIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('app');
 
-  public get showIcon$(): Observable<boolean> {
+  public get showIcon$(): Observable<string> {
     return this._showIcon$;
   }
 
@@ -77,12 +78,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.sidenav.closeFloatingNav();
   }
 
+  public set showIcon(icon: string) {
+    this._showIcon$.next(icon);
+  }
+
   public onMenuClick() {
     this.sidenav.toggleNav();
   }
 
   public onInfoClick() {
+    let v = this._showIcon$.value;
     this.rightnav.toggleRightnav();
+    this._showIcon$.next(v);
   }
 
   private generateList() {

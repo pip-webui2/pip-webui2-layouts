@@ -10,7 +10,7 @@
         <div fxFlex="grow"></div>
         <button style="position: absolute; top: 0; right: 0" mat-icon-button (click)="onInfoClick()">
                 <mat-icon>clear</mat-icon>
-            </button>
+        </button>
       </mat-toolbar>
       <div class="pip-rightnav-content" fxFlex="grow" style="padding: 8px">
         <img src="http://s4.thingpic.com/images/pQ/NnndmJd4bex6qPpZAzMJ9mPG.jpeg" width="100%" alt="">
@@ -47,11 +47,14 @@
     </div>
     <div type="body" fxFlexFill>
       <pip-appbar [ngSwitch]="showIcon$ | async">
-        <button mat-icon-button class="app-icon" (click)="onMenuClick()" *ngSwitchCase="true">
+        <button mat-icon-button class="app-icon" (click)="onMenuClick()" *ngSwitchCase="'menu'">
             <mat-icon>menu</mat-icon>
         </button>
-        <button mat-icon-button class="app-icon" *ngSwitchCase="false">
+        <button mat-icon-button class="app-icon" *ngSwitchCase="'app'">
             <mat-icon>view_carousel</mat-icon>
+        </button>
+        <button mat-icon-button class="app-icon" (click)="onBackClick()" *ngSwitchCase="'back'">
+            <mat-icon>arrow_back</mat-icon>
         </button>
         <p>Layouts</p>
         <div fxFlex="grow"></div>

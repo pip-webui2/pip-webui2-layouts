@@ -1,8 +1,8 @@
 <pip-shadow visible="true" attachmentSide="top"></pip-shadow>
 <pip-shadow visible="true" attachmentSide="left"></pip-shadow>
 <pip-shadow visible="true" attachmentSide="right"></pip-shadow>
-<div fxFlex="fill" fxLayout="column">
-  <nav mat-tab-nav-bar color="primary">
+<div fxFlex="fill" fxLayout="column" >
+  <nav mat-tab-nav-bar color="primary" >
     <a mat-tab-link *ngFor="let link of navLinks; let i = index" [active]="i == selectedIndex" (click)="onLinkClick(i)">
           {{link.label}}
       </a>
@@ -12,7 +12,7 @@
     <pip-main-menu [ngClass]="{'pip-single-content': isSingle}">
       <div class="pip-menu">
         <mat-nav-list dense>
-          <mat-list-item *ngFor="let item of list">
+          <mat-list-item *ngFor="let item of list; let i = index" (click)="onItemClick(i)">
             <h3 md-line>{{ item.title }}</h3>
           </mat-list-item>
         </mat-nav-list>
@@ -20,8 +20,8 @@
 
       <div class="pip-content-container">
         <pip-document *ngIf="selectedIndex == 0">
-          <h3>Title</h3>
-          <mat-slide-toggle [(ngModel)]="isSingle">Single content</mat-slide-toggle>
+          <h3>Title {{ itemIndex }}</h3>
+          <mat-slide-toggle *ngIf="media.isMainActive('gt-xs')" [(ngModel)]="isSingle">Single content</mat-slide-toggle>
           <img style="margin-top: 8px" src="http://s4.thingpic.com/images/pQ/NnndmJd4bex6qPpZAzMJ9mPG.jpeg" width="100%" alt="">
           <div style="margin-top: 8px">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
