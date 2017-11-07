@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material';
 
 import { ScrollableLayoutExampleComponent } from './scrollable-layout-example.component';
-import { PipScrollableLayoutModule, PipShadowModule } from '../pip-webui2-layouts';
+import { PipScrollableModule, PipShadowModule } from '../pip-webui2-layouts';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { PipScrollableLayoutModule, PipShadowModule } from '../pip-webui2-layout
     ReactiveFormsModule,
     MatToolbarModule,
 
-    PipScrollableLayoutModule,
+    PipScrollableModule,
     PipShadowModule
   ],
   exports: [

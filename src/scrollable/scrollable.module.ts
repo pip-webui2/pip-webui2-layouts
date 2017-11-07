@@ -20,4 +20,4 @@ import { PipScrollableContainerComponent } from './scrollable-container.componen
     PipScrollableContainerComponent
   ]
 })
-export class PipScrollableLayoutModule { }
+export class PipScrollableModule { }
