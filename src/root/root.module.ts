@@ -5,12 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material'
 
-import { PipSidenavFixedComponent } from './sidenav-fixed.component';
-import { PipSidenavService } from './shared/sidenav.service';
+import { PipRootComponent } from './root.component';
 
 @NgModule({
   declarations: [
-    PipSidenavFixedComponent
+    PipRootComponent
   ],
   imports: [
     BrowserModule,
@@ -20,10 +19,10 @@ import { PipSidenavService } from './shared/sidenav.service';
     MatSidenavModule
   ],
   exports: [
-    PipSidenavFixedComponent
+    PipRootComponent
   ],
   providers: [
-    PipSidenavService
+
   ]
 })
-export class PipSidenavModule { }
+export class PipRootModule { }

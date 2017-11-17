@@ -1,7 +1,7 @@
 .pip-rightnav {
     overflow: hidden !important;
 
-    [type=rightnav] {
+    pip-floating-rightnav, pip-fixed-rightnav {
         padding: 0 !important;
         height: 100%;
     }

@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomBreakPointsProvider } from './custom-breakpoints';
 import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
 
-import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipContentCanvasModule, PipMainLayoutModule } from './pip-webui2-layouts';
+import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipContentCanvasModule, PipMainLayoutModule, PipRootModule } from './pip-webui2-layouts';
 
 import { ExampleListModule } from './examples-list/examples-list.module';
 import { ToggleMediumSidenavModule } from './toggle-medium-sidenav/toggle-medium-sidenav.module';
@@ -52,6 +52,7 @@ const appRoutes: Routes = [
     PipRightnavModule,
     PipContentCanvasModule,
     PipMainLayoutModule,
+    PipRootModule,
 
     ExampleListModule,
     ToggleMediumSidenavModule,
@@ -65,7 +66,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [CustomBreakPointsProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
  

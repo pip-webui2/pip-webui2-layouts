@@ -10,3 +10,5 @@ export * from './rightnav/index';
 export * from './content-canvas/index';
 export * from './card-layout/index';
 export * from './scrollable/index';
+
+export * from './root/index';

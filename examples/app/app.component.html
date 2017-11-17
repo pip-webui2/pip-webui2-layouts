@@ -1,10 +1,10 @@
 <div fxLayout="column" class="content" id="content-id">
-  <pip-floating-sidenav>
-    <div type="nav" style="height: 100%">
+  <pip-root>
+    <pip-floating-sidenav style="height: 100%">
       <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
       </examples-list>
-    </div>
-    <div type="rightnav" style="font-family: Roboto; padding: 8px" fxLayout="column">
+    </pip-floating-sidenav>
+    <pip-floating-rightnav style="font-family: Roboto; padding: 8px" fxLayout="column">
       <mat-toolbar fxLayout="row" class="pip-rightnav-title" color="accent">
         <h2 style="margin: 0px">Tigers</h2>
         <div fxFlex="grow"></div>
@@ -44,8 +44,8 @@
           occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </div>
       </div>
-    </div>
-    <div type="body" fxFlexFill>
+    </pip-floating-rightnav>
+    <pip-root-content fxFlexFill>
       <pip-appbar [ngSwitch]="showIcon$ | async">
         <button mat-icon-button class="app-icon" (click)="onMenuClick()" *ngSwitchCase="'menu'">
             <mat-icon>menu</mat-icon>
@@ -76,6 +76,6 @@
           </pip-sidenav-fixed>
         </pip-main>
       </pip-content>
-    </div>
-  </pip-floating-sidenav>
+    </pip-root-content>
+  </pip-root>
 </div>
