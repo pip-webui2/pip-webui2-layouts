@@ -14,6 +14,7 @@ export class MainMenuLayoutExampleComponent implements OnInit {
 	public selectedIndex: number = 0;
 	public tiles = [];
 	public itemIndex: number = 0;
+	private _prevIcon: string;
 
 	constructor(
 		public media: PipMediaService,
@@ -50,11 +51,12 @@ export class MainMenuLayoutExampleComponent implements OnInit {
 		this.itemIndex = index;
 		if (this.media.isMainActive('xs')) {
 			this.isSingle = true;
+			this._prevIcon = this.parent.showIcon;
 			this.parent.showIcon = 'back';
 			this.parent.onBackClick = () => {
 				this.isSingle = false;
 				this.parent.onBackClick = null;
-				this.parent.showIcon = 'menu';
+				this.parent.showIcon = this._prevIcon;
 			}
 		}
 	}

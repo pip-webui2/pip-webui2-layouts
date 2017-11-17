@@ -82,6 +82,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     this._showIcon$.next(icon);
   }
 
+  public get showIcon(): string {
+    return this._showIcon$.getValue();
+  }
+
   public onMenuClick() {
     this.sidenav.toggleNav();
   }
