@@ -22,7 +22,7 @@ export class PipSidenavFixedComponent implements OnInit, AfterViewInit {
 	public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 	public constructor(
-		private service: PipSidenavService,
+		private sidenavService: PipSidenavService,
 		private rightnavService: PipRightnavService,
 		private renderer: Renderer,
 		private elRef: ElementRef,
@@ -38,7 +38,7 @@ export class PipSidenavFixedComponent implements OnInit, AfterViewInit {
 		this.media.asObservable().subscribe((change: MediaChange) => {
 			if (this.rightnavService.onlyFloating === true) return;
 
-			if (this.service.floatingSidenavAliases.includes(change.mqAlias)) {
+			if (this.sidenavService.floatingSidenavAliases.includes(change.mqAlias)) {
 				if (this.rightnavService.fixedRightnav && this.rightnavService.fixedRightnav.opened && this.rightnavService.floatingRightnav) {
 					this.rightnavService.closeFixedRightnav();
 					this.rightnavService.floatingRightnav.open();
@@ -51,7 +51,7 @@ export class PipSidenavFixedComponent implements OnInit, AfterViewInit {
 			}
 		});
 
-		this.service.small$.subscribe((small) => {
+		this.sidenavService.small$.subscribe((small) => {
 			this.small$.next(small);
 			this.cd.detectChanges();
 		});
@@ -60,7 +60,7 @@ export class PipSidenavFixedComponent implements OnInit, AfterViewInit {
 			this.cd.detectChanges();
 		});
 
-		this.service.active$.subscribe((active) => {
+		this.sidenavService.active$.subscribe((active) => {
 			if (!this.sidenav) return;
 
 			if (active && !this.sidenav.opened) this.sidenav.open();
@@ -70,7 +70,7 @@ export class PipSidenavFixedComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		this.service.fixedSidenav = this.sidenav;
+		this.sidenavService.fixedSidenav = this.sidenav;
 		this.rightnavService.fixedRightnav = this.rightnav;
 	}
 }

@@ -24,7 +24,7 @@ export class PipSidenavFloatingComponent implements OnInit, AfterViewInit {
 	public mode$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
 	public constructor(
-        private service: PipSidenavService,
+        private sidenavService: PipSidenavService,
         private rightnavService: PipRightnavService,
 		private renderer: Renderer,
         private elRef: ElementRef,
@@ -35,7 +35,7 @@ export class PipSidenavFloatingComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit() {
-		this.service.opened$.subscribe((opened) => {
+		this.sidenavService.opened$.subscribe((opened) => {
 			this.cd.detectChanges();
 		});
 
@@ -50,7 +50,7 @@ export class PipSidenavFloatingComponent implements OnInit, AfterViewInit {
 	 }
 
 	ngAfterViewInit() {
-        this.service.floatingSidenav = this.sidenav;
+        this.sidenavService.floatingSidenav = this.sidenav;
         this.rightnavService.floatingRightnav = this.rightnav;
 	}
 
