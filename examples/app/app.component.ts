@@ -26,8 +26,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit() {
-    this.media.asObservableMain().subscribe((change: MediaMainChange) => {
-      this._showIcon$.next(change.aliases.includes('xs') ? 'menu' : 'app');
+    this.globalMedia.asObservable().subscribe((change: MediaChange) => {
+      this._showIcon$.next(change.mqAlias === 'xs' ? 'menu' : 'app');
       this.cd.detectChanges();
     });
 
