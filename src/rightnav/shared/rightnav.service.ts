@@ -54,6 +54,10 @@ export class PipRightnavService {
         return this._opened$;
     }
 
+    public get opened(): boolean {
+        return this._opened$.getValue();
+    }
+
     public set opened(open: boolean) {
         this._opened$.next(open);
     }
@@ -85,7 +89,8 @@ export class PipRightnavService {
     public toggleFloatingRightnav() {
         if (this._floatingRightnav) {
             this._floatingRightnav.toggle();
-            this.opened = !this._floatingRightnav.opened;
+            this.opened = this._floatingRightnav.opened;
+            console.log('this._opened$', this._opened$.getValue());
         } else { 
             console.log('rightnav not found'); 
         }
@@ -94,7 +99,7 @@ export class PipRightnavService {
     public toggleFixedRightnav() {
         if (this._fixedRightnav) {
             this._fixedRightnav.toggle();
-            this.opened = !this._fixedRightnav.opened;
+            this.opened = this._fixedRightnav.opened;
         } else { 
             console.log('rightnav not found'); 
         }
