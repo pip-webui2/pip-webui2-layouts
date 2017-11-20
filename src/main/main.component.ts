@@ -103,7 +103,7 @@ export class PipMainComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
     private onResize() {
-        let rightnavWidth = this.rightnavService.opened ? this.rightnavService._fixedRightnav['_elementRef'].nativeElement.offsetWidth : 0;
+        let rightnavWidth = this.rightnavService._fixedRightnav.opened ? this.rightnavService._fixedRightnav['_elementRef'].nativeElement.offsetWidth : 0;
         this.mainMedia.updateMainLayoutBreakpoints(this.element.offsetWidth - rightnavWidth);
     }
 }
