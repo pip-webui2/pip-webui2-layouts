@@ -12,7 +12,7 @@ Development responsible applications requires to organization content the way th
 
 **Right nav** is right side panel that should show secondary content to the main content on a page.
 
-**Main layout** is structural part that contains only **content canvas** or **side nav and content canvas** and serves to determine the width of the responsive content of the application page.
+**Main** is structural part that contains only **main content** or **side nav and main content** and serves to determine the width of the responsive content of the application page.
 
 ### Layouts
 
