@@ -12,7 +12,7 @@ export class PipRightnavService {
     public _fixedRightnav: MatSidenav;
     private _onlyFloating: boolean = true;
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-    private _floatingRightnavAliases: string[] = ['xs'];
+    private _floatingRightnavAliases: string[] = ['xs', 'sm'];
 
     public constructor(
         private media: ObservableMedia
