@@ -1,9 +1,0 @@
-<mat-sidenav-container class="pip-sidenav-container pip-sidenav-fixed-container" [ngClass]="{ 'pip-small': small$ | async }">
-  <mat-sidenav #fixedSidenav class="pip-sidenav" opened="true" mode="side" align="start">
-    <ng-content select="[type=nav]"></ng-content>
-  </mat-sidenav>
-  <mat-sidenav #fixedRightnav class="pip-rightnav" opened="false" mode="side" align="end">
-    <ng-content select="[type=rightNav]"></ng-content>
-  </mat-sidenav>
-  <ng-content select="[type=body]"></ng-content>
-</mat-sidenav-container>
