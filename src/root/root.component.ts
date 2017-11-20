@@ -47,11 +47,23 @@ export class PipRootComponent implements OnInit, AfterViewInit {
 			this.mode$.next(this.rightnavService.floatingRightnavAliases.includes(change.mqAlias) ? null : 'side');
 			this.cd.detectChanges();
 		});
+
+		this.initMode();
 	 }
 
 	ngAfterViewInit() {
         this.sidenavService.floatingSidenav = this.sidenav;
         this.rightnavService.floatingRightnav = this.rightnav;
+	}
+
+	private initMode() {
+		let mode = 'side';
+
+		_.each(this.rightnavService.floatingRightnavAliases, (alias: string) => {
+			if (this.media.isActive(alias)) mode = null;
+		});
+
+		this.mode$.next(mode);
 	}
 
 }
