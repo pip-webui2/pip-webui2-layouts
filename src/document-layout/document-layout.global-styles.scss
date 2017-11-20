@@ -1,6 +1,7 @@
 .pip-main-xs,
 .pip-main-sm,
-.pip-main-md
+.pip-main-md,
+.pip-main-document-lt-lg
 {
   .pip-document {
     position: absolute !important;
@@ -18,7 +19,7 @@
 }
 
 .pip-main-sm,
-.pip-main-md 
+.pip-main-md,
 {
   .pip-main-menu:not(.pip-single-content) {
     .pip-content-container {
@@ -30,6 +31,15 @@
   }
 }
 
+.pip-document {
+  -webkit-transition: left .35s ease, width .35s ease;
+  -moz-transition: left .35s ease, width .35s ease;
+  -ms-transition: left .35s ease, width .35s ease;
+  -o-transition: left .35s ease, width .35s ease;
+  transition: left .35s ease, width .35s ease;
+}
+
+
 .pip-main-menu {
   &:not(.pip-single-content) {
     .pip-content-container {
@@ -37,7 +47,6 @@
         left: 0px;
         width: calc(100% - 16px);
         height: calc(100% - 16px);
-        //min-width: 320px;
         max-width: 960px;
       }
     }
