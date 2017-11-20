@@ -25,7 +25,7 @@ export class ToggleMediumSidenavComponent implements OnInit {
 
 	ngOnInit() {
 		this.media.asObservableMain().subscribe((change: MediaMainChange) => {
-			this.elRef.nativeElement.classList[change.aliases.includes('md') ? 'add' : 'remove']('show');
+			this.elRef.nativeElement.classList[change.aliases.includes('lg') ? 'add' : 'remove']('show');
 		});
 
 		this.sidenav.small$.subscribe((small) => {
