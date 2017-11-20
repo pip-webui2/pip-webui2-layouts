@@ -16,13 +16,20 @@ export class PipMediaService {
     private mainChange$: BehaviorSubject<MediaMainChange> = new BehaviorSubject<MediaMainChange>({ aliases: [] });
 
     public activate() {
+        console.log('this.media', this.media);
+
         this.media.asObservable().subscribe((change: MediaChange) => {
-            let body = document.body;
-            _.each(this.media['breakpoints'].aliases, (alias: any) => {
-                body.classList[this.media.isActive(alias) ? 'add' : 'remove']('pip-' + alias);
-            });
+            this.updateBodyLayoutBreakpoints();
         });
+        this.updateBodyLayoutBreakpoints();
         this.setMainLayoutBreakpoints();
+    }
+
+    private updateBodyLayoutBreakpoints() {
+        let body = document.body;
+        _.each(this.media['breakpoints'].aliases, (alias: any) => {
+            body.classList[this.media.isActive(alias) ? 'add' : 'remove']('pip-' + alias);
+        });
     }
 
     public updateMainLayoutBreakpoints(width: number) {
