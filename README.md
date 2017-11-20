@@ -12,8 +12,6 @@ Development responsible applications requires to organization content the way th
 
 **Right nav** is right side panel that should show secondary content to the main content on a page.
 
-**Content canvas** is part that placed under app bar and between side navs. It contains main application's content.
-
 **Main layout** is structural part that contains only **content canvas** or **side nav and content canvas** and serves to determine the width of the responsive content of the application page.
 
 ### Layouts
@@ -32,4 +30,4 @@ Development responsible applications requires to organization content the way th
 
 **Media** is used to evaluate whether a given media query is true or false given the current device's screen / window size. It has media queries for full device's screen / window and for **main layout**.
 
-**Layouts** serves to control **app bar**, **side nav**, **right nav** and **content canvas**.
+**Layouts** serves to control **app bar**, **side nav**, **right nav**.
