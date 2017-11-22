@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Routes, RouterModule} from '@angular/router'
+import { Routes, RouterModule } from '@angular/router'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomBreakPointsProvider } from './custom-breakpoints';
 import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
+
+import { PipBreadcrumbModule, PipNavIconModule, PipPrimaryActionsModule, PipNavModule, PipNavMenuModule } from 'pip-webui2-nav';
 
 import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipMainModule, PipRootModule, PipSidenavToggleModule } from './pip-webui2-layouts';
 
@@ -45,8 +47,16 @@ const appRoutes: Routes = [
     MatIconModule,
     MatToolbarModule,
 
+    // Nav dependencies
+    PipBreadcrumbModule, 
+    PipNavIconModule, 
+    PipPrimaryActionsModule, 
+    PipNavModule, 
+    PipNavMenuModule,
+
+    // Layouts dependencies
     PipShadowModule,
-    PipAppbarModule, 
+    PipAppbarModule,
     PipSidenavModule,
     PipRightnavModule,
     PipSidenavToggleModule,
@@ -65,7 +75,6 @@ const appRoutes: Routes = [
   ],
   providers: [CustomBreakPointsProvider],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
- 
