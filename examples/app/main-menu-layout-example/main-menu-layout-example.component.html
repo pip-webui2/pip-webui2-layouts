@@ -19,7 +19,7 @@
       </div>
 
       <div class="pip-menu-container">
-        <pip-document *ngIf="selectedIndex == 0">
+        <pip-document-layout *ngIf="selectedIndex == 0">
           <h3>Title {{ itemIndex }}</h3>
           <mat-slide-toggle *ngIf="media.isMainActive('gt-xs')" [(ngModel)]="isSingle">Single content</mat-slide-toggle>
           <img style="margin-top: 8px" src="http://s4.thingpic.com/images/pQ/NnndmJd4bex6qPpZAzMJ9mPG.jpeg" width="100%" alt="">
@@ -46,7 +46,7 @@
             repellat.
           </div>
 
-        </pip-document>
+        </pip-document-layout>
         <div class="pip-multi-tiles-container" *ngIf="selectedIndex == 1">
           <pip-tiles columnWidth="200">
             <div class="pip-tile pip-tile-narrow" *ngFor="let tile of tiles">
