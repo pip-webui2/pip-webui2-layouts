@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 
-import { PipScrollableElementComponent } from './scrollable-element.component';
-import { PipScrollableContainerComponent } from './scrollable-container.component';
+import { PipScrollableContentComponent } from './scrollable-content.component';
+import { PipScrollableComponent } from './scrollable.component';
 
 @NgModule({
   declarations: [
-    PipScrollableElementComponent,
-    PipScrollableContainerComponent
+    PipScrollableContentComponent,
+    PipScrollableComponent
   ],
   imports: [
     
   ],
   exports: [  
-    PipScrollableElementComponent,
-    PipScrollableContainerComponent
+    PipScrollableContentComponent,
+    PipScrollableComponent
   ],
   providers: [
-    PipScrollableElementComponent,
-    PipScrollableContainerComponent
+    PipScrollableContentComponent,
+    PipScrollableComponent
   ]
 })
 export class PipScrollableModule { }
