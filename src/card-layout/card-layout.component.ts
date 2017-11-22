@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, Input } from '@angular/core';
 
 @Component({
-	selector: 'pip-card',
+	selector: 'pip-card-layout',
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./card-layout.component.scss']
 })
