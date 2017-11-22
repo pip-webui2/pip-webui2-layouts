@@ -5,8 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { PipNavService } from 'pip-webui2-nav';
-
 import { PipThemesService } from 'pip-webui2-themes';
 
 declare var _;
@@ -24,7 +22,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     private rightnav: PipRightnavService,
     private cd: ChangeDetectorRef,
     private router: Router,
-    private navService: PipNavService,
     private themesService: PipThemesService
   ) {
     media.activate();
