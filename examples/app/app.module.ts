@@ -5,10 +5,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomBreakPointsProvider } from './custom-breakpoints';
 import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
 
-import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipMainModule, PipRootModule } from './pip-webui2-layouts';
+import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipMainModule, PipRootModule, PipSidenavToggleModule } from './pip-webui2-layouts';
 
 import { ExampleListModule } from './examples-list/examples-list.module';
-import { ToggleMediumSidenavModule } from './toggle-medium-sidenav/toggle-medium-sidenav.module';
 import { AppComponent } from './app.component';
 import { MainLayoutExampleComponent } from './main-layout-example/main-layout-example.component';
 import { DocumentLayoutExampleComponent } from './document-layout-example/document-layout-example.component';
@@ -50,11 +49,11 @@ const appRoutes: Routes = [
     PipAppbarModule, 
     PipSidenavModule,
     PipRightnavModule,
+    PipSidenavToggleModule,
     PipMainModule,
     PipRootModule,
 
     ExampleListModule,
-    ToggleMediumSidenavModule,
     MainLayoutExampleModule,
     DocumentLayoutExampleModule,
     TilesLayoutExampleModule,

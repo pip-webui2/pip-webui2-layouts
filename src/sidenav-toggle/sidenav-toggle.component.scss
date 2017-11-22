@@ -1,0 +1,26 @@
+:host {
+    .toggle-sidenav {
+      transition: height 0.35s ease;
+      height: 0px;
+      padding-top: 0;
+      .mat-icon {
+        margin-right: 24px;
+        margin-left: 4px;
+        color: rgba(0, 0, 0, 0.54);
+        transition: opacity 0.35s ease;
+        opacity: 0;
+      }
+    }
+    /deep/ .mat-list-item-content {
+        height: 48px !important;
+    }
+    &.show {
+      .toggle-sidenav {
+        height: 48px;
+        .mat-icon {   
+          opacity: 1;
+        }
+      }
+    }
+  }
+  

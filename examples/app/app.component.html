@@ -63,7 +63,7 @@
     </pip-appbar>
     <pip-main fxFlex="grow" pipContainer=".content">
       <pip-sidenav-fixed style="height: 100%">
-        <toggle-medium-sidenav></toggle-medium-sidenav>
+        <pip-sidenav-toggle></pip-sidenav-toggle>
         <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
         </examples-list>
       </pip-sidenav-fixed>
