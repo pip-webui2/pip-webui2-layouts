@@ -1,9 +1,9 @@
 <pip-root>
-  <pip-floating-sidenav style="height: 100%">
+  <pip-sidenav-floating style="height: 100%">
     <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
     </examples-list>
-  </pip-floating-sidenav>
-  <pip-floating-rightnav style="font-family: Roboto; padding: 8px" fxLayout="column">
+  </pip-sidenav-floating>
+  <pip-rightnav-floating style="font-family: Roboto; padding: 8px" fxLayout="column">
     <mat-toolbar fxLayout="row" class="pip-rightnav-title" color="accent">
       <h2 style="margin: 0px">Tigers</h2>
       <div fxFlex="grow"></div>
@@ -43,7 +43,7 @@
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
     </div>
-  </pip-floating-rightnav>
+  </pip-rightnav-floating>
   <pip-root-content>
     <pip-appbar [ngSwitch]="showIcon$ | async">
       <button mat-icon-button class="app-icon" (click)="onMenuClick()" *ngSwitchCase="'menu'">
@@ -62,11 +62,11 @@
       </button>
     </pip-appbar>
     <pip-main fxFlex="grow" pipContainer=".content">
-      <pip-fixed-sidenav style="height: 100%">
+      <pip-sidenav-fixed style="height: 100%">
         <toggle-medium-sidenav></toggle-medium-sidenav>
         <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
         </examples-list>
-      </pip-fixed-sidenav>
+      </pip-sidenav-fixed>
       <pip-main-content>
         <router-outlet></router-outlet>
       </pip-main-content>
