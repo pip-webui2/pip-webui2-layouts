@@ -1,7 +1,7 @@
 <pip-root>
   <pip-sidenav-floating style="height: 100%">
-    <!--examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
-    </examples-list-->
+    <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
+    </examples-list>
     <pip-nav-menu></pip-nav-menu>
   </pip-sidenav-floating>
   <pip-rightnav-floating style="font-family: Roboto; padding: 8px" fxLayout="column">
@@ -47,7 +47,7 @@
   </pip-rightnav-floating>
   <pip-root-content>
     <pip-appbar [ngSwitch]="showIcon$ | async">
-      <!--button mat-icon-button class="app-icon" (click)="onMenuClick()" *ngSwitchCase="'menu'">
+      <button mat-icon-button class="app-icon" (click)="onMenuClick()" *ngSwitchCase="'menu'">
         <mat-icon>menu</mat-icon>
       </button>
       <button mat-icon-button class="app-icon" *ngSwitchCase="'app'">
@@ -60,18 +60,13 @@
       <div fxFlex="grow"></div>
       <button mat-icon-button (click)="onInfoClick()">
         <mat-icon>info</mat-icon>
-      </button-->
-      <pip-nav-icon> </pip-nav-icon>
-      <pip-breadcrumb> </pip-breadcrumb>
-      <div fxFlex="grow"></div>
-      <pip-primary-actions> </pip-primary-actions>
+      </button>
     </pip-appbar>
-    <pip-main fxFlex="grow" pipContainer=".content">
+    <pip-main fxFlex="grow">
       <pip-sidenav-fixed style="height: 100%">
         <pip-sidenav-toggle></pip-sidenav-toggle>
-        <!--examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
-        </examples-list-->
-        <pip-nav-menu></pip-nav-menu>
+        <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
+        </examples-list>
       </pip-sidenav-fixed>
       <pip-main-content>
         <router-outlet></router-outlet>

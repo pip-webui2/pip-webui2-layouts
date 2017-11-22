@@ -5,8 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomBreakPointsProvider } from './custom-breakpoints';
 import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
 
-import { PipBreadcrumbModule, PipNavIconModule, PipPrimaryActionsModule, PipNavModule, PipNavMenuModule } from 'pip-webui2-nav';
-
+import { PipThemesModule } from 'pip-webui2-themes';
 import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipMainModule, PipRootModule, PipSidenavToggleModule } from './pip-webui2-layouts';
 
 import { ExampleListModule } from './examples-list/examples-list.module';
@@ -47,12 +46,8 @@ const appRoutes: Routes = [
     MatIconModule,
     MatToolbarModule,
 
-    // Nav dependencies
-    PipBreadcrumbModule, 
-    PipNavIconModule, 
-    PipPrimaryActionsModule, 
-    PipNavModule, 
-    PipNavMenuModule,
+    // Theme dependencies
+    PipThemesModule,
 
     // Layouts dependencies
     PipShadowModule,

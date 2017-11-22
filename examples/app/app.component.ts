@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { PipNavService } from 'pip-webui2-nav';
 
+import { PipThemesService } from 'pip-webui2-themes';
+
 declare var _;
 
 @Component({
@@ -22,27 +24,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     private rightnav: PipRightnavService,
     private cd: ChangeDetectorRef,
     private router: Router,
-    private navService: PipNavService
+    private navService: PipNavService,
+    private themesService: PipThemesService
   ) {
     media.activate();
     this.generateList();
 
-    this.navService.showTitle('Layouts');
-    this.navService.showNavIcon({ icon: 'view_carousel' });
-    this.navService.showPrimaryActions({ actions: [{ icon: 'info', click: () => {
-      this.onInfoClick();
-    } }] });
-    this.navService.showNavMenu(this._navMenuConfig);
-
+    this.themesService.selectedTheme = this.themesService.themes[2];
   }
 
   public ngOnInit() {
     this.media.asObservableMain().subscribe((change: MediaMainChange) => {
       let isMenu = change.aliases.includes('xs') || change.aliases.includes('sm');
-      this.navService.showNavIcon({ 
-        icon: isMenu ? 'menu' : 'view_carousel',
-        action: isMenu ? () => { this.onMenuClick(); } : null
-      });
+      this._showIcon$.next(isMenu ? 'menu' : 'app');
     });
 
     this.sidenav.small$.subscribe((small) => {
@@ -59,28 +53,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   public list: any[] = [];
   public onBackClick: Function = null;
 
-  private _navMenuConfig: any = {
-    sections: [
-      {
-        name: 'services',
-        title: 'Services',
-        links: [
-          { name: 'Media query', title: 'Media query', icon: 'visibility', url: 'media' },
-        ]
-      },
-      {
-        name: 'layouts',
-        title: 'Layouts',
-        links: [
-          { name: 'Documnet', title: 'Document', icon: 'description', url: 'document' },
-          { name: 'Tiles', title: 'Tiles', icon: 'view_module', url: 'tiles' },
-          { name: 'Menu', title: 'Menu', icon: 'view_quilt', url: 'menu' },
-          { name: 'Card', title: 'Card', icon: 'view_array', url: 'card' },
-          { name: 'Scrollable', title: 'Scrollable', icon: 'view_day', url: 'scrollable' }
-        ]
-      }
-    ]
-  };
+  private _list: any[] = [
+    {name: 'Media query', id: 'media', route: 'media', icon: 'visibility'},
+    {name: 'Document', id: 'document', route: 'document', icon: 'description'},
+    {name: 'Tiles', id: 'tiles', route: 'tiles', icon: 'view_module'},
+    {name: 'Menu', id: 'menu', route: 'menu', icon: 'view_quilt'},
+    {name: 'Card', id: 'card', route: 'card', icon: 'view_array'},
+    {name: 'Scrollable', id: 'scrollable', route: 'scrollable', icon: 'view_day'}
+  ];
 
   private _showIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('app');
 
@@ -114,7 +94,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   private generateList() {
-    //this.list = this._list;
+    this.list = this._list;
   }
 
   private setListIndex() {

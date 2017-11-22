@@ -1,3 +1,60 @@
+@import '~@angular/material/theming';
+@import "../../node_modules/pip-webui2-themes/src/styles.scss";
+@include mat-core();
+
+@mixin card-mixin($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+  
+    :host  /deep/ .mat-card {
+      color: mat-color($foreground, text) !important;
+      background: mat-color($background, card);
+    }
+}
+  .unicorn-dark-theme { 
+    @include card-mixin($dark-theme); 
+  }
+  .candy-theme { 
+    @include card-mixin($candy-app-theme); 
+  }
+
+  .pip-blue-theme {
+    @include card-mixin($pip-blue-theme);
+  }
+  .pip-grey-theme {
+    @include card-mixin($pip-grey-theme);
+  }
+  .pip-navy-theme {
+    @include card-mixin($pip-navy-theme);
+  } 
+  .pip-amber-theme {
+    @include card-mixin($pip-amber-theme);
+  }
+  .pip-green-theme {
+    @include card-mixin($pip-green-theme);
+  }
+  .pip-orange-theme {
+    @include card-mixin($pip-orange-theme);
+  }
+  .pip-pink-theme {
+    @include card-mixin($pip-pink-theme);
+  }
+  .pip-dark-theme {
+    @include card-mixin($pip-dark-theme);
+  }
+  .pip-black-theme {
+    @include card-mixin($pip-black-theme);
+  }
+  .bootbarn-warm-theme {
+    @include card-mixin($bootbarn-warm-theme);
+  }
+  .bootbarn-cool-theme {    
+    @include card-mixin($bootbarn-cool-theme);
+  }
+  .bootbarn-mono-theme {
+    @include card-mixin($bootbarn-mono-theme);
+  }
+
 :host {
   box-sizing: border-box;
   flex: 1 1 100%;
@@ -5,6 +62,8 @@
   flex-direction: column;
   justify-content: center;
   max-width: 100%;
+  overflow-y: auto;
+  
   place-content: center;
   align-items: center;
   /deep/ .mat-card {
@@ -22,7 +81,7 @@
 }
 
 ::ng-deep .pip-main-xs,
- ::ng-deep .pip-xs {
+ ::ng-deep .pip-main-sm {
   pip-card-layout {
     .mat-card {
       width: 100%;
@@ -32,3 +91,4 @@
     }
   }
 }
+
