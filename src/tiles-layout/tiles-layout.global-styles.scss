@@ -15,14 +15,14 @@
     overflow: hidden;
 }
 
-pip-tiles .pip-stretch .pip-tile {
+pip-tiles-layout .pip-stretch .pip-tile {
     width: calc(100% - 16px) !important;
 }
 
 .pip-multi-tiles-container {
     overflow: auto;
     height: 100%;
-    .pip-tiles {
+    .pip-tiles-layout {
         overflow: hidden;
     }
 }

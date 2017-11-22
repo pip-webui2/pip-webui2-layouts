@@ -48,7 +48,7 @@
 
         </pip-document-layout>
         <div class="pip-multi-tiles-container" *ngIf="selectedIndex == 1">
-          <pip-tiles columnWidth="200">
+          <pip-tiles-layout columnWidth="200">
             <div class="pip-tile pip-tile-narrow" *ngFor="let tile of tiles">
               <h3 style="margin: 16px 8px">{{ tile.title }}</h3>
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw6KNcvzNDdDw32Y7Kvnc7zwP6tqwuFLEVJmjsyhQD-X7ls-Z5" width="100%"
@@ -57,7 +57,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
               </div>
             </div>
-          </pip-tiles>
+          </pip-tiles-layout>
         </div>
       </div>
     </pip-menu-layout>

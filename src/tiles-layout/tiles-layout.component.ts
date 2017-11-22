@@ -8,7 +8,7 @@ import { addResizeListener, removeResizeListener } from '../media/resize-layout.
 var masonry = require('masonry-layout');
 
 @Component({
-    selector: 'pip-tiles',
+    selector: 'pip-tiles-layout',
     styleUrls: ['./tiles-layout.component.scss'],
     templateUrl: './tiles-layout.component.html'
 })
@@ -36,7 +36,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
         private elRef: ElementRef,
         private cd: ChangeDetectorRef
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-tiles', true);
+        renderer.setElementClass(elRef.nativeElement, 'pip-tiles-layout', true);
         this.listener = () => { this.onResize(true); };
     }
 
