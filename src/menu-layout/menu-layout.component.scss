@@ -1,4 +1,4 @@
-:host.pip-main-menu {
+:host.pip-main-layout {
   z-index: 50;
   position: relative;
   width: 100%;
@@ -70,7 +70,7 @@
 }
 
 ::ng-deep .pip-main-xs, ::ng-deep .pip-main-sm {
-  .pip-main-menu {
+  .pip-main-layout {
     .pip-menu {
       width: 100%;
       left: 0;
@@ -99,7 +99,7 @@
 }
 
 ::ng-deep .pip-main-gt-lg {
-  .pip-main-menu {
+  .pip-main-layout {
     .pip-menu {
       width: 480px;
     }

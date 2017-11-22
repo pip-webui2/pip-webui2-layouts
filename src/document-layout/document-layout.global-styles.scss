@@ -21,7 +21,7 @@
 .pip-main-sm,
 .pip-main-md,
 {
-  .pip-main-menu:not(.pip-single-content) {
+  .pip-main-layout:not(.pip-single-content) {
     .pip-content-container {
       .pip-document {
         width: 100%;
@@ -40,7 +40,7 @@
 }
 
 
-.pip-main-menu {
+.pip-main-layout {
   &:not(.pip-single-content) {
     .pip-content-container {
       .pip-document {
