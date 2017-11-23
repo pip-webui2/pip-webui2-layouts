@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   private selectTheme(selectedTheme) {
-    console.log('selectedTheme', selectedTheme);
+
     this.themesService.selectedTheme = selectedTheme;
     this.selectedTheme = selectedTheme;
   }
@@ -100,7 +100,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public onThemeClick(theme) {
-    console.log('theme', theme);
       this.selectTheme(theme);
   }
 
