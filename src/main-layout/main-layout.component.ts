@@ -10,11 +10,11 @@ import { PipSidenavService } from '../sidenav/shared/sidenav.service';
 import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 
 @Component({ 
-    selector: 'pip-main',
-    templateUrl: 'main.component.html',
-    styleUrls: ['./main.component.scss']
+    selector: 'pip-main-layout',
+    templateUrl: 'main-layout.component.html',
+    styleUrls: ['./main-layout.component.scss']
  })
-export class PipMainComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() public pipContainer;
     @ViewChild('fixedSidenav') sidenav: MatSidenav;
 	@ViewChild('fixedRightnav') rightnav: MatSidenav;
@@ -34,7 +34,7 @@ export class PipMainComponent implements OnInit, AfterViewInit, OnDestroy {
         private rightnavService: PipRightnavService,
         private media: ObservableMedia
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-main', true);
+        renderer.setElementClass(elRef.nativeElement, 'pip-main-layout', true);
         this.listener = () => { this.onResize(); };
     }
 

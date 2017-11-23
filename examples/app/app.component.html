@@ -62,7 +62,7 @@
         <mat-icon>info</mat-icon>
       </button>
     </pip-appbar>
-    <pip-main fxFlex="grow">
+    <pip-main-layout fxFlex="grow">
       <pip-sidenav-fixed style="height: 100%">
         <pip-sidenav-toggle></pip-sidenav-toggle>
         <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
@@ -71,6 +71,6 @@
       <pip-main-content>
         <router-outlet></router-outlet>
       </pip-main-content>
-    </pip-main>
+    </pip-main-layout>
   </pip-root-content>
 </pip-root-layout>

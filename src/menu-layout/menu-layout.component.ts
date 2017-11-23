@@ -10,7 +10,7 @@ export class PipMenuLayoutComponent implements OnInit, OnDestroy {
         private renderer: Renderer,
         private elRef: ElementRef
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-main-layout', true);
+        renderer.setElementClass(elRef.nativeElement, 'pip-menu-layout', true);
     }
 
     public ngOnInit() {

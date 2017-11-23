@@ -10,7 +10,7 @@
     }
 }
 
-::ng-deep .pip-main {
+::ng-deep .pip-main-layout {
     position: absolute;
     top: 64px;
     bottom: 0;
@@ -18,7 +18,7 @@
     right: 0;
 }
 
-::ng-deep .pip-xs .pip-main, ::ng-deep .pip-sm .pip-main {
+::ng-deep .pip-xs .pip-main-layout, ::ng-deep .pip-sm .pip-main-layout {
     top: 56px;
 }
 
@@ -49,7 +49,7 @@ mat-sidenav.pip-sidenav {
   }
   
   // In main
-  ::ng-deep .pip-main-lg .pip-main {
+  ::ng-deep .pip-main-lg .pip-main-layout {
     .pip-sidenav-fixed-container.pip-small {
       mat-sidenav.pip-sidenav {
         max-width: 64px;
@@ -63,7 +63,7 @@ mat-sidenav.pip-sidenav {
   }
   
   
-   ::ng-deep .pip-main-md .pip-main {
+   ::ng-deep .pip-main-md .pip-main-layout {
     .pip-sidenav-fixed-container {
       mat-sidenav.pip-sidenav {
         max-width: 64px;
@@ -76,7 +76,7 @@ mat-sidenav.pip-sidenav {
     }
   }
   
-  ::ng-deep .pip-main-sm .pip-main, ::ng-deep .pip-main-xs .pip-main {
+  ::ng-deep .pip-main-sm .pip-main-layout, ::ng-deep .pip-main-xs .pip-main-layout {
     .pip-sidenav-fixed-container {
       mat-sidenav.pip-sidenav {
         max-width: 0px;
