@@ -1,6 +1,5 @@
 :host {
     overflow-x: hidden !important;
-
     /deep/ pip-main-content {
         overflow: hidden;
         flex: 1 1 100%;
@@ -18,7 +17,8 @@
     right: 0;
 }
 
-::ng-deep .pip-xs .pip-main-layout, ::ng-deep .pip-sm .pip-main-layout {
+::ng-deep .pip-xs .pip-main-layout,
+ ::ng-deep .pip-sm .pip-main-layout {
     top: 56px;
 }
 
@@ -27,77 +27,71 @@ mat-sidenav.pip-sidenav {
     width: 250px;
     transition: all 0.3s ease;
     overflow-x: hidden;
-  }
-  
-  :host ::ng-deep mat-sidenav-content {
+}
+
+ :host ::ng-deep mat-sidenav-content {
     transition: all 0.3s ease;
     display: flex;
     margin-left: 250px !important;
     overflow-x: hidden;
-  }
-  
-  .pip-sidenav-container {
+}
+
+.pip-sidenav-container {
     display: block;
     height: 100%;
-  }
-  
-  :host {
+}
+
+ :host {
     .mat-drawer.mat-drawer-end {
-      width: 250px;
+        width: 250px;
     }
-  }
-  
-  // In main
-  ::ng-deep .pip-main-lg .pip-main-layout {
+} // In main
+ ::ng-deep .pip-main-lg .pip-main-layout {
     .pip-sidenav-fixed-container.pip-small {
-      mat-sidenav.pip-sidenav {
-        max-width: 64px;
-        width: 64px;
-        min-width: 64px;
-      }
-       ::ng-deep mat-sidenav-content {
-        margin-left: 64px !important;
-      }
+        mat-sidenav.pip-sidenav {
+            max-width: 64px;
+            width: 64px;
+            min-width: 64px;
+        }
+         ::ng-deep mat-sidenav-content {
+            margin-left: 64px !important;
+        }
     }
-  }
-  
-  
-   ::ng-deep .pip-main-md .pip-main-layout {
+}
+
+ ::ng-deep .pip-main-md .pip-main-layout {
     .pip-sidenav-fixed-container {
-      mat-sidenav.pip-sidenav {
-        max-width: 64px;
-        width: 64px;
-        min-width: 64px;
-      }
-      mat-sidenav-content {
-        margin-left: 64px !important;
-      }
+        mat-sidenav.pip-sidenav {
+            max-width: 64px;
+            width: 64px;
+            min-width: 64px;
+        }
+        mat-sidenav-content {
+            margin-left: 64px !important;
+        }
     }
-  }
-  
-  ::ng-deep .pip-main-sm .pip-main-layout, ::ng-deep .pip-main-xs .pip-main-layout {
+}
+
+ ::ng-deep .pip-main-sm .pip-main-layout,
+ ::ng-deep .pip-main-xs .pip-main-layout {
     .pip-sidenav-fixed-container {
-      mat-sidenav.pip-sidenav {
-        max-width: 0px;
-        width: 0px;
-        min-width: 0px;
-      }
-      mat-sidenav-content {
-        margin-left: 0px !important;
-      }
+        mat-sidenav.pip-sidenav {
+            max-width: 0px;
+            width: 0px;
+            min-width: 0px;
+        }
+        mat-sidenav-content {
+            margin-left: 0px !important;
+        }
     }
-  }
-  
-  // Not active
-  
-  :host.pip-sidenav-not-active {
+} // Not active
+ :host.pip-sidenav-not-active {
     mat-sidenav.pip-sidenav {
-      max-width: 0px !important;
-      width: 0px !important;
-      min-width: 0px !important;
+        max-width: 0px !important;
+        width: 0px !important;
+        min-width: 0px !important;
     }
     .pip-sidenav-fixed-container ::ng-deep mat-sidenav-content {
-      margin-left: 0px !important;
+        margin-left: 0px !important;
     }
-  }
-  
+}
