@@ -5,11 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material'
 
-import { PipRootComponent } from './root.component';
+import { PipRootLayoutComponent } from './root-layout.component';
 
 @NgModule({
   declarations: [
-    PipRootComponent
+    PipRootLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -19,10 +19,10 @@ import { PipRootComponent } from './root.component';
     MatSidenavModule
   ],
   exports: [
-    PipRootComponent
+    PipRootLayoutComponent
   ],
   providers: [
 
   ]
 })
-export class PipRootModule { }
+export class PipRootLayoutModule { }

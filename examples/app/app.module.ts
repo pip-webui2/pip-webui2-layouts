@@ -6,7 +6,7 @@ import { CustomBreakPointsProvider } from './custom-breakpoints';
 import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
 
 import { PipThemesModule } from 'pip-webui2-themes';
-import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipMainModule, PipRootModule, PipSidenavToggleModule } from './pip-webui2-layouts';
+import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipMainModule, PipRootLayoutModule, PipSidenavToggleModule } from './pip-webui2-layouts';
 
 import { ExampleListModule } from './examples-list/examples-list.module';
 import { AppComponent } from './app.component';
@@ -56,7 +56,7 @@ const appRoutes: Routes = [
     PipRightnavModule,
     PipSidenavToggleModule,
     PipMainModule,
-    PipRootModule,
+    PipRootLayoutModule,
 
     ExampleListModule,
     MainLayoutExampleModule,

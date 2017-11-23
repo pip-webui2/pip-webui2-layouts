@@ -12,12 +12,12 @@ import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
 
 @Component({
-	selector: 'pip-root',
-	templateUrl: 'root.component.html',
-	styleUrls: ['./root.component.scss']
+	selector: 'pip-root-layout',
+	templateUrl: 'root-layout.component.html',
+	styleUrls: ['./root-layout.component.scss']
 })
 
-export class PipRootComponent implements OnInit, AfterViewInit {
+export class PipRootLayoutComponent implements OnInit, AfterViewInit {
     @ViewChild('floatingSidenav') sidenav: MatSidenav;
     @ViewChild('floatingRightnav') rightnav: MatSidenav;
 
@@ -31,7 +31,7 @@ export class PipRootComponent implements OnInit, AfterViewInit {
 		private media: ObservableMedia,
 		private cd: ChangeDetectorRef
 	) {
-		renderer.setElementClass(elRef.nativeElement, 'pip-root', true);
+		renderer.setElementClass(elRef.nativeElement, 'pip-root-layout', true);
 	}
 
 	ngOnInit() {

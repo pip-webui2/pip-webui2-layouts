@@ -10,4 +10,4 @@ export * from './rightnav/index';
 export * from './card-layout/index';
 export * from './scrollable/index';
 export * from './sidenav-toggle/index';
-export * from './root/index';
+export * from './root-layout/index';
