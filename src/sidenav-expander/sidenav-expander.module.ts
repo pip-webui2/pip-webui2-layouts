@@ -7,11 +7,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatListModule, MatIconModule } from '@angular/material';
 
-import { PipSidenavToggleComponent } from './sidenav-toggle.component';
+import { PipSidenavExpanderComponent } from './sidenav-expander.component';
 
 @NgModule({
   declarations: [
-    PipSidenavToggleComponent
+    PipSidenavExpanderComponent
   ],
   imports: [
     BrowserModule,
@@ -23,8 +23,8 @@ import { PipSidenavToggleComponent } from './sidenav-toggle.component';
     MatIconModule
   ],
   exports: [
-    PipSidenavToggleComponent
+    PipSidenavExpanderComponent
   ],
   providers: [],
 })
-export class PipSidenavToggleModule { }
+export class PipSidenavExpanderModule { }

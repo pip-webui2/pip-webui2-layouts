@@ -1,5 +1,5 @@
 :host {
-    .toggle-sidenav {
+    .sidenav-expander {
       transition: height 0.35s ease;
       height: 0px;
       padding-top: 0;
@@ -14,10 +14,10 @@
         height: 48px !important;
     }
     &.show {
-      .toggle-sidenav {
+      .sidenav-expander {
         height: 48px;
         .mat-icon {   
-          opacity: 1;
+          opacity: 0.56;
         }
       }
     }

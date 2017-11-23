@@ -7,11 +7,11 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
-    selector: 'pip-sidenav-toggle',
-    templateUrl: 'sidenav-toggle.component.html',
-    styleUrls: ['./sidenav-toggle.component.scss']
+    selector: 'pip-sidenav-expander',
+    templateUrl: 'sidenav-expander.component.html',
+    styleUrls: ['./sidenav-expander.component.scss']
 })
-export class PipSidenavToggleComponent implements OnInit {
+export class PipSidenavExpanderComponent implements OnInit {
     private _defaultAliases: string[] = ['lg'];
     private _aliases: string[] = this._defaultAliases;
 
