@@ -3,7 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomBreakPointsProvider } from './custom-breakpoints';
-import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatToolbarModule, MatGridListModule, MatMenuModule } from '@angular/material';
 
 import { PipThemesModule } from 'pip-webui2-themes';
 import { PipShadowModule, PipAppbarModule, PipSidenavModule, PipRightnavModule, PipMainLayoutModule, PipRootLayoutModule, PipSidenavToggleModule } from './pip-webui2-layouts';
@@ -45,6 +45,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    MatGridListModule, 
+    MatMenuModule,
 
     // Theme dependencies
     PipThemesModule,

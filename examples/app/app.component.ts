@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { PipThemesService } from 'pip-webui2-themes';
+import { PipThemesService, Theme } from 'pip-webui2-themes';
 
 declare var _;
 
@@ -27,7 +27,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     media.activate();
     this.generateList();
 
-    this.themesService.selectedTheme = this.themesService.themes[2];
+    this.themes = this.themesService.themes;
+    this.selectTheme(this.themesService.themes[0]);
+  }
+
+  private selectTheme(selectedTheme) {
+    console.log('selectedTheme', selectedTheme);
+    this.themesService.selectedTheme = selectedTheme;
+    this.selectedTheme = selectedTheme;
   }
 
   public ngOnInit() {
@@ -48,6 +55,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public list: any[] = [];
+  public themes: Theme[];
+  public selectedTheme: Theme;
   public onBackClick: Function = null;
 
   private _list: any[] = [
@@ -88,6 +97,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     let v = this._showIcon$.value;
     this.rightnav.toggleRightnav();
     this._showIcon$.next(v);
+  }
+
+  public onThemeClick(theme) {
+    console.log('theme', theme);
+      this.selectTheme(theme);
   }
 
   private generateList() {
