@@ -70,7 +70,7 @@ const appRoutes: Routes = [
 
     RouterModule.forRoot(appRoutes, { useHash: true })
   ],
-  providers: [CustomBreakPointsProvider],
+  providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
