@@ -10,22 +10,22 @@ export class PipShadowComponent {
 	@Input() set visible(isVisible: boolean) {
 		switch (this._attachmentSide) {
 			case shadowAttachmentSide.top: {
-				this.el.nativeElement.style.top = isVisible ? '-2px' : '-30px';
+				this.el.nativeElement.style.cssText = isVisible ? 'top: -2px' : 'top: -30px';
 				break;
 			}
 
 			case shadowAttachmentSide.left: {
-				this.el.nativeElement.style.left = isVisible ? '-2px' : '-30px';
+				this.el.nativeElement.style.cssText = isVisible ? 'left: -2px' : 'left: -30px';
 				break;
 			}
 
 			case shadowAttachmentSide.right: {
-				this.el.nativeElement.style.right = isVisible ? '-2px' : '-30px';
+				this.el.nativeElement.style.cssText = isVisible ? 'right: -2px' : 'right: -30px';
 				break;
 			}
 
 			case shadowAttachmentSide.bottom: {
-				this.el.nativeElement.style.bottom = isVisible ? '-2px' : '-30px';
+				this.el.nativeElement.style.cssText = isVisible ? 'bottom: -2px' : 'bottom: -30px';
 				break;
 			}
 		}
@@ -34,7 +34,7 @@ export class PipShadowComponent {
 	@Input() set attachmentSide(side: string) {
 		let index = shadowAttachmentSide.all.indexOf(side);
 		this._attachmentSide = index > -1 ? side : shadowAttachmentSide.top;
-		this.el.nativeElement.classList = [this._acttacnmentSideClasses[this._attachmentSide]];
+		this.el.nativeElement.classList.add([this._acttacnmentSideClasses[this._attachmentSide]]);
 	}
 
 	private _attachmentSide: string = null;
