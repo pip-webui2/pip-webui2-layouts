@@ -8,6 +8,11 @@
         color: mat-color($foreground, text) !important;
         background: mat-color($background, card);
     }
+
+    :host.pip-document-layout {
+        border-left: 1px solid mat-color($foreground, divider) !important;
+        border-right: 1px solid mat-color($foreground, divider) !important;
+    }
 }
 
 .unicorn-dark-theme {
