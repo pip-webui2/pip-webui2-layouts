@@ -14,7 +14,9 @@
         </mat-form-field>
       </mat-card-content>
     </form>
-    <mat-slide-toggle [(ngModel)]="text">Transparent card</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="isTransparent">Transparent card</mat-slide-toggle>
+    <br>
+    <mat-slide-toggle style="margin-top: 8px" [(ngModel)]="text">A lot of text</mat-slide-toggle>
     <div style="margin-top: 8px" *ngIf="text">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
