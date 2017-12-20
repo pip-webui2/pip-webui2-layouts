@@ -40,7 +40,11 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
 
     public get opened$(): Observable<boolean> {
 		return this._opened$;
-	}
+    }
+    
+    public get active$(): Observable<boolean> {
+        return this.sidenavService.active$;
+    }
 
     public ngOnInit() {
         if (this.pipContainer != null) {

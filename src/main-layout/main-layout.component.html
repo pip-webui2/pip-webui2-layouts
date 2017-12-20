@@ -1,5 +1,5 @@
 <mat-sidenav-container class="pip-sidenav-container pip-sidenav-fixed-container" [ngClass]="{ 'pip-small': small$ | async }">
-    <mat-sidenav #fixedSidenav class="pip-sidenav" opened="true" mode="side" align="start">
+    <mat-sidenav #fixedSidenav class="pip-sidenav" [opened]="active$ | async" mode="side" align="start">
         <ng-content select="pip-sidenav-fixed"></ng-content>
     </mat-sidenav>
     <mat-sidenav #fixedRightnav class="pip-rightnav" opened="false" mode="side" align="end">
