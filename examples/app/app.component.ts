@@ -26,7 +26,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   ) {
     media.activate();
     this.generateList();
-    this.sidenav.active = true;
 
     this.themes = this.themesService.themes;
     this.selectTheme(this.themesService.themes[0]);

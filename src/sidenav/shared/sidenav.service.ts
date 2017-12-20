@@ -23,7 +23,7 @@ export class PipSidenavService {
     private _floatingSidenavAliases: string[] = ['xs', 'sm'];
     private _small: boolean = false;
     private _small$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-    private _active$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _active$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
     public constructor(
         private media: PipMediaService
