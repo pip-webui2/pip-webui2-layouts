@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PipMediaService } from '../pip-webui2-layouts'
 
 @Component({
 	selector: 'main-layout-example',
@@ -9,4 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class MainLayoutExampleComponent implements OnInit {
 
 	ngOnInit() { }
+
+	constructor(
+		public media: PipMediaService
+	) {
+	}
 }

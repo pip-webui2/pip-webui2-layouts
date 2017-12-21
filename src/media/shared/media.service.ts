@@ -16,8 +16,6 @@ export class PipMediaService {
     private mainChange$: BehaviorSubject<MediaMainChange> = new BehaviorSubject<MediaMainChange>({ aliases: [] });
 
     public activate() {
-        console.log('this.media', this.media);
-
         this.media.asObservable().subscribe((change: MediaChange) => {
             this.updateBodyLayoutBreakpoints();
         });
@@ -69,6 +67,6 @@ export class PipMediaService {
     }
 
     public isMainActive(alias) {
-        return  this.mainLayoutBreakpoints[alias].active;
+        return this.mainLayoutBreakpoints[alias] && this.mainLayoutBreakpoints[alias].active;
     }
 }
