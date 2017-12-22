@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { PipScrollableModule } from '../scrollable/scrollable.module';
 
 import { PipDocumentLayoutComponent } from './document-layout.component';
 
@@ -7,7 +8,7 @@ import { PipDocumentLayoutComponent } from './document-layout.component';
     PipDocumentLayoutComponent
   ],
   imports: [
-    
+    PipScrollableModule
   ],
   exports: [  
     PipDocumentLayoutComponent

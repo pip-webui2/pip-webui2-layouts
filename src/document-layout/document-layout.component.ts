@@ -3,7 +3,7 @@ import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angu
 @Component({
     selector: 'pip-document-layout',
     styleUrls: ['./document-layout.component.scss'],
-    template: '<div class="pip-document-content"><ng-content></ng-content></div>'
+    templateUrl: './document-layout.component.html'
 })
 export class PipDocumentLayoutComponent implements OnInit, OnDestroy {
     @Input() set toolbar(toolbar: boolean | string) {

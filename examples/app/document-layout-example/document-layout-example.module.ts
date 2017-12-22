@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule } from '@angular/material';
 
 import { DocumentLayoutExampleComponent } from './document-layout-example.component';
 import { PipDocumentLayoutModule, PipMediaModule, PipShadowModule } from '../pip-webui2-layouts';
@@ -17,6 +17,7 @@ import { PipDocumentLayoutModule, PipMediaModule, PipShadowModule } from '../pip
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
+    MatButtonModule,
 
     PipDocumentLayoutModule,
     PipMediaModule,
@@ -28,5 +29,6 @@ import { PipDocumentLayoutModule, PipMediaModule, PipShadowModule } from '../pip
   providers: [
     
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DocumentLayoutExampleModule { }
