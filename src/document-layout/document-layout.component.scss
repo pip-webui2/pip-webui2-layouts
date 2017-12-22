@@ -107,6 +107,9 @@
     font-family: Roboto;
     overflow: hidden;
     overflow-y: auto;
+    pip-scrollable-content {
+        height: 100%;
+    }
     /deep/ pip-document-content {
         padding: 16px;
         display: block;
