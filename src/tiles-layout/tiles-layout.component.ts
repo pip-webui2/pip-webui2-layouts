@@ -1,5 +1,4 @@
 import { transition } from '@angular/animations';
-import * as _ from 'lodash';
 declare var require: any;
 
 import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
