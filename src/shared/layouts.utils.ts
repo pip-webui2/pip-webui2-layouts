@@ -1,7 +1,3 @@
-var HOT_COUNT = 800,
-    HOT_SPAN = 16,
-    nativeNow = Date.now;
-
 export function each(array, iteratee) {
     var index = -1,
         length = array == null ? 0 : array.length;
