@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
@@ -32,5 +32,6 @@ import { PipDocumentLayoutModule, PipTilesLayoutModule, PipMediaModule, PipMenuL
   providers: [
     
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MainMenuLayoutExampleModule { }
