@@ -1,5 +1,3 @@
-import * as _ from 'lodash';
-
 import { Component, Input, OnInit, Renderer, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { AfterViewInit, ViewChild } from '@angular/core';
@@ -10,6 +8,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
 import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 import { ObservableMedia, MediaChange } from "@angular/flex-layout";
+
+import { each } from '../shared/layouts.utils';
 
 @Component({
 	selector: 'pip-root-layout',
@@ -59,7 +59,7 @@ export class PipRootLayoutComponent implements OnInit, AfterViewInit {
 	private initMode() {
 		let mode = 'side';
 
-		_.each(this.rightnavService.floatingRightnavAliases, (alias: string) => {
+		each(this.rightnavService.floatingRightnavAliases, (alias: string) => {
 			if (this.media.isActive(alias)) mode = null;
 		});
 

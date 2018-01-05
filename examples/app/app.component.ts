@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { PipThemesService, Theme } from 'pip-webui2-themes';
 
-declare var _;
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',

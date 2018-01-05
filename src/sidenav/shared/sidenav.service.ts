@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Injectable, isDevMode } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -12,6 +11,8 @@ import 'rxjs/add/operator/catch';
 
 import { ObservableMedia } from "@angular/flex-layout";
 import { PipMediaService } from '../../media/shared/media.service'
+
+import { each } from '../../shared/layouts.utils';
 
 @Injectable()
 export class PipSidenavService {
@@ -178,7 +179,7 @@ export class PipSidenavService {
     private isFloating() {
         let is = false;
 
-        _.each(this._floatingSidenavAliases, (alias: string) => {
+        each(this._floatingSidenavAliases, (alias: string) => {
             if (this.media.isMainActive(alias)) is = true;
         });
 

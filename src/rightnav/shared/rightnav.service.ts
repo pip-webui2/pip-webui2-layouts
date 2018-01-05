@@ -1,10 +1,11 @@
-import * as _ from 'lodash';
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MatSidenav } from '@angular/material';
 
 import { ObservableMedia } from "@angular/flex-layout";
+
+import { each } from '../../shared/layouts.utils';
 
 @Injectable()
 export class PipRightnavService {
@@ -138,7 +139,7 @@ export class PipRightnavService {
 
         let is = false;
 
-        _.each(this._floatingRightnavAliases, (alias: string) => {
+        each(this._floatingRightnavAliases, (alias: string) => {
             if (this.media.isActive(alias)) is = true;
         });
 

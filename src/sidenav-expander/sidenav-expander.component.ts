@@ -1,10 +1,11 @@
-import * as _ from 'lodash';
 import { Component, OnInit, Input, Output, ChangeDetectorRef, Renderer, ElementRef } from '@angular/core';
 import { PipMediaService } from '../media/shared/media.service';
 import { MediaMainChange } from '../media/shared/media-main-change.model';
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+import { intersection } from '../shared/layouts.utils';
 
 @Component({
     selector: 'pip-sidenav-expander',
@@ -39,7 +40,7 @@ export class PipSidenavExpanderComponent implements OnInit {
 
     ngOnInit() {
         this.media.asObservableMain().subscribe((change: MediaMainChange) => {
-            let isIntersection = _.intersection(change.aliases, this._aliases).length > 0;
+            let isIntersection = intersection(change.aliases, this._aliases).length > 0;
 
             this.elRef.nativeElement.classList[isIntersection ? 'add' : 'remove']('show');
         });
