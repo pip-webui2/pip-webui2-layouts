@@ -20,30 +20,54 @@ Development responsible applications requires to organization content the way th
 
 **Note that** root layout has no paddings.
 
+**Real example** with closed sidenav and rightnav.
+
+<a href="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/mobile_layout_screenshot.png" style="display: block; max-width: 512px">
+    <img src="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/mobile_layout_screenshot.png"/>
+</a>
+
 #### Phablet structure
 
 <a href="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/fablet_layout.png" style="display: block">
     <img src="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/fablet_layout.png"/>
 </a>
 
+**Real example** with closed rightnav.
+
+<a href="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/fablet_layout_screenshot.png" style="display: block; max-width: 700px">
+    <img src="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/fablet_layout_screenshot.png"/>
+</a>
+
 #### Tablet structure
 
-##### Tablet structure with opened side nav
+##### Tablet structure with expanded side nav
 
 <a href="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/tablet_layout_opened.png" style="display: block">
     <img src="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/tablet_layout_opened.png"/>
 </a>
 
-##### Tablet structure with closed side nav
+##### Tablet structure with not expanded side nav
 
 <a href="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/tablet_layout_closed.png" style="display: block">
     <img src="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/tablet_layout_closed.png"/>
+</a>
+
+**Real example** with closed rightnav and expanded side nav.
+
+<a href="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/tablet_layout_opened_screenshot.png" style="display: block; max-width: 1000px">
+    <img src="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/tablet_layout_opened_screenshot.png"/>
 </a>
 
 #### Desktop structure
 
 <a href="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/desktop_layout.png" style="display: block">
     <img src="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/desktop_layout.png"/>
+</a>
+
+**Real example** with closed rightnav.
+
+<a href="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/desktop_layout_screenshot.png" style="display: block;">
+    <img src="https://github.com/pip-webui2/pip-webui2-layouts/raw/master/doc/images/desktop_layout_screenshot.png"/>
 </a>
 
 ### Layouts
@@ -64,7 +88,8 @@ Development responsible applications requires to organization content the way th
 
 ### Services
 
-**Media** is used to evaluate whether a given media query is true or false given the current device's screen / window size. It has media queries for full device's screen / window and for **main layout**.
+**Media** is used to evaluate whether a given media query is true or false given the current size of layout internal part. 
+Internal part consist of **main layout** and its width calculated without including side nav and right nav.
 
 **Layouts** serves to control **app bar**, **side nav**, **right nav**.
 
@@ -78,7 +103,7 @@ npm install pip-webui2-layouts --save
 
 ## Using
 
-Structure of application using layouts:
+##### Structure of application using layouts:
 
 ```html
 <pip-root-layout>
@@ -115,6 +140,39 @@ Structure of application using layouts:
     </pip-main-layout>
   </pip-root-content>
 </pip-root-layout>
+```
+
+##### Media service (subscribe on main part width changing)
+
+```typescript
+this.media.asObservableMain().subscribe((change: MediaMainChange) => {
+      // Do anything...
+      // MediaMainChange contains aliases - string array of active at this moment media query aliases
+});
+```
+
+##### Media service in template (add media service to component before)
+
+```html
+<div *ngIf="media.isMainActive('lt-sm')">
+    <!-- Show current div only for phablet and mobile -->
+</div>
+```
+
+##### Media queries in styles
+
+In component's styles:
+```css
+::ng-deep .pip-xs .xs-black {
+    background: black;
+}
+```
+
+In component's template:
+```html
+<div class="xs-black">
+    <!-- Black background on mobile screen -->
+</div>
 ```
 
 ## <a name="license"></a>License
