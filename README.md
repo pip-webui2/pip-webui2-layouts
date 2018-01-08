@@ -73,7 +73,7 @@ Development responsible applications requires to organization content the way th
 To install this module using npm:
 
 ```bash
-npm install pip-webui2-layouts 
+npm install pip-webui2-layouts --save
 ```
 
 ## Using
