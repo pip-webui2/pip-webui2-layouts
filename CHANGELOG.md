@@ -11,7 +11,6 @@ Initial release with layouts: appbar, sidenav, rightnav, card, document, tiles.
 * **card**: card layout that shows content in a card in the center of page
 * **document**: document layout that show content with fixed width
 * **tiles**: tiles layout
-* **dialog**: dialog layout that show content in a dialog
 
 ### Breaking Changes
 No breaking changes in this version
