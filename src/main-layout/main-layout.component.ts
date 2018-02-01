@@ -50,7 +50,7 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
         if (this.pipContainer != null) {
             let firstSym = this.pipContainer.substr(0, 1);
 
-            let element = firstSym == '#' ? document.getElementById(this.pipContainer.substring(1, this.pipContainer.length )) : firstSym == '.'
+            let element: any = firstSym == '#' ? document.getElementById(this.pipContainer.substring(1, this.pipContainer.length )) : firstSym == '.'
                 ? document.getElementsByClassName(this.pipContainer.substring(1, this.pipContainer.length)) 
                 : document.getElementsByTagName(this.pipContainer);
             this.element = firstSym == '#' ? element : element.length > 0 ? element[0] : this.elRef.nativeElement;
