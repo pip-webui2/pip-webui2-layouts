@@ -18,6 +18,24 @@ export class TilesLayoutExampleComponent implements OnInit {
 
     ngOnInit() { 
         this.createTiles();
+
+        // setTimeout(() => {
+        //     //this.tiles = [];
+
+        //     this.createTiles();
+        // }, 2000);
+
+        // setTimeout(() => {
+        //     //this.tiles = [];
+
+        //     this.createTiles();
+        // }, 4000);
+
+        // setTimeout(() => {
+        //     //this.tiles = [];
+
+        //     this.createTiles();
+        // }, 6000);
     }
 
     private createTiles() {

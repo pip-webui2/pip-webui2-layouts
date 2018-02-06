@@ -21,6 +21,8 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     private listener: any;
     private sizer: any;
     private prevContainerWidth: any = null;
+    private observer: any;
+    private debounced: Function;
 
     public tilesOptions: any = {
         gutter: 16,
@@ -58,6 +60,18 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
                 this.elRef.nativeElement.classList.add('animation');
             }, 1000);
     }
+
+    ngAfterViewInit() {
+        this.observer = new MutationObserver(mutations => {
+          mutations.forEach((mutation) => {
+            this.masonry = new masonry(this.container, this.tilesOptions);
+            this.onResize(true);
+          });   
+        });
+        var config = { childList: true, characterData: true };
+    
+        this.observer.observe(this.elRef.nativeElement.getElementsByClassName('pip-tiles-content')[0], config);
+      }
 
     public ngOnDestroy() {
         if (this.masonry) {
