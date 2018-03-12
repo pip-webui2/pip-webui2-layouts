@@ -1,6 +1,6 @@
 # Pip.WebUI.Layouts Changelog
 
-## <a name="0.0.0"></a> 0.0.0 (2017-01-09)
+## <a name="0.0.0"></a> 0.0.0 (2018-01-09)
 
 Initial release with layouts: appbar, sidenav, rightnav, card, document, tiles.
 
@@ -17,3 +17,23 @@ No breaking changes in this version
 
 ### Bug Fixes
 No fixes in this version 
+
+# Pip.WebUI.Layouts Changelog
+
+## <a name="0.0.1"></a> 0.0.1 (2018-03-12)
+
+Fix bugs
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+No breaking changes in this version
+
+### Bug Fixes
+* **build problems** - update @angular/flex-layout version to 5.0.0-beta.13, change media query breakpoints elements stucture (@angular/flex-layouts new version adds strict fields in breakpoint type and removes DEFAULT_BREAKPOINTS constant)
