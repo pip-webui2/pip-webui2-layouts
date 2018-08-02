@@ -6,3 +6,9 @@
         }
     }
 }
+
+::ng-deep .pip-sm pip-appbar {
+    .mat-toolbar {
+        height: 56px;
+    }
+}
