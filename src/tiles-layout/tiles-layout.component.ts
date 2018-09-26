@@ -1,7 +1,7 @@
 import { transition } from '@angular/animations';
 declare var require: any;
 
-import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Renderer, ElementRef, Input, Output, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { addResizeListener, removeResizeListener } from '../media/resize-layout.function';
 
 var masonry = require('masonry-layout');
@@ -15,6 +15,8 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
     @Input() columnWidth: number | string;
     @Input() stretch: boolean;
     @Input() animation: boolean = true;
+
+    @Output() resized = new EventEmitter<number>();
 
     private container: any;
     private masonry: any;
@@ -111,6 +113,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy {
 
         if (this.prevContainerWidth != containerWidth || force) {
             this.prevContainerWidth = containerWidth;
+            this.resized.emit(containerWidth);
             setTimeout(() => {
                 this.masonry.layout();
             }, 400);
