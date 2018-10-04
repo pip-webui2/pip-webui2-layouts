@@ -3,5 +3,6 @@
   "dest": "../../dist/pip-webui2-layouts",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": ["masonry-layout"]
 }
