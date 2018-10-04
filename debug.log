@@ -1,6 +1,0 @@
-[1009/132114.014:ERROR:settings.cc(266)] Settings version is not 1
-[1009/191650.219:ERROR:settings.cc(266)] Settings version is not 1
-[1009/191650.223:ERROR:settings.cc(266)] Settings version is not 1
-[1011/192132.020:ERROR:settings.cc(266)] Settings version is not 1
-[1013/112734.814:ERROR:persistent_memory_allocator.cc(777)] Corruption detected in shared-memory segment.
-[1015/141948.326:ERROR:settings.cc(266)] Settings version is not 1
