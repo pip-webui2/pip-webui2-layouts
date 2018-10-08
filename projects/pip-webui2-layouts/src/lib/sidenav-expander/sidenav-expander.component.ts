@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ChangeDetectorRef, Renderer, ElementRef } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+
 import { PipMediaService } from '../media/shared/media.service';
 import { MediaMainChange } from '../media/shared/media-main-change.model';
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-
 import { intersection } from '../shared/layouts.utils';
 
 @Component({

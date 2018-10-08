@@ -21,7 +21,7 @@ import {
   PipRightnavModule,
   PipRootLayoutModule,
 } from 'pip-webui2-layouts';
-import { PipThemesModule } from 'pip-webui2-themes-temp';
+import { PipThemesModule } from 'pip-webui2-themes';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';

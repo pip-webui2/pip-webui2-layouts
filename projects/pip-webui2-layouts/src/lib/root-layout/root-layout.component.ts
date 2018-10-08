@@ -1,5 +1,4 @@
 import { Component, OnInit, Renderer, ElementRef, ChangeDetectorRef } from '@angular/core';
-
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';

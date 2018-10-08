@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input } from '@angular/core';
+
 import { ShadowAttachmentSide } from './shared/ShadowAttachmentSide.model';
 
 @Component({

@@ -3,7 +3,7 @@ import { ObservableMedia } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
-import { PipThemesService, Theme } from 'pip-webui2-themes-temp';
+import { PipThemesService, Theme } from 'pip-webui2-themes';
 import { PipMediaService, PipSidenavService, PipRightnavService, MediaMainChange } from 'pip-webui2-layouts';
 import { Observable, BehaviorSubject } from 'rxjs';
 

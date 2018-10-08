@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { MediaChange, ObservableMedia, BreakPoint } from '@angular/flex-layout';
 
 import { MediaMainChange } from './media-main-change.model';
 import { each } from '../../shared/layouts.utils';
