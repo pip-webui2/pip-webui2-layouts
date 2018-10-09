@@ -25,7 +25,4 @@ mat-sidenav {
         box-sizing: border-box;
         flex-direction: column !important;
     }
-    /deep/ mat-sidenav-content {
-        overflow: hidden;
-    }
 }
