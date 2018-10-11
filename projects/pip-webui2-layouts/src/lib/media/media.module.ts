@@ -4,7 +4,7 @@ import { BREAKPOINTS } from '@angular/flex-layout';
 import { PipMediaService } from './shared/media.service';
 import { PIP_BREAKPOINTS } from './shared/breakpoints';
 
-export const PipBreakPointsProvider = {
+const PipBreakPointsProvider = {
   provide: BREAKPOINTS,
   useValue: [...PIP_BREAKPOINTS]
 };
@@ -15,7 +15,7 @@ export const PipBreakPointsProvider = {
   exports: [],
   providers: [
     PipMediaService,
-    PipBreakPointsProvider,
+    PipBreakPointsProvider
   ]
 })
 export class PipMediaModule { }
