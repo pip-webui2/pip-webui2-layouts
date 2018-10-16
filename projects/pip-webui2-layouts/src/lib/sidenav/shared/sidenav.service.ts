@@ -9,13 +9,15 @@ import { each } from '../../shared/layouts.utils';
 export class PipSidenavService {
     public _floatingSidenav: MatSidenav;
     public _fixedSidenav: MatSidenav;
+    public _universalSidenav: MatSidenav;
     private _mode$: BehaviorSubject<string> = new BehaviorSubject('side');
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-    private _mode = 'side';
     private _floatingSidenavAliases: string[] = ['xs', 'sm'];
+    private _universalSidenavAliases: string[] = ['lt-sm', 'sm'];
     private _small = false;
     private _small$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     private _active$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+    private _isUniversal$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     public constructor(
         private media: PipMediaService
@@ -42,6 +44,30 @@ export class PipSidenavService {
         return this._floatingSidenavAliases;
     }
 
+    public get universalSidenav(): MatSidenav {
+        return this._universalSidenav;
+    }
+
+    public set universalSidenav(sidenav: MatSidenav) {
+        this._universalSidenav = sidenav;
+    }
+
+    public get universalSidenavAliases() {
+        return this._universalSidenavAliases;
+    }
+
+    public set universalSidenavAliases(aliases: string[]) {
+        this._universalSidenavAliases = aliases;
+    }
+
+    public get isUniversal(): boolean {
+        return this._isUniversal$.getValue();
+    }
+
+    public set isUniversal(val: boolean) {
+        this._isUniversal$.next(val);
+    }
+
     public get floatingSidenav(): MatSidenav {
         return this._floatingSidenav;
     }
@@ -58,13 +84,20 @@ export class PipSidenavService {
         this._fixedSidenav = sidenav;
     }
 
+    public get mode(): string {
+        return this._mode$.getValue();
+    }
+
     public get mode$(): Observable<string> {
         return this._mode$;
     }
 
     public set mode(s: string) {
         this._mode$.next(s);
-        this._mode = s;
+    }
+
+    public get opened(): boolean {
+        return this._opened$.getValue();
     }
 
     public get opened$(): Observable<boolean> {
@@ -99,6 +132,8 @@ export class PipSidenavService {
 
         if (sidenav) {
             sidenav.toggle();
+        } else if (this.isUniversal) {
+            this.toggleUniversavNav();
         } else {
             this.isFloating() ? this.toggleFloatingNav() :  this.toggleFixedNav();
         }
@@ -109,6 +144,8 @@ export class PipSidenavService {
 
         if (sidenav) {
             sidenav.open();
+        } else if (this.isUniversal) {
+            this.openUniversavNav();
         } else {
             this.isFloating() ? this.openFloatingNav() : this.openFixedNav();
         }
@@ -120,6 +157,8 @@ export class PipSidenavService {
 
         if (sidenav) {
             sidenav.close();
+        } else if (this.isUniversal) {
+            this.closeUniversavNav();
         } else {
             this.isFloating() ? this.closeFloatingNav() : this.closeFixedNav();
         }
@@ -157,6 +196,18 @@ export class PipSidenavService {
         this._fixedSidenav ? this.small = true : console.log('Fixed sidenav not found');
     }
 
+    public toggleUniversavNav() {
+        this._universalSidenav ? this._universalSidenav.toggle() : console.log('Universal sidenav was not found');
+    }
+
+    public openUniversavNav() {
+        this._universalSidenav ? this._universalSidenav.open() : console.log('Universal sidenav was not found');
+    }
+
+    public closeUniversavNav() {
+        this._universalSidenav ? this._universalSidenav.close() : console.log('Universal sidenav was not found');
+    }
+
     public changeStateNav(sidenav: MatSidenav = this._floatingSidenav) {
         if (sidenav) {
 
@@ -165,7 +216,20 @@ export class PipSidenavService {
         }
     }
 
-    private isFloating() {
+    public isUniversalFloating() {
+        let is = false;
+
+        for (const alias of this._universalSidenavAliases) {
+            if (this.media.isMainActive(alias)) {
+                is = true;
+                break;
+            }
+        }
+
+        return is;
+    }
+
+    public isFloating() {
         let is = false;
 
         each(this._floatingSidenavAliases, (alias: string) => {

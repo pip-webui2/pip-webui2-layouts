@@ -16,7 +16,7 @@ import { ExmapleListItem } from './examples-list/shared/ExampleListItem';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  private _showIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('app');
+  private _showIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('menu');
 
   public themes: Theme[];
   public theme: Theme;
@@ -74,10 +74,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit() {
-    this.media.asObservableMain().subscribe((change: MediaMainChange) => {
-      const isMenu = change.aliases.includes('xs') || change.aliases.includes('sm');
-      this._showIcon$.next(isMenu ? 'menu' : 'app');
-    });
 
     this.sidenav.small$.subscribe((small) => {
       this.cd.detectChanges();

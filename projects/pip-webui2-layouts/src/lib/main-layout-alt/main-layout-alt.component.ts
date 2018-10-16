@@ -1,48 +1,56 @@
-import { Component, Renderer, ElementRef, Input, OnInit, AfterViewInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {
+    Component,
+    Renderer2,
+    ElementRef,
+    Input,
+    OnInit,
+    AfterViewInit,
+    OnDestroy,
+    ViewChild,
+    ChangeDetectorRef
+} from '@angular/core';
 import { ObservableMedia, MediaChange } from '@angular/flex-layout';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { MatSidenav } from '@angular/material';
 import { addResizeListener } from '../media/resize-layout.function';
 import { PipMediaService } from '../media/shared/media.service';
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
 import { PipRightnavService } from '../rightnav/shared/rightnav.service';
+import { MediaMainChange } from '../media/shared/media-main-change.model';
 
 @Component({
-    selector: 'pip-main-layout',
-    templateUrl: 'main-layout.component.html',
-    styleUrls: ['./main-layout.component.scss']
+    selector: 'pip-main-layout-alt',
+    templateUrl: 'main-layout-alt.component.html',
+    styleUrls: ['./main-layout-alt.component.scss']
 })
-export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() public pipContainer;
-    @ViewChild('fixedSidenav') sidenav: MatSidenav;
+    @ViewChild('universalSidenav') sidenav: MatSidenav;
     @ViewChild('fixedRightnav') rightnav: MatSidenav;
 
     private listener: any;
     private element: any;
+    private universalMainSubscribtion: Subscription;
 
-    private _opened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public uFloating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
-        private renderer: Renderer,
+        private renderer2: Renderer2,
         private elRef: ElementRef,
         private cd: ChangeDetectorRef,
         private mainMedia: PipMediaService,
-        private sidenavService: PipSidenavService,
+        public sidenavService: PipSidenavService,
         private rightnavService: PipRightnavService,
         private media: ObservableMedia
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-main-layout', true);
+        this.renderer2.addClass(this.elRef.nativeElement, 'pip-main-layout-alt');
         this.listener = () => { this.onResize(); };
-    }
-
-    public get opened$(): Observable<boolean> {
-        return this._opened$;
-    }
-
-    public get active$(): Observable<boolean> {
-        return this.sidenavService.active$;
+        this.sidenavService.fixedSidenav = null;
+        this.sidenavService.isUniversal = true;
+        this.sidenavService.opened = false;
+        this.sidenavService.mode = 'over';
     }
 
     public ngOnInit() {
@@ -85,20 +93,28 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
                 }
             }
         });
-
-        this.sidenavService.small$.subscribe((small) => {
-            this.small$.next(small);
-            this.cd.detectChanges();
-        });
     }
 
     public ngOnDestroy() {
         removeEventListener(this.element, this.listener);
+        this.universalMainSubscribtion.unsubscribe();
     }
 
     ngAfterViewInit() {
-        this.sidenavService.fixedSidenav = this.sidenav;
+        this.uFloating$.next(this.sidenavService.isUniversalFloating());
+        this.universalMainSubscribtion = this.mainMedia.asObservableMain()
+            .subscribe((change: MediaMainChange) => {
+                const floating = this.sidenavService.isUniversalFloating();
+                if (this.uFloating$.getValue() !== floating) {
+                    this.uFloating$.next(floating);
+                }
+            });
+        this.sidenavService.universalSidenav = this.sidenav;
         this.rightnavService.fixedRightnav = this.rightnav;
+    }
+
+    public backdropClick(): void {
+        this.sidenavService.closeNav();
     }
 
     private onResize() {

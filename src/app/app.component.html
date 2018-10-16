@@ -1,8 +1,4 @@
 <pip-root-layout>
-  <pip-sidenav-floating style="height: 100%">
-    <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
-    </examples-list>
-  </pip-sidenav-floating>
   <pip-rightnav-floating style="font-family: Roboto; padding: 8px" fxLayout="column">
     <mat-toolbar fxLayout="row" class="pip-rightnav-title" color="accent">
       <h2 style="margin: 0px">Tigers</h2>
@@ -90,15 +86,15 @@
         <mat-icon>info</mat-icon>
       </button>
     </pip-appbar>
-    <pip-main-layout fxFlex="grow">
-      <pip-sidenav-fixed style="height: 100%">
+    <pip-main-layout-alt fxFlex="grow">
+      <pip-sidenav>
         <pip-sidenav-expander></pip-sidenav-expander>
         <examples-list [list]="list" [selectedItemIndex]="listIndex" (selectedItemIndexChange)="onListItemIndexChanged($event)">
         </examples-list>
-      </pip-sidenav-fixed>
+      </pip-sidenav>
       <pip-main-content>
         <router-outlet></router-outlet>
       </pip-main-content>
-    </pip-main-layout>
+    </pip-main-layout-alt>
   </pip-root-content>
 </pip-root-layout>

@@ -24,7 +24,6 @@
 mat-sidenav.pip-sidenav {
     max-width: 250px;
     width: 250px;
-    transition: all 0.3s ease;
     overflow-x: hidden;
 }
 
@@ -32,7 +31,6 @@ mat-sidenav.pip-sidenav {
     transition: all 0.3s ease;
     display: flex;
     margin-left: 250px !important;
-    overflow-x: hidden;
 }
 
 .pip-sidenav-container {

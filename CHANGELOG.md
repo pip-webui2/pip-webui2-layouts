@@ -72,3 +72,22 @@ No breaking changes in this version
 
 ### Bug Fixes
 * fix overflow
+
+
+## <a name="1.0.2"></a> ~1.0.2-beta.2 (2018-10-16)
+
+Bug fixes
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+* **main-layout-alt**: new layout type with single sidenav
+
+### Bug Fixes
+* relative imports

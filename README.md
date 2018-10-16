@@ -76,6 +76,8 @@ Development responsible applications requires to organization content the way th
 
 **Main layout** contains fixed sidenav and main content. Main content is placed under app bar, beetween side nav and right nav.
 
+**Main layout (alt)** new version of layout with universal sidenav for both desctop and mobile versions.
+
 **Card layout** places small content at the center of the screen in a card. On phones the content is extended to the whole screen.
 
 **Document layout** places content as a document with fixed width and full height centered on the screen. On tables and phones the content occupies the whole screen.
@@ -122,6 +124,42 @@ npm install pip-webui2-layouts --save
         <pip-sidenav-expander></pip-sidenav-expander>
         <!-- Side nav content of application is here -->
       </pip-sidenav-fixed>
+      <pip-main-content>
+        <!-- Main content of application is here -->
+         <!-- Shadows -->
+         <pip-shadow visible="true" attachmentSide="left"></pip-shadow>
+         <pip-shadow visible="true" attachmentSide="right"></pip-shadow>
+         <!-- For example using document layout -->
+         <pip-document-layout toolbar="true">
+            <pip-document-content>
+                <!-- Document content here -->
+            </pip-document-content>
+            <pip-document-footer >
+                <!-- Document footer here -->
+            </pip-document-footer>
+         </pip-document-layout>
+      </pip-main-content>
+    </pip-main-layout>
+  </pip-root-content>
+</pip-root-layout>
+```
+
+Alternative using with new sidenav:
+
+```html
+<pip-root-layout>
+  <pip-rightnav-floating >
+    <!-- Right nav content of application is here -->
+  </pip-rightnav-floating>
+  <pip-root-content>
+    <pip-appbar >
+      <!-- App bar content of application is here -->
+    </pip-appbar>
+    <pip-main-layout-alt >
+      <pip-sidenav >
+        <pip-sidenav-expander></pip-sidenav-expander>
+        <!-- Side nav content of application is here -->
+      </pip-sidenav>
       <pip-main-content>
         <!-- Main content of application is here -->
          <!-- Shadows -->

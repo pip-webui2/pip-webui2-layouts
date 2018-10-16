@@ -14,7 +14,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import {
   PipAppbarModule,
-  PipMainLayoutModule,
+  PipMainLayoutAltModule,
   PipShadowModule,
   PipSidenavExpanderModule,
   PipSidenavModule,
@@ -52,7 +52,7 @@ import { TilesLayoutExampleModule } from './tiles-layout-example/tiles-layout-ex
 
     PipThemesModule,
     PipAppbarModule,
-    PipMainLayoutModule,
+    PipMainLayoutAltModule,
     PipShadowModule,
     PipSidenavExpanderModule,
     PipSidenavModule,

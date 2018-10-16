@@ -4,6 +4,7 @@
 
 export * from './lib/document-layout/index';
 export * from './lib/main-layout/index';
+export * from './lib/main-layout-alt/index';
 export * from './lib/tiles-layout/index';
 export * from './lib/menu-layout/index';
 export * from './lib/media/index';
