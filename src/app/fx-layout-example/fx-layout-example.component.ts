@@ -12,9 +12,6 @@ export class FxLayoutExampleComponent implements OnInit {
     public media: PipMediaService
   ) {
     this.media.activate();
-    this.media.asObservableMain().subscribe((change) => {
-      console.log(this.media.isMainActive('document-lt-lg'));
-    });
   }
 
   ngOnInit() {

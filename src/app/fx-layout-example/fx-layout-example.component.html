@@ -1,15 +1,24 @@
 <div fxLayout="row" fxLayout.lt-sm="column">
-  <div class="bg-primary">[lt-sm]</div>
+  <div>[lt-sm]</div>
   <div>[B]</div>
   <div>[C]</div>
 </div>
 
 <div fxLayout="row" fxLayout.xs="column">
-  <div class="bg-primary">[xs]</div>
+  <div>[xs]</div>
   <div>[B]</div>
   <div>[C]</div>
 </div>
 
 <div [fxHide]="media.isMainActive('document-lt-lg')">
-  Shown when > 1250px
+  Shown when > 1250px. This breakpoint works only if PipMediaService is activated
+</div>
+
+<div fxHide.sm="true">
+  Hidden on sm only
+</div>
+
+<div fxflex fxLayout="column">
+  <div ngClass.lt-sm="underline">This text should be underlined if 'lt-sm'</div>
+  <div fxFlexOffset.lt-sm="50px">And this one should have offset (50px)</div>
 </div>
