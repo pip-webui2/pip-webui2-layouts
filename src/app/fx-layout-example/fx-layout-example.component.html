@@ -1,0 +1,15 @@
+<div fxLayout="row" fxLayout.lt-sm="column">
+  <div class="bg-primary">[lt-sm]</div>
+  <div>[B]</div>
+  <div>[C]</div>
+</div>
+
+<div fxLayout="row" fxLayout.xs="column">
+  <div class="bg-primary">[xs]</div>
+  <div>[B]</div>
+  <div>[C]</div>
+</div>
+
+<div [fxHide]="media.isMainActive('document-lt-lg')">
+  Shown when > 1250px
+</div>

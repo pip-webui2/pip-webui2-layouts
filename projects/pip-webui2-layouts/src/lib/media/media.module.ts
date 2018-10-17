@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { BREAKPOINTS } from '@angular/flex-layout';
+import { BREAKPOINT } from '@angular/flex-layout';
 
 import { PipMediaService } from './shared/media.service';
 import { PIP_BREAKPOINTS } from './shared/breakpoints';
 
 const PipBreakPointsProvider = {
-  provide: BREAKPOINTS,
+  provide: BREAKPOINT,
   useValue: [...PIP_BREAKPOINTS]
 };
 

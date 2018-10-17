@@ -46,6 +46,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public list: ExmapleListItem[] = [
     { name: 'Media query', id: 'media', route: 'media', icon: 'visibility' },
     { name: 'Document', id: 'document', route: 'document', icon: 'description' },
+    { name: 'FX layout', id: 'fx', route: 'fx', icon: 'feedback' },
     { name: 'Tiles', id: 'tiles', route: 'tiles', icon: 'view_module' },
     { name: 'Menu', id: 'menu', route: 'menu', icon: 'view_quilt' },
     { name: 'Card', id: 'card', route: 'card', icon: 'view_array' },
