@@ -49,7 +49,7 @@ export class MainMenuLayoutExampleComponent implements OnInit {
 
   public onItemClick(index) {
     this.itemIndex = index;
-    if (this.media.isMainActive('xs')) {
+    if (this.media.isMainActive('lt-md')) {
       this.isSingle = true;
       this._prevIcon = this.parent.showIcon;
       this.parent.showIcon = 'back';
