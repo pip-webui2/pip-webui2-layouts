@@ -74,7 +74,7 @@ No breaking changes in this version
 * fix overflow
 
 
-## <a name="1.0.2"></a> ~1.0.2-beta.2 (2018-10-16)
+## <a name="1.0.2"></a> ~1.0.2-beta.5 (2018-10-16)
 
 Bug fixes
 
@@ -91,3 +91,6 @@ Bug fixes
 
 ### Bug Fixes
 * relative imports
+* directives for flex layout was fixed
+* menu-layout mobile click fix (lt-md)
+* improved tiles layout component to watch for animation property

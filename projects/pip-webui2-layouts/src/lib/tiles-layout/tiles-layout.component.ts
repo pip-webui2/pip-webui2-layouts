@@ -9,8 +9,10 @@ import {
     Output,
     OnInit,
     OnDestroy,
+    OnChanges,
     ChangeDetectorRef,
-    AfterViewInit
+    AfterViewInit,
+    SimpleChanges
 } from '@angular/core';
 import { addResizeListener, removeResizeListener } from '../media/resize-layout.function';
 
@@ -21,7 +23,7 @@ const masonry = require('masonry-layout');
     styleUrls: ['./tiles-layout.component.scss'],
     templateUrl: './tiles-layout.component.html'
 })
-export class PipTilesLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PipTilesLayoutComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
     @Input() columnWidth: number | string;
     @Input() stretch: boolean;
     @Input() animation = true;
@@ -71,6 +73,16 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy, AfterViewInit
             setTimeout(() => {
                 this.elRef.nativeElement.classList.add('animation');
             }, 1000);
+        }
+    }
+
+    public ngOnChanges(changes: SimpleChanges) {
+        if (changes['animation']) {
+            if (changes['animation'].currentValue === true) {
+                this.elRef.nativeElement.classList.add('animation');
+            } else {
+                this.elRef.nativeElement.classList.remove('animation');
+            }
         }
     }
 
