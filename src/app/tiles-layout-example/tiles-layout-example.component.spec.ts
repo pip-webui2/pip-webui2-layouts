@@ -1,4 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { TilesLayoutExampleComponent } from './tiles-layout-example.component';
 
@@ -8,9 +10,13 @@ describe('TilesLayoutExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TilesLayoutExampleComponent ]
+      declarations: [TilesLayoutExampleComponent],
+      imports: [
+        FlexLayoutModule
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

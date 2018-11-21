@@ -1,4 +1,7 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule, MatListModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 import { ExamplesListComponent } from './examples-list.component';
 
@@ -8,9 +11,15 @@ describe('ExamplesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExamplesListComponent ]
+      declarations: [ExamplesListComponent],
+      imports: [
+        MatIconModule,
+        MatListModule,
+        RouterModule
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,4 +1,7 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { PipMediaService } from 'pip-webui2-layouts';
 
 import { MainLayoutExampleComponent } from './main-layout-example.component';
 
@@ -8,9 +11,16 @@ describe('MainLayoutExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainLayoutExampleComponent ]
+      declarations: [MainLayoutExampleComponent],
+      imports: [
+        FlexLayoutModule
+      ],
+      providers: [
+        PipMediaService
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

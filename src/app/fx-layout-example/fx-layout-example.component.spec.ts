@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { PipMediaService } from 'pip-webui2-layouts';
 
 import { FxLayoutExampleComponent } from './fx-layout-example.component';
 
@@ -8,9 +10,15 @@ describe('FxLayoutExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FxLayoutExampleComponent ]
+      declarations: [FxLayoutExampleComponent],
+      imports: [
+        FlexLayoutModule
+      ],
+      providers: [
+        PipMediaService
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

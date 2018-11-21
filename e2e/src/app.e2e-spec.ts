@@ -7,8 +7,8 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should contain "Layouts" in appbar', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to pip-webui2-layouts-app!');
+    expect(page.getParagraphText()).toEqual('Layouts');
   });
 });

@@ -96,3 +96,23 @@ Bug fixes
 * improved tiles layout component to watch for animation property
 * improved tiles layout before mansory displaying of tiles
 * fixed appbar height between xs and sm
+
+## <a name="1.1.0"></a> 1.1.0 (2018-11-21)
+
+Update to stable Angular 7 and fix the tests.
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+No breaking changes in this version
+
+### Bug Fixes
+* Library tests works now. Run `npm run test:lib` to check it out;
+* Example tests works now. Run `npm run test` to check it out;
+* E2E tests works too. Run `npm run e2e` to check it out.
