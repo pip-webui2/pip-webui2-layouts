@@ -1,6 +1,6 @@
 <mat-sidenav-container class="pip-sidenav-container pip-sidenav-fixed-container" [hasBackdrop]="uFloating$ | async"
                        [style.zIndex]="(uFloating$ | async) ? 0 : 'inherit'" (backdropClick)="backdropClick()">
-    <mat-sidenav #universalSidenav class="pip-sidenav" [opened]="sidenavService.opened$ | async" mode="sidenavService.mode$ | async"
+    <mat-sidenav #universalSidenav class="pip-sidenav" [opened]="activeSidenav$ | async" mode="sidenavService.mode$ | async"
                  [fixedInViewport]="uFloating$ | async" fixedTopGap="0" position="start">
         <ng-content select="pip-sidenav"></ng-content>
     </mat-sidenav>

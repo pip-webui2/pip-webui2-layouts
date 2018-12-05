@@ -139,6 +139,11 @@ export class PipSidenavService {
         }
     }
 
+    public toggleOpened() {
+        if (!this.isActive()) { return; }
+        this.opened = !this.opened;
+    }
+
     public openNav(sidenav?: MatSidenav) {
         if (!this.isActive()) { return; }
 

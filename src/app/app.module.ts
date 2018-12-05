@@ -52,14 +52,14 @@ import { TilesLayoutExampleModule } from './tiles-layout-example/tiles-layout-ex
     MatToolbarModule,
     TranslateModule.forRoot(),
 
-    PipThemesModule,
+    PipThemesModule.forRoot(),
     PipAppbarModule,
     PipMainLayoutAltModule,
-    PipMediaModule,
+    PipMediaModule.forRoot(),
     PipShadowModule,
     PipSidenavExpanderModule,
-    PipSidenavModule,
-    PipRightnavModule,
+    PipSidenavModule.forRoot(),
+    PipRightnavModule.forRoot(),
     PipRootLayoutModule,
 
     AppRoutingModule,

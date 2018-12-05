@@ -52,7 +52,7 @@ describe('AppComponent', () => {
         ScrollableLayoutExampleModule,
         TilesLayoutExampleModule,
 
-        PipThemesModule
+        PipThemesModule.forRoot()
       ],
       providers: [
         PipMediaService,

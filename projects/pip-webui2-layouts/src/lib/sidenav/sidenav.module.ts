@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material';
 
 import { PipSidenavService } from './shared/sidenav.service';
+import { ModuleWithProviders } from '@angular/compiler/src/core';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     MatSidenavModule
-  ],
-  exports: [
-  ],
-  providers: [
-    PipSidenavService
   ]
 })
-export class PipSidenavModule { }
+export class PipSidenavModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: PipSidenavModule,
+      providers: [
+        PipSidenavService
+      ]
+    };
+  }
+}

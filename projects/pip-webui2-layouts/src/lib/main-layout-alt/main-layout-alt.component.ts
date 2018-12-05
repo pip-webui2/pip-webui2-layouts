@@ -10,7 +10,8 @@ import {
     ChangeDetectorRef
 } from '@angular/core';
 import { ObservableMedia, MediaChange } from '@angular/flex-layout';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { MatSidenav } from '@angular/material';
 import { addResizeListener } from '../media/resize-layout.function';
@@ -35,6 +36,7 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
 
     public uFloating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public activeSidenav$: Observable<boolean>;
 
     constructor(
         private renderer2: Renderer2,
@@ -51,6 +53,12 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
         this.sidenavService.isUniversal = true;
         this.sidenavService.opened = false;
         this.sidenavService.mode = 'over';
+        this.activeSidenav$ = combineLatest(this.sidenavService.opened$, this.sidenavService.active$)
+            .pipe(
+                map(([opened, active]) => {
+                    return opened && active;
+                })
+            );
     }
 
     public ngOnInit() {

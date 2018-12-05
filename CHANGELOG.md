@@ -116,3 +116,23 @@ No breaking changes in this version
 * Library tests works now. Run `npm run test:lib` to check it out;
 * Example tests works now. Run `npm run test` to check it out;
 * E2E tests works too. Run `npm run e2e` to check it out.
+
+## <a name="1.1.1"></a> 1.1.1 (2018-12-05)
+
+Angular minor updates; Media, sidenav and rightnav modules updated
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
+* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
+* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+
+### Bug Fixes
+No fixes in this version 
