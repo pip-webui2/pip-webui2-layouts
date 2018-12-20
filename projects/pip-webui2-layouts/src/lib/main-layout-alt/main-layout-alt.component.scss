@@ -40,6 +40,12 @@ mat-sidenav.pip-sidenav {
     height: 100%;
 }
 
+/deep/ .pip-main-gt-sm .pip-sidenav-container {
+    .mat-drawer-backdrop {
+        background-color: transparent;
+    }
+}
+
 :host {
     .mat-drawer.mat-drawer-end {
         width: 250px;

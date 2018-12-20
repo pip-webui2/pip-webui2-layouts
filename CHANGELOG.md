@@ -176,3 +176,23 @@ Max width fix for main layout
 
 ### Bug Fixes
 Max width fix for main layout
+
+## <a name="1.1.4"></a> 1.1.4 (2018-12-18)
+
+Transparent backdrop for `main-alt-layout` sidenav
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
+* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
+* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+
+### Bug Fixes
+Max width fix for main layout
