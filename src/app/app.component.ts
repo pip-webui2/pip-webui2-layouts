@@ -1,10 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit, AfterViewInit } from '@angular/core';
-import { ObservableMedia } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 import { PipThemesService, Theme } from 'pip-webui2-themes';
-import { PipMediaService, PipSidenavService, PipRightnavService, MediaMainChange } from 'pip-webui2-layouts';
+import { PipMediaService, PipSidenavService, PipRightnavService } from 'pip-webui2-layouts';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { AppTranslations } from './app.strings';
@@ -55,7 +54,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   public constructor(
     public media: PipMediaService,
-    public globalMedia: ObservableMedia,
     public sidenav: PipSidenavService,
     private rightnav: PipRightnavService,
     private translate: TranslateService,

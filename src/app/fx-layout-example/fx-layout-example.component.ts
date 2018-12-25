@@ -1,20 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { BREAKPOINTS, ObservableMedia } from '@angular/flex-layout';
 import { PipMediaService } from 'pip-webui2-layouts';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-fx-layout-example',
-  templateUrl: './fx-layout-example.component.html',
-  styleUrls: ['./fx-layout-example.component.scss']
+    selector: 'app-fx-layout-example',
+    templateUrl: './fx-layout-example.component.html',
+    styleUrls: ['./fx-layout-example.component.scss']
 })
-export class FxLayoutExampleComponent implements OnInit {
+export class FxLayoutExampleComponent implements OnInit, OnDestroy {
 
-  constructor(
-    public media: PipMediaService
-  ) {
-    this.media.activate();
-  }
+    private subs: Subscription = new Subscription();
 
-  ngOnInit() {
-  }
+    public windowSize: number = window && window.innerWidth;
+
+    constructor(
+        @Inject(BREAKPOINTS) public bps: any,
+        public fxMedia: ObservableMedia,
+        public media: PipMediaService
+    ) {
+        window.addEventListener('resize', () => {
+            this.windowSize = window.innerWidth;
+        });
+    }
+
+    ngOnInit() {
+    }
+
+    ngOnDestroy() {
+        this.subs.unsubscribe();
+    }
 
 }

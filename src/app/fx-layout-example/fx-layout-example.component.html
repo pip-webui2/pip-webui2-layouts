@@ -10,15 +10,34 @@
   <div>[C]</div>
 </div>
 
-<div [fxHide]="media.isMainActive('document-lt-lg')">
-  Shown when > 1250px. This breakpoint works only if PipMediaService is activated
+<div [fxShow]="media.isMainActive('document-lt-lg')">
+  Show when &lt; 1250px
 </div>
 
-<div fxHide.sm="true">
-  Hidden on sm only
+<div fxHide fxShow.document-lt-lg>
+  Also show when &lt; 1250px only
 </div>
 
 <div fxflex fxLayout="column">
   <div ngClass.lt-sm="underline">This text should be underlined if 'lt-sm'</div>
   <div fxFlexOffset.lt-sm="50px">And this one should have offset (50px)</div>
 </div>
+
+<table border="1" frame="void" rules="all">
+  <tr>
+    <th>{{ windowSize }}</th>
+    <th *ngFor="let bp of bps" [ngClass]="{'active': fxMedia.isActive(bp.mediaQuery)}">{{ bp.alias }}</th>
+  </tr>
+  <tr>
+    <td>fxShow</td>
+    <td *ngFor="let bp of bps"><span [fxShow]="fxMedia.isActive(bp.mediaQuery)">+</span></td>
+  </tr>
+  <tr>
+    <td>fxHide</td>
+    <td *ngFor="let bp of bps"><span [fxHide]="fxMedia.isActive(bp.mediaQuery)">+</span></td>
+  </tr>
+  <tr>
+    <td>mainActive</td>
+    <td *ngFor="let bp of bps"><span [fxShow]="media.isMainActive(bp.alias)">+</span></td>
+  </tr>
+</table>

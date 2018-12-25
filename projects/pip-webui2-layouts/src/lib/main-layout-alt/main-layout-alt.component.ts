@@ -114,9 +114,10 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
             .subscribe((change: MediaMainChange) => {
                 const floating = this.sidenavService.isUniversalFloating();
                 if (this.uFloating$.getValue() !== floating) {
-                    this.uFloating$.next(floating);
+                    setTimeout(() => this.uFloating$.next(floating), 0);
                 }
             });
+        this.onResize();
         this.sidenavService.universalSidenav = this.sidenav;
         this.rightnavService.fixedRightnav = this.rightnav;
     }
@@ -126,7 +127,7 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private onResize() {
-        const rightnavWidth = this.rightnavService._fixedRightnav.opened
+        const rightnavWidth = this.rightnavService._fixedRightnav && this.rightnavService._fixedRightnav.opened
             ? this.rightnavService._fixedRightnav['_elementRef'].nativeElement.offsetWidth
             : 0;
         this.mainMedia.updateMainLayoutBreakpoints(this.element.offsetWidth - rightnavWidth);

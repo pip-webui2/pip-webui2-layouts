@@ -17,7 +17,7 @@ const appRoutes: Routes = [
     { path: 'menu', component: MainMenuLayoutExampleComponent },
     { path: 'card', component: CardLayoutExampleComponent },
     { path: 'scrollable', component: ScrollableLayoutExampleComponent },
-    { path: '', pathMatch: 'full', redirectTo: 'document' }
+    { path: '**', redirectTo: 'document' }
 ];
 
 @NgModule({

@@ -99,10 +99,11 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     ngAfterViewInit() {
         this.sidenavService.fixedSidenav = this.sidenav;
         this.rightnavService.fixedRightnav = this.rightnav;
+        this.onResize();
     }
 
     private onResize() {
-        const rightnavWidth = this.rightnavService._fixedRightnav.opened
+        const rightnavWidth = this.rightnavService._fixedRightnav && this.rightnavService._fixedRightnav.opened
             ? this.rightnavService._fixedRightnav['_elementRef'].nativeElement.offsetWidth
             : 0;
         this.mainMedia.updateMainLayoutBreakpoints(this.element.offsetWidth - rightnavWidth);

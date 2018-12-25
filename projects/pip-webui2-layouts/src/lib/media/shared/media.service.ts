@@ -3,58 +3,60 @@ import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { MediaMainChange } from './media-main-change.model';
-import { each } from '../../shared/layouts.utils';
 
 @Injectable()
 export class PipMediaService {
     constructor(
         private media: ObservableMedia
-    ) { }
-
-    private mainLayoutBreakpoints: any = {};
-    private mainChange$: BehaviorSubject<MediaMainChange> = new BehaviorSubject<MediaMainChange>({ aliases: [] });
-
-    public activate() {
-        this.media.asObservable().subscribe((change: MediaChange) => {
+    ) {
+        this.media.subscribe((change: MediaChange) => {
             this.updateBodyLayoutBreakpoints();
         });
         this.updateBodyLayoutBreakpoints();
         this.setMainLayoutBreakpoints();
     }
 
+    private mainLayoutBreakpoints: any = {};
+    private mainChange$: BehaviorSubject<MediaMainChange> = new BehaviorSubject<MediaMainChange>({ aliases: [] });
+
+    // TODO: deprecated
+    public activate() { }
+
     private updateBodyLayoutBreakpoints() {
         const body = document.body;
-        each(this.media['breakpoints'].aliases, (alias: any) => {
+        for (const alias of this.media['breakpoints'].aliases) {
             body.classList[this.media.isActive(alias) ? 'add' : 'remove']('pip-' + alias);
-        });
+        }
     }
 
     public updateMainLayoutBreakpoints(width: number) {
         const body = document.body;
         const aliases = [];
-        each(this.media['breakpoints'].aliases, (alias: any) => {
+        for (const alias of this.media['breakpoints'].aliases) {
             this.mainLayoutBreakpoints[alias].active = this._isMainInclude(width, alias);
             body.classList[this.mainLayoutBreakpoints[alias].active ? 'add' : 'remove']('pip-main-' + alias);
             if (this.mainLayoutBreakpoints[alias].active) { aliases.push(alias); }
-        });
+        }
 
-        this.mainChange$.next({aliases: aliases});
+        this.mainChange$.next({ aliases: aliases });
     }
 
     private setMainLayoutBreakpoints() {
         const regExp = new RegExp(/\([a-z-:' '0-9]+\)/g);
         this.mainLayoutBreakpoints = {};
 
-        each(this.media['breakpoints'].items, (item: any) => {
+        for (const item of this.media['breakpoints'].items) {
             const matches = item.mediaQuery.match(regExp);
             this.mainLayoutBreakpoints[item.alias] = { min: 0, max: 10000, active: false };
 
-            each(matches, (match) => {
+            for (const match of matches) {
                 const num = match.match(new RegExp(/[0-9]+/g));
-                num ? (match.includes('max-width') ? this.mainLayoutBreakpoints[item.alias].max = Number(num) :
-                    (match.includes('min-width') ? this.mainLayoutBreakpoints[item.alias].min = Number(num) : '')) : '';
-            });
-        });
+                if (num) {
+                    if (match.includes('max-width')) { this.mainLayoutBreakpoints[item.alias].max = Number(num); }
+                    if (match.includes('min-width')) { this.mainLayoutBreakpoints[item.alias].min = Number(num); }
+                }
+            }
+        }
     }
 
     private _isMainInclude(width: number, alias: string) {

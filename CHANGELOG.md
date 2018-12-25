@@ -195,4 +195,24 @@ Transparent backdrop for `main-alt-layout` sidenav
 * **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
 
 ### Bug Fixes
-Max width fix for main layout
+* Max width fix for main layout
+
+## <a name="1.1.5"></a> 1.1.5 (2018-12-25)
+
+Custom directives for show/hide was added. To use them `PipMediaModule` and `FlexLayoutModule` both should be present at component's module.
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
+* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
+* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+
+### Bug Fixes
+* Custom breakpoints directives
