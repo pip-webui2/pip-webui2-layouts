@@ -3,7 +3,7 @@ import { BreakPoint } from '@angular/flex-layout';
 export const PIP_BREAKPOINTS: BreakPoint[] = [
     {
         alias: 'xs',
-        mediaQuery: '(max-width: 639px)',
+        mediaQuery: '(min-width: 0px) and (max-width: 639px)',
         overlapping: false,
     },
     {
