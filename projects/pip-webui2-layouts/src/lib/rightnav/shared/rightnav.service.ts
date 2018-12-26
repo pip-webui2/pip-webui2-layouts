@@ -12,6 +12,7 @@ export class PipRightnavService {
     private _onlyFloating = true;
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
     private _floatingRightnavAliases: string[] = ['xs', 'sm'];
+    private _fixedRightnavMode$ = new BehaviorSubject<string>('side');
 
     public constructor(
         private media: ObservableMedia
@@ -47,6 +48,18 @@ export class PipRightnavService {
 
     public get fixedRightnav(): MatSidenav {
         return this._fixedRightnav;
+    }
+
+    public get fixedRightnavMode$(): Observable<string> {
+        return this._fixedRightnavMode$.asObservable();
+    }
+
+    public get fixedRightnavMode(): string {
+        return this._fixedRightnavMode$.getValue();
+    }
+
+    public set fixedRightnavMode(mode: string) {
+        this._fixedRightnavMode$.next(mode);
     }
 
     public get opened$(): Observable<boolean> {

@@ -236,3 +236,23 @@ Breakpoints fixed
 
 ### Bug Fixes
 * Breakpoints fixed
+
+## <a name="1.1.7"></a> 1.1.7 (2018-12-26)
+
+Ability to change mode for fixed rightnav.
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
+* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
+* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+
+### Bug Fixes
+No fixes in this version 

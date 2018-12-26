@@ -32,7 +32,7 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
 
     private listener: any;
     private element: any;
-    private universalMainSubscribtion: Subscription;
+    private subs: Subscription = new Subscription();
 
     public uFloating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -44,7 +44,7 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
         private cd: ChangeDetectorRef,
         private mainMedia: PipMediaService,
         public sidenavService: PipSidenavService,
-        private rightnavService: PipRightnavService,
+        public rightnavService: PipRightnavService,
         private media: ObservableMedia
     ) {
         this.renderer2.addClass(this.elRef.nativeElement, 'pip-main-layout-alt');
@@ -105,18 +105,18 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
 
     public ngOnDestroy() {
         removeEventListener(this.element, this.listener);
-        this.universalMainSubscribtion.unsubscribe();
+        this.subs.unsubscribe();
     }
 
     ngAfterViewInit() {
         this.uFloating$.next(this.sidenavService.isUniversalFloating());
-        this.universalMainSubscribtion = this.mainMedia.asObservableMain()
+        this.subs.add(this.mainMedia.asObservableMain()
             .subscribe((change: MediaMainChange) => {
                 const floating = this.sidenavService.isUniversalFloating();
                 if (this.uFloating$.getValue() !== floating) {
                     setTimeout(() => this.uFloating$.next(floating), 0);
                 }
-            });
+            }));
         this.onResize();
         this.sidenavService.universalSidenav = this.sidenav;
         this.rightnavService.fixedRightnav = this.rightnav;
