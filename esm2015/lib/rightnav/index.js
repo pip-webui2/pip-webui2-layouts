@@ -1,7 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { PipRightnavModule } from './rightnav.module';
-export { PipRightnavService } from './shared/rightnav.service';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9waXAtd2VidWkyLWxheW91dHMvIiwic291cmNlcyI6WyJsaWIvcmlnaHRuYXYvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxpQkFBaUIsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBQ3RELE9BQU8sRUFBRSxrQkFBa0IsRUFBRSxNQUFNLDJCQUEyQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IHsgUGlwUmlnaHRuYXZNb2R1bGUgfSBmcm9tICcuL3JpZ2h0bmF2Lm1vZHVsZSc7XHJcbmV4cG9ydCB7IFBpcFJpZ2h0bmF2U2VydmljZSB9IGZyb20gJy4vc2hhcmVkL3JpZ2h0bmF2LnNlcnZpY2UnO1xyXG4iXX0=

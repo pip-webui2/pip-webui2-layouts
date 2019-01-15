@@ -1,7 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { PipSidenavModule } from './sidenav.module';
-export { PipSidenavService } from './shared/sidenav.service';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9waXAtd2VidWkyLWxheW91dHMvIiwic291cmNlcyI6WyJsaWIvc2lkZW5hdi9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0sa0JBQWtCLENBQUM7QUFDcEQsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sMEJBQTBCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgeyBQaXBTaWRlbmF2TW9kdWxlIH0gZnJvbSAnLi9zaWRlbmF2Lm1vZHVsZSc7XHJcbmV4cG9ydCB7IFBpcFNpZGVuYXZTZXJ2aWNlIH0gZnJvbSAnLi9zaGFyZWQvc2lkZW5hdi5zZXJ2aWNlJztcclxuIl19
