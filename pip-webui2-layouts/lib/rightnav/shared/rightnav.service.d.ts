@@ -1,0 +1,32 @@
+import { MediaObserver } from '@angular/flex-layout';
+import { MatSidenav } from '@angular/material';
+import { Observable } from 'rxjs';
+export declare class PipRightnavService {
+    private media;
+    _floatingRightnav: MatSidenav;
+    _fixedRightnav: MatSidenav;
+    private _onlyFloating;
+    private _opened$;
+    private _floatingRightnavAliases;
+    private _fixedRightnavMode$;
+    constructor(media: MediaObserver);
+    floatingRightnavAliases: string[];
+    onlyFloating: boolean;
+    floatingRightnav: MatSidenav;
+    fixedRightnav: MatSidenav;
+    readonly fixedRightnavMode$: Observable<string>;
+    fixedRightnavMode: string;
+    readonly opened$: Observable<boolean>;
+    opened: boolean;
+    toggleRightnav(rightnav?: MatSidenav): void;
+    openRightnav(rightnav?: MatSidenav): void;
+    closeRightnav(rightnav?: MatSidenav): void;
+    toggleFloatingRightnav(): void;
+    toggleFixedRightnav(): void;
+    openFloatingRightnav(): void;
+    closeFloatingRightnav(): void;
+    openFixedRightnav(): void;
+    closeFixedRightnav(): void;
+    changeStateRightnav(rightnav?: MatSidenav): void;
+    private isFloating;
+}

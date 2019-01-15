@@ -1,0 +1,32 @@
+{
+  "name": "pip-webui2-layouts",
+  "version": "1.1.9",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pip-webui2/pip-webui2-layouts"
+  },
+  "dependencies": {
+    "masonry-layout": "^4.2.2",
+    "pip-webui2-themes": "^1.1.8",
+    "tslib": "^1.9.0"
+  },
+  "peerDependencies": {
+    "@angular/cdk": "^7.2.0",
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/flex-layout": "^7.0.0-beta.23",
+    "@angular/material": "^7.2.1",
+    "rxjs": "~6.3.3"
+  },
+  "main": "bundles/pip-webui2-layouts.umd.js",
+  "module": "fesm5/pip-webui2-layouts.js",
+  "es2015": "fesm2015/pip-webui2-layouts.js",
+  "esm5": "esm5/pip-webui2-layouts.js",
+  "esm2015": "esm2015/pip-webui2-layouts.js",
+  "fesm5": "fesm5/pip-webui2-layouts.js",
+  "fesm2015": "fesm2015/pip-webui2-layouts.js",
+  "typings": "pip-webui2-layouts.d.ts",
+  "metadata": "pip-webui2-layouts.metadata.json",
+  "sideEffects": false
+}

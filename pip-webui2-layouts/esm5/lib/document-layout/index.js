@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { PipDocumentLayoutComponent } from './document-layout.component';
+export { PipDocumentLayoutModule } from './document-layout.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9waXAtd2VidWkyLWxheW91dHMvIiwic291cmNlcyI6WyJsaWIvZG9jdW1lbnQtbGF5b3V0L2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsMEJBQTBCLEVBQUUsTUFBTSw2QkFBNkIsQ0FBQztBQUN6RSxPQUFPLEVBQUUsdUJBQXVCLEVBQUUsTUFBTSwwQkFBMEIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IFBpcERvY3VtZW50TGF5b3V0Q29tcG9uZW50IH0gZnJvbSAnLi9kb2N1bWVudC1sYXlvdXQuY29tcG9uZW50JztcclxuZXhwb3J0IHsgUGlwRG9jdW1lbnRMYXlvdXRNb2R1bGUgfSBmcm9tICcuL2RvY3VtZW50LWxheW91dC5tb2R1bGUnO1xyXG4iXX0=

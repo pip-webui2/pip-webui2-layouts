@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { PipSidenavExpanderComponent } from './sidenav-expander.component';
+export { PipSidenavExpanderModule } from './sidenav-expander.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9waXAtd2VidWkyLWxheW91dHMvIiwic291cmNlcyI6WyJsaWIvc2lkZW5hdi1leHBhbmRlci9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsT0FBTyxFQUFFLDJCQUEyQixFQUFFLE1BQU0sOEJBQThCLENBQUM7QUFDM0UsT0FBTyxFQUFFLHdCQUF3QixFQUFFLE1BQU0sMkJBQTJCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgeyBQaXBTaWRlbmF2RXhwYW5kZXJDb21wb25lbnQgfSBmcm9tICcuL3NpZGVuYXYtZXhwYW5kZXIuY29tcG9uZW50JztcclxuZXhwb3J0IHsgUGlwU2lkZW5hdkV4cGFuZGVyTW9kdWxlIH0gZnJvbSAnLi9zaWRlbmF2LWV4cGFuZGVyLm1vZHVsZSc7XHJcbiJdfQ==

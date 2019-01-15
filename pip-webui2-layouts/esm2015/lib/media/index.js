@@ -1,0 +1,10 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { PipMediaModule } from './media.module';
+export { PipMediaService } from './shared/media.service';
+export { MediaMainChange } from './shared/media-main-change.model';
+export { PIP_BREAKPOINTS } from './shared/breakpoints';
+export { addResizeListener, removeResizeListener } from './resize-layout.function';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9waXAtd2VidWkyLWxheW91dHMvIiwic291cmNlcyI6WyJsaWIvbWVkaWEvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxjQUFjLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUNoRCxPQUFPLEVBQUUsZUFBZSxFQUFFLE1BQU0sd0JBQXdCLENBQUM7QUFDekQsT0FBTyxFQUFFLGVBQWUsRUFBRSxNQUFNLGtDQUFrQyxDQUFDO0FBQ25FLE9BQU8sRUFBRSxlQUFlLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQUN2RCx3REFBYywwQkFBMEIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IFBpcE1lZGlhTW9kdWxlIH0gZnJvbSAnLi9tZWRpYS5tb2R1bGUnO1xyXG5leHBvcnQgeyBQaXBNZWRpYVNlcnZpY2UgfSBmcm9tICcuL3NoYXJlZC9tZWRpYS5zZXJ2aWNlJztcclxuZXhwb3J0IHsgTWVkaWFNYWluQ2hhbmdlIH0gZnJvbSAnLi9zaGFyZWQvbWVkaWEtbWFpbi1jaGFuZ2UubW9kZWwnO1xyXG5leHBvcnQgeyBQSVBfQlJFQUtQT0lOVFMgfSBmcm9tICcuL3NoYXJlZC9icmVha3BvaW50cyc7XHJcbmV4cG9ydCAqIGZyb20gJy4vcmVzaXplLWxheW91dC5mdW5jdGlvbic7XHJcbiJdfQ==

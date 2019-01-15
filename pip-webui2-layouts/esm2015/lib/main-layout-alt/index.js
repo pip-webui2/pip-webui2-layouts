@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { PipMainLayoutAltComponent } from './main-layout-alt.component';
+export { PipMainLayoutAltModule } from './main-layout-alt.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9waXAtd2VidWkyLWxheW91dHMvIiwic291cmNlcyI6WyJsaWIvbWFpbi1sYXlvdXQtYWx0L2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUseUJBQXlCLEVBQUUsTUFBTSw2QkFBNkIsQ0FBQztBQUN4RSxPQUFPLEVBQUUsc0JBQXNCLEVBQUUsTUFBTSwwQkFBMEIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IFBpcE1haW5MYXlvdXRBbHRDb21wb25lbnQgfSBmcm9tICcuL21haW4tbGF5b3V0LWFsdC5jb21wb25lbnQnO1xyXG5leHBvcnQgeyBQaXBNYWluTGF5b3V0QWx0TW9kdWxlIH0gZnJvbSAnLi9tYWluLWxheW91dC1hbHQubW9kdWxlJztcclxuIl19

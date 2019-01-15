@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { PipTilesLayoutComponent } from './tiles-layout.component';
+export { PipTilesLayoutModule } from './tiles-layout.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9waXAtd2VidWkyLWxheW91dHMvIiwic291cmNlcyI6WyJsaWIvdGlsZXMtbGF5b3V0L2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsdUJBQXVCLEVBQUUsTUFBTSwwQkFBMEIsQ0FBQztBQUNuRSxPQUFPLEVBQUUsb0JBQW9CLEVBQUUsTUFBTSx1QkFBdUIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IFBpcFRpbGVzTGF5b3V0Q29tcG9uZW50IH0gZnJvbSAnLi90aWxlcy1sYXlvdXQuY29tcG9uZW50JztcclxuZXhwb3J0IHsgUGlwVGlsZXNMYXlvdXRNb2R1bGUgfSBmcm9tICcuL3RpbGVzLWxheW91dC5tb2R1bGUnO1xyXG4iXX0=

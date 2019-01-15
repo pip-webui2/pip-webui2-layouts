@@ -1,0 +1,30 @@
+import { Renderer, ElementRef, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { MatSidenav } from '@angular/material';
+import { PipMediaService } from '../media/shared/media.service';
+import { PipSidenavService } from '../sidenav/shared/sidenav.service';
+import { PipRightnavService } from '../rightnav/shared/rightnav.service';
+export declare class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+    private renderer;
+    private elRef;
+    private cd;
+    private mainMedia;
+    private sidenavService;
+    private rightnavService;
+    private media;
+    pipContainer: any;
+    sidenav: MatSidenav;
+    rightnav: MatSidenav;
+    private listener;
+    private element;
+    private _opened$;
+    small$: BehaviorSubject<boolean>;
+    constructor(renderer: Renderer, elRef: ElementRef, cd: ChangeDetectorRef, mainMedia: PipMediaService, sidenavService: PipSidenavService, rightnavService: PipRightnavService, media: MediaObserver);
+    readonly opened$: Observable<boolean>;
+    readonly active$: Observable<boolean>;
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    ngAfterViewInit(): void;
+    private onResize;
+}
