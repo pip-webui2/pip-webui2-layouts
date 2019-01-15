@@ -2,7 +2,14 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/pip-webui2-layouts",
   "lib": {
-    "entryFile": "src/public_api.ts"
+    "entryFile": "src/public_api.ts",
+    "umdModuleIds": {
+      "masonry-layout": "^4.2.2",
+      "pip-webui2-themes": "^1.1.8"
+    }
   },
-  "whitelistedNonPeerDependencies": ["masonry-layout", "^pip-webui2"]
+  "whitelistedNonPeerDependencies": [
+    "masonry-layout",
+    "^pip-webui2"
+  ]
 }

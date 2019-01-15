@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MediaChange, ObservableMedia } from '@angular/flex-layout';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { MediaMainChange } from './media-main-change.model';
@@ -7,9 +7,9 @@ import { MediaMainChange } from './media-main-change.model';
 @Injectable()
 export class PipMediaService {
     constructor(
-        private media: ObservableMedia
+        private media: MediaObserver
     ) {
-        this.media.subscribe((change: MediaChange) => {
+        this.media.media$.subscribe((change: MediaChange) => {
             this.updateBodyLayoutBreakpoints();
         });
         this.updateBodyLayoutBreakpoints();

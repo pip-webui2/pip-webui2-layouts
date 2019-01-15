@@ -150,9 +150,7 @@ Flex-direction fix
 * **tiles**: tiles layout
 
 ### Breaking Changes
-* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
-* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
-* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+No breaking changes in this version
 
 ### Bug Fixes
 Flex-direction fix for main layout
@@ -170,9 +168,7 @@ Max width fix for main layout
 * **tiles**: tiles layout
 
 ### Breaking Changes
-* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
-* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
-* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+No breaking changes in this version
 
 ### Bug Fixes
 Max width fix for main layout
@@ -190,9 +186,7 @@ Transparent backdrop for `main-alt-layout` sidenav
 * **tiles**: tiles layout
 
 ### Breaking Changes
-* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
-* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
-* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+No breaking changes in this version
 
 ### Bug Fixes
 * Max width fix for main layout
@@ -210,9 +204,7 @@ Custom directives for show/hide was added. To use them `PipMediaModule` and `Fle
 * **tiles**: tiles layout
 
 ### Breaking Changes
-* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
-* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
-* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+No breaking changes in this version
 
 ### Bug Fixes
 * Custom breakpoints directives
@@ -230,9 +222,7 @@ Breakpoints fixed
 * **tiles**: tiles layout
 
 ### Breaking Changes
-* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
-* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
-* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+No breaking changes in this version
 
 ### Bug Fixes
 * Breakpoints fixed
@@ -250,9 +240,7 @@ Ability to change mode for fixed rightnav.
 * **tiles**: tiles layout
 
 ### Breaking Changes
-* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
-* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
-* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+No breaking changes in this version
 
 ### Bug Fixes
 No fixes in this version 
@@ -270,9 +258,25 @@ Package size improvements.
 * **tiles**: tiles layout
 
 ### Breaking Changes
-* **PipMediaModule** should be replaced with **PipMediaModule.forRoot()**
-* **PipSidenavModule** should be replaced with **PipSidenavModule.forRoot()**
-* **PipRightnavModule** should be replaced with **PipRightnavModule.forRoot()**
+No breaking changes in this version
+
+### Bug Fixes
+No fixes in this version 
+
+## <a name="1.1.9"></a> 1.1.9 (2019-01-15)
+
+ObservableMedia updated to MediaObserver
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+No breaking changes in this version
 
 ### Bug Fixes
 No fixes in this version 

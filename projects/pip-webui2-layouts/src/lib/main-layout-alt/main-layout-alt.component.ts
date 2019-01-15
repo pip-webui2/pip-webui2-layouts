@@ -9,7 +9,7 @@ import {
     ViewChild,
     ChangeDetectorRef
 } from '@angular/core';
-import { ObservableMedia, MediaChange } from '@angular/flex-layout';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { BehaviorSubject, Subscription, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -45,7 +45,7 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
         private mainMedia: PipMediaService,
         public sidenavService: PipSidenavService,
         public rightnavService: PipRightnavService,
-        private media: ObservableMedia
+        private media: MediaObserver
     ) {
         this.renderer2.addClass(this.elRef.nativeElement, 'pip-main-layout-alt');
         this.listener = () => { this.onResize(); };
@@ -84,7 +84,7 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
             this.cd.detectChanges();
         });
 
-        this.media.asObservable().subscribe((change: MediaChange) => {
+        this.media.media$.subscribe((change: MediaChange) => {
             if (this.rightnavService.onlyFloating === true) { return; }
 
             if (this.sidenavService.floatingSidenavAliases.includes(change.mqAlias)) {

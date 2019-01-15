@@ -1,5 +1,5 @@
 import { Component, Renderer, ElementRef, Input, OnInit, AfterViewInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { ObservableMedia, MediaChange } from '@angular/flex-layout';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { MatSidenav } from '@angular/material';
@@ -31,7 +31,7 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
         private mainMedia: PipMediaService,
         private sidenavService: PipSidenavService,
         private rightnavService: PipRightnavService,
-        private media: ObservableMedia
+        private media: MediaObserver
     ) {
         renderer.setElementClass(elRef.nativeElement, 'pip-main-layout', true);
         this.listener = () => { this.onResize(); };
@@ -68,7 +68,7 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
             this.cd.detectChanges();
         });
 
-        this.media.asObservable().subscribe((change: MediaChange) => {
+        this.media.media$.subscribe((change: MediaChange) => {
             if (this.rightnavService.onlyFloating === true) { return; }
 
             if (this.sidenavService.floatingSidenavAliases.includes(change.mqAlias)) {

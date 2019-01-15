@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { BREAKPOINTS, ObservableMedia } from '@angular/flex-layout';
+import { BREAKPOINTS, MediaObserver } from '@angular/flex-layout';
 import { PipMediaService } from 'pip-webui2-layouts';
 import { Subscription } from 'rxjs';
 
@@ -16,7 +16,7 @@ export class FxLayoutExampleComponent implements OnInit, OnDestroy {
 
     constructor(
         @Inject(BREAKPOINTS) public bps: any,
-        public fxMedia: ObservableMedia,
+        public fxMedia: MediaObserver,
         public media: PipMediaService
     ) {
         window.addEventListener('resize', () => {

@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
 import { PipRightnavService } from '../rightnav/shared/rightnav.service';
-import { ObservableMedia, MediaChange } from '@angular/flex-layout';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 import { each } from '../shared/layouts.utils';
 
@@ -26,7 +26,7 @@ export class PipRootLayoutComponent implements OnInit, AfterViewInit {
         private rightnavService: PipRightnavService,
         private renderer: Renderer,
         private elRef: ElementRef,
-        private media: ObservableMedia,
+        private media: MediaObserver,
         private cd: ChangeDetectorRef
     ) {
         renderer.setElementClass(elRef.nativeElement, 'pip-root-layout', true);
@@ -41,7 +41,7 @@ export class PipRootLayoutComponent implements OnInit, AfterViewInit {
             this.cd.detectChanges();
         });
 
-        this.media.asObservable().subscribe((change: MediaChange) => {
+        this.media.media$.subscribe((change: MediaChange) => {
             this.mode$.next(this.rightnavService.floatingRightnavAliases.includes(change.mqAlias) ? null : 'side');
             this.cd.detectChanges();
         });

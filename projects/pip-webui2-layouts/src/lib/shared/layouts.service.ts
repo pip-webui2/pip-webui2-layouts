@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { ObservableMedia } from '@angular/flex-layout';
+import { MediaObserver } from '@angular/flex-layout';
 import { Observable } from 'rxjs';
 
 import { PipMediaService } from '../media/shared/media.service';
@@ -11,7 +11,7 @@ import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 export class PipLayoutsService {
     public constructor(
         private mainMedia: PipMediaService,
-        private media: ObservableMedia,
+        private media: MediaObserver,
         private sidenav: PipSidenavService,
         private rightnav: PipRightnavService
     ) { }

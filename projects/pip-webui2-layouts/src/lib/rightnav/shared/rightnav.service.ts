@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ObservableMedia } from '@angular/flex-layout';
+import { MediaObserver } from '@angular/flex-layout';
 import { MatSidenav } from '@angular/material';
 import { Observable, BehaviorSubject } from 'rxjs';
 
@@ -15,7 +15,7 @@ export class PipRightnavService {
     private _fixedRightnavMode$ = new BehaviorSubject<string>('side');
 
     public constructor(
-        private media: ObservableMedia
+        private media: MediaObserver
     ) { }
 
     public set floatingRightnavAliases(aliases: string[]) {

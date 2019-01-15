@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ObservableMedia } from '@angular/flex-layout';
+import { MediaObserver } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-tiles-layout-example',
@@ -10,7 +10,7 @@ export class TilesLayoutExampleComponent implements OnInit {
   public tiles = [];
 
   constructor(
-    public media: ObservableMedia
+    public media: MediaObserver
   ) { }
 
   ngOnInit() {
