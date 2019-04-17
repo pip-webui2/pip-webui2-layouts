@@ -298,3 +298,21 @@ No breaking changes in this version
 
 ### Bug Fixes
 No fixes in this version
+
+## <a name="1.1.11"></a> 1.1.11 (2019-04-17)
+
+Appbar now have it's own service and tabs
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+* `PipAppbarModule` now should be imported `.forRoot()`
+
+### Bug Fixes
+No fixes in this version

@@ -1,3 +1,8 @@
 <mat-toolbar color="primary">
     <ng-content></ng-content>
 </mat-toolbar>
+<nav *ngIf="appbar.tabs && appbar.tabs.length > 0" mat-tab-nav-bar backgroundColor="primary" animationDuration="0ms">
+    <a mat-tab-link *ngFor="let link of appbar?.tabs; let idx = index"
+        (click)="navigate(idx)" [active]="appbar.activeIdx === idx">{{link.name | translate}}
+    </a>
+</nav>

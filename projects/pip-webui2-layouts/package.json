@@ -1,12 +1,13 @@
 {
   "name": "pip-webui2-layouts",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/pip-webui2/pip-webui2-layouts"
   },
   "dependencies": {
+    "@ngx-translate/core": "^11.0.1",
     "masonry-layout": "^4.2.2",
     "pip-webui2-themes": "^1.1.10"
   },

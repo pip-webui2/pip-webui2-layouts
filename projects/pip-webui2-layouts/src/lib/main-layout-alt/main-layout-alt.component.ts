@@ -19,6 +19,7 @@ import { PipMediaService } from '../media/shared/media.service';
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
 import { PipRightnavService } from '../rightnav/shared/rightnav.service';
 import { MediaMainChange } from '../media/shared/media-main-change.model';
+import { PipAppbarService } from '../appbar/shared/appbar.service';
 
 @Component({
     selector: 'pip-main-layout-alt',
@@ -32,7 +33,7 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
 
     private listener: any;
     private element: any;
-    private subs: Subscription = new Subscription();
+    private _subs: Subscription = new Subscription();
 
     public uFloating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -40,6 +41,7 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
 
     constructor(
         private renderer2: Renderer2,
+        private appbar: PipAppbarService,
         private elRef: ElementRef,
         private cd: ChangeDetectorRef,
         private mainMedia: PipMediaService,
@@ -48,6 +50,16 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
         private media: MediaObserver
     ) {
         this.renderer2.addClass(this.elRef.nativeElement, 'pip-main-layout-alt');
+        let showing = false;
+        this._subs.add(this.appbar.tabs$.pipe(map(t => t && t.length > 0)).subscribe(show => {
+            if (show === showing) { return; }
+            showing = show;
+            if (showing) {
+                renderer2.addClass(this.elRef.nativeElement, 'pip-with-tabs');
+            } else {
+                renderer2.removeClass(this.elRef.nativeElement, 'pip-with-tabs');
+            }
+        }));
         this.listener = () => { this.onResize(); };
         this.sidenavService.fixedSidenav = null;
         this.sidenavService.isUniversal = true;
@@ -105,12 +117,12 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
 
     public ngOnDestroy() {
         removeEventListener(this.element, this.listener);
-        this.subs.unsubscribe();
+        this._subs.unsubscribe();
     }
 
     ngAfterViewInit() {
         this.uFloating$.next(this.sidenavService.isUniversalFloating());
-        this.subs.add(this.mainMedia.asObservableMain()
+        this._subs.add(this.mainMedia.asObservableMain()
             .subscribe((change: MediaMainChange) => {
                 const floating = this.sidenavService.isUniversalFloating();
                 if (this.uFloating$.getValue() !== floating) {

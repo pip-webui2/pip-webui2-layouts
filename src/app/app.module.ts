@@ -53,7 +53,7 @@ import { TilesLayoutExampleModule } from './tiles-layout-example/tiles-layout-ex
     TranslateModule.forRoot(),
 
     PipThemesModule.forRoot(),
-    PipAppbarModule,
+    PipAppbarModule.forRoot(),
     PipMainLayoutAltModule,
     PipMediaModule.forRoot(),
     PipShadowModule,

@@ -15,6 +15,9 @@
     bottom: 0;
     left: 0;
     right: 0;
+    &.pip-with-tabs {
+        top: 112px;
+    }
 }
 
 ::ng-deep .pip-xs .pip-main-layout,

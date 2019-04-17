@@ -1,12 +1,14 @@
 import { Component, Renderer, ElementRef, Input, OnInit, AfterViewInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { MatSidenav } from '@angular/material';
 import { addResizeListener } from '../media/resize-layout.function';
 import { PipMediaService } from '../media/shared/media.service';
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
 import { PipRightnavService } from '../rightnav/shared/rightnav.service';
+import { PipAppbarService } from '../appbar/shared/appbar.service';
 
 @Component({
     selector: 'pip-main-layout',
@@ -20,6 +22,7 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
 
     private listener: any;
     private element: any;
+    private _subs: Subscription = new Subscription();
 
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -28,12 +31,19 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
         private renderer: Renderer,
         private elRef: ElementRef,
         private cd: ChangeDetectorRef,
+        private appbar: PipAppbarService,
         private mainMedia: PipMediaService,
         private sidenavService: PipSidenavService,
         private rightnavService: PipRightnavService,
         private media: MediaObserver
     ) {
         renderer.setElementClass(elRef.nativeElement, 'pip-main-layout', true);
+        let showing = false;
+        this._subs.add(this.appbar.tabs$.pipe(map(t => t && t.length > 0)).subscribe(show => {
+            if (show === showing) { return; }
+            showing = show;
+            renderer.setElementClass(elRef.nativeElement, 'pip-with-tabs', showing);
+        }));
         this.listener = () => { this.onResize(); };
     }
 
@@ -94,6 +104,7 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
 
     public ngOnDestroy() {
         removeEventListener(this.element, this.listener);
+        this._subs.unsubscribe();
     }
 
     ngAfterViewInit() {

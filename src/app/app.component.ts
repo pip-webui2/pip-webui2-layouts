@@ -51,7 +51,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     { name: 'Tiles', id: 'tiles', route: 'tiles', icon: 'view_module' },
     { name: 'Menu', id: 'menu', route: 'menu', icon: 'view_quilt' },
     { name: 'Card', id: 'card', route: 'card', icon: 'view_array' },
-    { name: 'Scrollable', id: 'scrollable', route: 'scrollable', icon: 'view_day' }
+    { name: 'Scrollable', id: 'scrollable', route: 'scrollable', icon: 'view_day' },
+    { name: 'Tabs', id: 'tabs', route: 'tabs', icon: 'view_week' },
   ];
 
   public constructor(
