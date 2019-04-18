@@ -23,6 +23,9 @@
 ::ng-deep .pip-xs .pip-main-layout-alt,
 ::ng-deep .pip-sm .pip-main-layout-alt {
     top: 56px;
+    &.pip-with-tabs {
+        top: 104px;
+    }
 }
 
 mat-sidenav.pip-sidenav {

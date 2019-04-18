@@ -23,6 +23,9 @@
 ::ng-deep .pip-xs .pip-main-layout,
 ::ng-deep .pip-sm .pip-main-layout {
     top: 56px;
+    &.pip-with-tabs {
+        top: 104px;
+    }
 }
 
 mat-sidenav.pip-sidenav {
