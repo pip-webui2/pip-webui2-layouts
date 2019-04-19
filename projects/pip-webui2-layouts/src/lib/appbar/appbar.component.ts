@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UrlTree, Router } from '@angular/router';
 
 import { PipAppbarService } from './shared/appbar.service';
 
@@ -10,12 +11,13 @@ import { PipAppbarService } from './shared/appbar.service';
 export class PipAppbarComponent implements OnInit {
 
     constructor(
+        private router: Router,
         public appbar: PipAppbarService,
     ) { }
 
     ngOnInit() { }
 
-    public navigate(idx: number) {
-        this.appbar.activeIdx = idx;
+    public isActive(url: string[]): boolean {
+        return this.router.isActive(this.router.createUrlTree(url), false);
     }
 }

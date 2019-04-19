@@ -20,13 +20,13 @@ export class TabsExampleComponent implements OnInit, OnDestroy {
             {
                 name: 'First',
                 route: {
-                    path: '/tabs/glue/1'
+                    path: ['/tabs/glue/1']
                 }
             },
             {
                 name: 'Second',
                 route: {
-                    path: '/tabs/glue/2'
+                    path: ['/tabs/glue/2']
                 },
                 isDefault: true
             }

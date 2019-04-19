@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 import { PipAppbarTab } from '../appbar.tab';
 
@@ -13,15 +13,32 @@ export class PipAppbarService {
 
     public constructor(
         private router: Router
-    ) { }
+    ) {
+        this.router.events
+            .pipe(
+                filter((e: RouterEvent) => e instanceof NavigationEnd),
+                filter(() => this.tabs && this.tabs.length > 0)
+            )
+            .subscribe(() => { this._resolveActiveTabIndex(); });
+    }
 
-    private _navigateByIndex(idx: number) {
-        if (typeof idx === 'number' && idx >= 0) {
-            this.router.navigate(
-                Array.isArray(this.activeTab.route.path) ? this.activeTab.route.path : [this.activeTab.route.path],
-                this.activeTab.route.extras
-            );
+    private _resolveActiveTabIndex() {
+        const defaultIdx = Math.max(this.tabs.findIndex(t => t.isDefault), 0);
+        const navigation = this.router.getCurrentNavigation();
+        let url = this.router.routerState.snapshot.url;
+        if (navigation) {
+            url = navigation.finalUrl.toString();
         }
+        let idx = this.tabs.findIndex(t =>
+            t.route
+            && t.route.path
+            && url.startsWith(Array.isArray(t.route.path) ? t.route.path[0] : t.route.path)
+        );
+        if (idx < 0) {
+            idx = defaultIdx;
+            this.router.navigate(this.tabs[idx].route.path, this.tabs[idx].route.extras);
+        }
+        this.activeIdx = idx;
     }
 
     public get tabs$(): Observable<PipAppbarTab[]> {
@@ -34,18 +51,8 @@ export class PipAppbarService {
 
     public set tabs(tabs: PipAppbarTab[]) {
         this._tabs$.next(tabs);
-        if (tabs && tabs.length) {
-            if (this.activeIdx >= tabs.length || this.activeIdx < 0 || this.activeIdx === null) {
-                const defaultIdx = Math.max(tabs.findIndex(t => t.isDefault), 0);
-                const idx = tabs.findIndex(t =>
-                    t.route
-                    && t.route.path
-                    && this.router.routerState.snapshot.url.startsWith(Array.isArray(t.route.path) ? t.route.path[0] : t.route.path)
-                );
-                this.activeIdx = idx >= 0 ? idx : defaultIdx;
-            } else {
-                this._navigateByIndex(this.activeIdx);
-            }
+        if (tabs && tabs.length && (this.activeIdx >= tabs.length || this.activeIdx < 0 || this.activeIdx === null)) {
+            this._resolveActiveTabIndex();
         }
     }
 
@@ -59,7 +66,6 @@ export class PipAppbarService {
 
     public set activeIdx(idx: number) {
         this._activeIdx$.next(idx);
-        this._navigateByIndex(idx);
     }
 
     public get activeTab$(): Observable<PipAppbarTab> {

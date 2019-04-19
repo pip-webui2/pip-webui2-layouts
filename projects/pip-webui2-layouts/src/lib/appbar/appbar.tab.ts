@@ -3,7 +3,7 @@ import { NavigationExtras } from '@angular/router';
 export class PipAppbarTab {
     name: string;
     route: {
-        path: string | string[],
+        path: string[],
         extras?: NavigationExtras
     };
     isDefault?: boolean;

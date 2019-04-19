@@ -334,3 +334,21 @@ No breaking changes in this version
 
 ### Bug Fixes
 * Style fixes for `main-layout` and `main-layout-alt` with tabs on mobile
+
+## <a name="1.1.13"></a> 1.1.13 (2019-04-18)
+
+No more navigations on index change in tabs
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+No breaking changes in this version
+
+### Bug Fixes
+* No more navigations on index change in tabs

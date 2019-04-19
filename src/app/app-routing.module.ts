@@ -17,7 +17,7 @@ const appRoutes: Routes = [
     { path: 'menu', component: MainMenuLayoutExampleComponent },
     { path: 'card', component: CardLayoutExampleComponent },
     { path: 'scrollable', component: ScrollableLayoutExampleComponent },
-    { path: 'tabs', loadChildren: './tabs-example/tabs-example.module#TabsExampleModule'},
+    { path: 'tabs', loadChildren: './tabs-example/tabs-example.module#TabsExampleModule' },
     { path: '**', redirectTo: 'document' }
 ];
 
