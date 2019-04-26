@@ -35,7 +35,7 @@ export class PipAppbarService {
         let idx = this.tabs.findIndex(t =>
             t.route
             && t.route.path
-            && url.startsWith(Array.isArray(t.route.path) ? t.route.path[0] : t.route.path)
+            && url.includes(Array.isArray(t.route.path) ? t.route.path.join('/') : t.route.path)
         );
         if (idx < 0) {
             idx = defaultIdx;
