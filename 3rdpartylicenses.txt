@@ -440,9 +440,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/router
-MIT
-
 @angular/material
 MIT
 The MIT License
@@ -471,6 +468,11 @@ THE SOFTWARE.
 @angular/animations
 MIT
 
+@angular/router
+MIT
+
+@angular/material/button
+
 @angular/forms
 MIT
 
@@ -485,8 +487,6 @@ MIT
 @angular/material/list
 
 @angular/material/icon
-
-@angular/material/button
 
 @angular/material/slide-toggle
 
