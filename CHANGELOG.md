@@ -352,3 +352,21 @@ No breaking changes in this version
 
 ### Bug Fixes
 * No more navigations on index change in tabs
+
+## <a name="1.1.14"></a> 1.1.14 (2019-04-26)
+
+Appbar colors now could be configured through service
+
+### Features
+* **appbar**: application bar places on top and shows navigation information
+* **side nav**: side nav places on left side and shows navigation information
+* **right nav**: side nav places on right side and shows navigation or additional information
+* **card**: card layout that shows content in a card in the center of page
+* **document**: document layout that show content with fixed width
+* **tiles**: tiles layout
+
+### Breaking Changes
+No breaking changes in this version
+
+### Bug Fixes
+No fixes in this version

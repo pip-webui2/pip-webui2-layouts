@@ -8,6 +8,9 @@ import { PipAppbarTab } from '../appbar.tab';
 @Injectable()
 export class PipAppbarService {
 
+    public color = 'primary';
+    public bgColor = 'primary';
+
     private _tabs$: BehaviorSubject<PipAppbarTab[]> = new BehaviorSubject([]);
     private _activeIdx$: BehaviorSubject<number> = new BehaviorSubject(null);
 

@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <ng-content></ng-content>
 </mat-toolbar>
-<nav *ngIf="appbar.tabs && appbar.tabs.length > 0" mat-tab-nav-bar backgroundColor="primary" animationDuration="0ms">
+<nav *ngIf="appbar.tabs && appbar.tabs.length > 0" mat-tab-nav-bar [color]="appbar.color" [backgroundColor]="appbar.bgColor" animationDuration="0ms">
     <a mat-tab-link *ngFor="let link of appbar?.tabs; let idx = index"
         [routerLink]="link.route.path" [active]="isActive(link.route.path)">{{link.name | translate}}
     </a>

@@ -20,4 +20,12 @@ export class TabsPageComponent implements OnInit {
 
     ngOnInit() { }
 
+    public toggleColor() {
+        this.appbar.bgColor = this.appbar.bgColor === 'primary' ? 'accent' : 'primary';
+    }
+
+    public toggleInkColor() {
+        this.appbar.color = this.appbar.color === 'primary' ? 'accent' : 'primary';
+    }
+
 }
