@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule, MatTabsModule } from '@angular/material';
+import { MatToolbarModule, MatTabsModule, MatSelectModule, MatFormFieldModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -13,6 +13,8 @@ import { PipAppbarService } from './shared/appbar.service';
     ],
     imports: [
         CommonModule,
+        MatFormFieldModule,
+        MatSelectModule,
         MatTabsModule,
         MatToolbarModule,
         RouterModule,

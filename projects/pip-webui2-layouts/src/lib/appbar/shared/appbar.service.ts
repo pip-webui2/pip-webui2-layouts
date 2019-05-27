@@ -10,6 +10,8 @@ export class PipAppbarService {
 
     public color = 'primary';
     public bgColor = 'primary';
+    public fallbackToSelect: boolean;
+    public fallbackSize = 'gt-xs';
 
     private _tabs$: BehaviorSubject<PipAppbarTab[]> = new BehaviorSubject([]);
     private _activeIdx$: BehaviorSubject<number> = new BehaviorSubject(null);

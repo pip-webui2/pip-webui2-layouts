@@ -31,6 +31,7 @@ export class TabsExampleComponent implements OnInit, OnDestroy {
                 isDefault: true
             }
         ];
+        this.appbar.fallbackToSelect = true;
     }
 
     ngOnInit() { }

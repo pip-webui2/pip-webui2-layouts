@@ -6,11 +6,13 @@
             height: 56px;
         }
     }
+    .mat-toolbar.with-select {
+        min-height: 112px;
+    }
 }
 
-::ng-deep .pip-xs pip-appbar,
-::ng-deep .pip-sm pip-appbar {
-    .mat-toolbar {
-        height: 56px;
+:host {
+    mat-form-field {
+        width: 100%;
     }
 }
