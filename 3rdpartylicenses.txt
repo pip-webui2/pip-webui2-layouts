@@ -478,11 +478,15 @@ MIT
 
 @angular/material/sidenav
 
+@angular/material/core
+
+@angular/material/form-field
+
+@angular/material/select
+
 @angular/material/tabs
 
 @angular/material/toolbar
-
-@angular/material/core
 
 @angular/material/list
 
@@ -491,8 +495,6 @@ MIT
 @angular/material/slide-toggle
 
 @angular/material/card
-
-@angular/material/form-field
 
 @angular/material/menu
 
