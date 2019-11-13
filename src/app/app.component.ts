@@ -39,10 +39,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     'bootbarn-warm-theme': 'Bootbarn Warm',
     'bootbarn-cool-theme': 'Bootbarn Cool',
     'bootbarn-mono-theme': 'Bootbarn Mono',
-    'mst-light-theme': 'MST Light',
-    'mst-dark-theme': 'MST Dark',
+    'mst-black-theme': 'MST Black',
+    'mst-black-dark-theme': 'MST Black Dark',
     'mst-mono-theme': 'MST Mono',
-    'mst-elegant-theme': 'MST Elegant',
+    'mst-orange-theme': 'MST Orange',
+    'mst-orange-dark-theme': 'MST Orange Dark',
+    'mst-elegant-theme': 'MST Elegant'
   };
 
   public list: ExmapleListItem[] = [
