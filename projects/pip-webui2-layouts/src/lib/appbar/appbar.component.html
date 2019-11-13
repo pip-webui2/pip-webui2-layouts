@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" [ngClass]="{'with-select': appbar.fallbackToSelect && !media.isMainActive(appbar.fallbackSize)}">
+<mat-toolbar [color]="appbar.color" [ngClass]="{'with-select': appbar.fallbackToSelect && !media.isMainActive(appbar.fallbackSize)}">
     <mat-toolbar-row>
         <ng-content></ng-content>
     </mat-toolbar-row>
