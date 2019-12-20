@@ -13,7 +13,7 @@
         max-height: 100%;
         position: relative;
     }
-    /deep/ .mat-card {
+    ::ng-deep .mat-card {
         min-width: 300px;
         width: 300px;
         margin-top: 24px;
@@ -27,7 +27,7 @@
         }
     }
     &.pip-transparent-card {
-        /deep/ .mat-card {
+        ::ng-deep .mat-card {
             background-color: transparent;
             box-shadow: none;
         }

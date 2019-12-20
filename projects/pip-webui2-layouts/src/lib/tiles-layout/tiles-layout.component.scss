@@ -4,7 +4,7 @@
     width: calc(100% - 16px) !important;
     padding: 8px;
     &.animation {
-        /deep/.pip-tile {
+        ::ng-deep.pip-tile {
             transition: all 0.35s ease !important;
         }
     }

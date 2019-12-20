@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: row;
     align-items: initial;
-    /deep/.pip-menu {
+    ::ng-deep.pip-menu {
         position: absolute;
         transition: all 0.35s ease;
         border-right: none;
@@ -28,7 +28,7 @@
             width: 100%;
         }
     }
-    /deep/.pip-menu-container {
+    ::ng-deep.pip-menu-container {
         margin: 0;
         transition: all 0.35s ease;
         position: absolute;
@@ -57,11 +57,11 @@
         }
     }
     &.pip-single-content {
-        /deep/.pip-menu {
+        ::ng-deep.pip-menu {
             opacity: 0;
             z-index: -100;
         }
-        /deep/.pip-menu-container {
+        ::ng-deep.pip-menu-container {
             width: 100% !important;
             left: 0 !important;
         }

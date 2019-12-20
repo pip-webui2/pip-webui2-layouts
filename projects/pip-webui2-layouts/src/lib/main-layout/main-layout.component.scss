@@ -1,6 +1,6 @@
 :host {
     overflow-x: hidden !important;
-    /deep/ pip-main-content {
+    ::ng-deep pip-main-content {
         flex: 1 1 100%;
         box-sizing: border-box;
         display: flex;

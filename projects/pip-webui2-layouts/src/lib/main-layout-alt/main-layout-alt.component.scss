@@ -1,6 +1,6 @@
 :host {
     overflow-x: hidden !important;
-    /deep/ pip-main-content {
+    ::ng-deep pip-main-content {
         flex: 1 1 100%;
         box-sizing: border-box;
         display: flex;
@@ -46,7 +46,7 @@ mat-sidenav.pip-sidenav {
     height: 100%;
 }
 
-/deep/ .pip-main-gt-sm .pip-sidenav-container {
+::ng-deep .pip-main-gt-sm .pip-sidenav-container {
     .mat-drawer-backdrop {
         background-color: transparent;
     }

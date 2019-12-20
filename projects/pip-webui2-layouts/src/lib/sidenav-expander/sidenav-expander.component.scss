@@ -10,7 +10,7 @@
             opacity: 0;
         }
     }
-    /deep/ .mat-list-item-content {
+    ::ng-deep .mat-list-item-content {
         height: 48px !important;
     }
     &.show {
