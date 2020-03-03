@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, OnDestroy, ChangeDetectorRef, Renderer2 } from '@angular/core';
 
 @Component({
     selector: 'pip-menu-layout',
@@ -14,11 +14,11 @@ export class PipMenuLayoutComponent implements OnInit, OnDestroy {
     }
 
     constructor(
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elRef: ElementRef,
         private cd: ChangeDetectorRef
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-menu-layout', true);
+        renderer.addClass(elRef.nativeElement, 'pip-menu-layout');
     }
 
     public ngOnInit() {

@@ -2,15 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-  MatButtonModule,
-  MatGridListModule,
-  MatIconModule,
-  MatMenuModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatToolbarModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   PipAppbarModule,
@@ -52,7 +50,7 @@ import { TilesLayoutExampleModule } from './tiles-layout-example/tiles-layout-ex
     MatToolbarModule,
     TranslateModule.forRoot(),
 
-    PipThemesModule.forRoot(),
+    PipThemesModule,
     PipAppbarModule.forRoot(),
     PipMainLayoutAltModule,
     PipMediaModule.forRoot(),

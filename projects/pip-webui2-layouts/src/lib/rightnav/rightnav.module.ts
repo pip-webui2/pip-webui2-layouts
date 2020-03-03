@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenavModule } from '@angular/material';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { PipRightnavService } from './shared/rightnav.service';
 
@@ -11,7 +11,7 @@ import { PipRightnavService } from './shared/rightnav.service';
   ]
 })
 export class PipRightnavModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<PipRightnavModule> {
     return {
       ngModule: PipRightnavModule,
       providers: [

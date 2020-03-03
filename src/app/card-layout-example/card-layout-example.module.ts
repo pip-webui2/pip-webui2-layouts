@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatToolbarModule, MatSlideToggleModule, MatCardModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { PipCardLayoutModule, PipMediaModule, PipShadowModule } from 'pip-webui2-layouts';
 
 import { CardLayoutExampleComponent } from './card-layout-example.component';

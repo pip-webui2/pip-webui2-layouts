@@ -1,8 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule, MatTabsModule, MatSelectModule, MatFormFieldModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { PipAppbarComponent } from './appbar.component';
 import { PipAppbarService } from './shared/appbar.service';
@@ -17,8 +19,7 @@ import { PipAppbarService } from './shared/appbar.service';
         MatSelectModule,
         MatTabsModule,
         MatToolbarModule,
-        RouterModule,
-        TranslateModule
+        RouterModule
     ],
     exports: [
         PipAppbarComponent
@@ -26,7 +27,7 @@ import { PipAppbarService } from './shared/appbar.service';
     providers: [],
 })
 export class PipAppbarModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<PipAppbarModule> {
         return {
             ngModule: PipAppbarModule,
             providers: [

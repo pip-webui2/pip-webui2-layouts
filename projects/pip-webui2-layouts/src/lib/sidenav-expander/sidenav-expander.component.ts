@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, Renderer, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { PipMediaService } from '../media/shared/media.service';
@@ -27,7 +27,7 @@ export class PipSidenavExpanderComponent implements OnInit {
         public media: PipMediaService,
         public sidenav: PipSidenavService,
         private cd: ChangeDetectorRef,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elRef: ElementRef
     ) { }
 

@@ -1,0 +1,19 @@
+@mixin document-layout-mixin($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    :host.pip-document-layout {
+        color: mat-color($foreground, text) !important;
+        background: mat-color($background, card);
+
+        ::ng-deep pip-document-footer {
+            border-top: 1px solid mat-color($foreground, divider);
+        }
+    }
+
+    .pip-main-document-lt-lg :host.pip-document-layout {
+        border-left: 1px solid mat-color($foreground, divider) !important;
+        border-right: 1px solid mat-color($foreground, divider) !important;
+        box-sizing: border-box;
+    }
+}

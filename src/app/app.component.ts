@@ -68,8 +68,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private themesService: PipThemesService
   ) {
     media.activate();
-    this.themes = this.themesService.themes;
-    this.selectTheme(this.themesService.themes[0]);
+    this.themes = this.themesService.themesArray;
 
     translate.setDefaultLang(this.language);
     translate.use(this.language);
@@ -91,9 +90,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public selectTheme(theme) {
+  public selectTheme(theme: Theme) {
     this.theme = theme;
-    this.themesService.selectedTheme = theme;
+    this.themesService.selectTheme(theme.name);
   }
 
   public changeLanguage(lang) {

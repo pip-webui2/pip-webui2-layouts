@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 
 @Component({
     selector: 'pip-document-layout',
@@ -11,10 +11,10 @@ export class PipDocumentLayoutComponent implements OnInit, OnDestroy {
     }
 
     constructor(
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elRef: ElementRef
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-document-layout', true);
+        renderer.addClass(elRef.nativeElement, 'pip-document-layout');
     }
 
     public ngOnInit() {

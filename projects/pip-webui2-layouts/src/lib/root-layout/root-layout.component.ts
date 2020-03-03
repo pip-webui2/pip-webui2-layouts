@@ -1,6 +1,6 @@
-import { Component, OnInit, Renderer, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { BehaviorSubject } from 'rxjs';
 
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
@@ -16,20 +16,20 @@ import { each } from '../shared/layouts.utils';
 })
 
 export class PipRootLayoutComponent implements OnInit, AfterViewInit {
-    @ViewChild('floatingSidenav') sidenav: MatSidenav;
-    @ViewChild('floatingRightnav') rightnav: MatSidenav;
+    @ViewChild('floatingSidenav', { static: true }) sidenav: MatSidenav;
+    @ViewChild('floatingRightnav', { static: true }) rightnav: MatSidenav;
 
     public mode$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
     public constructor(
         private sidenavService: PipSidenavService,
         private rightnavService: PipRightnavService,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elRef: ElementRef,
         private media: MediaObserver,
         private cd: ChangeDetectorRef
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-root-layout', true);
+        renderer.addClass(elRef.nativeElement, 'pip-root-layout');
     }
 
     ngOnInit() {

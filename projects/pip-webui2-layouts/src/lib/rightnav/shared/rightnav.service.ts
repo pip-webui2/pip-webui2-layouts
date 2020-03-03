@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { each } from '../../shared/layouts.utils';

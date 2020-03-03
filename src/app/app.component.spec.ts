@@ -1,14 +1,12 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import {
-  MatButtonModule,
-  MatGridListModule,
-  MatIconModule,
-  MatMenuModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatToolbarModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PipMediaService, PipSidenavService, PipRightnavService } from 'pip-webui2-layouts';

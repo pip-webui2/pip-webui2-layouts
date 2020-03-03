@@ -1,0 +1,9 @@
+@mixin tile-layout-mixin($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .pip-tile {
+        color: mat-color($foreground, text) !important;
+        background: mat-color($background, card);
+    }
+}

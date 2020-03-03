@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatSidenavModule } from '@angular/material';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { PipMainLayoutAltComponent } from './main-layout-alt.component';
 import { PipMediaService } from '../media/shared/media.service';

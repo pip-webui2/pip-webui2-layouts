@@ -7,5 +7,7 @@ const inputs = ['fxShow.document-lt-lg', 'fxHide.document-lt-lg'];
 // tslint:disable-next-line:use-input-property-decorator
 @Directive({ selector, inputs })
 export class PipShowHideDirective extends ShowHideDirective {
+  // TODO: add explicit constructor
+
     protected inputs = inputs;
 }

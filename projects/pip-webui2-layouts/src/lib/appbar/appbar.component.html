@@ -1,4 +1,5 @@
-<mat-toolbar [color]="appbar.color" [ngClass]="{'with-select': appbar.fallbackToSelect && !media.isMainActive(appbar.fallbackSize)}">
+<mat-toolbar [color]="appbar.color"
+    [ngClass]="{'with-select': appbar.fallbackToSelect && !media.isMainActive(appbar.fallbackSize)}">
     <mat-toolbar-row>
         <ng-content></ng-content>
     </mat-toolbar-row>
@@ -6,7 +7,7 @@
         <mat-form-field>
             <mat-select (selectionChange)="navigate($event.value)" [value]="appbar.activeTab$ | async">
                 <mat-option *ngFor="let link of appbar?.tabs; let idx = index" [value]="link">
-                    {{link.name | translate}}
+                    {{ link.name }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -15,6 +16,6 @@
 <nav *ngIf="appbar.tabs && appbar.tabs.length > 0 && (!appbar.fallbackToSelect || media.isMainActive(appbar.fallbackSize))"
     mat-tab-nav-bar [color]="appbar.color" [backgroundColor]="appbar.bgColor" animationDuration="0ms">
     <a mat-tab-link *ngFor="let link of appbar?.tabs; let idx = index" [routerLink]="link.route.path"
-        [active]="isActive(link.route.path)">{{link.name | translate}}
+        [active]="isActive(link.route.path)">{{ link.name }}
     </a>
 </nav>

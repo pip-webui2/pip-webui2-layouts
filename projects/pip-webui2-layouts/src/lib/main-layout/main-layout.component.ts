@@ -1,9 +1,9 @@
-import { Component, Renderer, ElementRef, Input, OnInit, AfterViewInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, AfterViewInit, OnDestroy, ViewChild, ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { addResizeListener } from '../media/resize-layout.function';
 import { PipMediaService } from '../media/shared/media.service';
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
@@ -17,8 +17,8 @@ import { PipAppbarService } from '../appbar/shared/appbar.service';
 })
 export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() public pipContainer;
-    @ViewChild('fixedSidenav') sidenav: MatSidenav;
-    @ViewChild('fixedRightnav') rightnav: MatSidenav;
+    @ViewChild('fixedSidenav', { static: true }) sidenav: MatSidenav;
+    @ViewChild('fixedRightnav', { static: true }) rightnav: MatSidenav;
 
     private listener: any;
     private element: any;
@@ -28,7 +28,7 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     public small$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elRef: ElementRef,
         private cd: ChangeDetectorRef,
         private appbar: PipAppbarService,
@@ -37,12 +37,12 @@ export class PipMainLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
         private rightnavService: PipRightnavService,
         private media: MediaObserver
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-main-layout', true);
+        renderer.addClass(elRef.nativeElement, 'pip-main-layout');
         let showing = false;
         this._subs.add(this.appbar.tabs$.pipe(map(t => t && t.length > 0)).subscribe(show => {
             if (show === showing) { return; }
             showing = show;
-            renderer.setElementClass(elRef.nativeElement, 'pip-with-tabs', showing);
+            showing ? renderer.addClass(elRef.nativeElement, 'pip-with-tabs') : renderer.removeClass(elRef.nativeElement, 'pip-with-tabs');
         }));
         this.listener = () => { this.onResize(); };
     }

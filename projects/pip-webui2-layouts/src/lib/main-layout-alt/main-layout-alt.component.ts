@@ -13,7 +13,7 @@ import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { BehaviorSubject, Subscription, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { addResizeListener } from '../media/resize-layout.function';
 import { PipMediaService } from '../media/shared/media.service';
 import { PipSidenavService } from '../sidenav/shared/sidenav.service';
@@ -28,8 +28,8 @@ import { PipAppbarService } from '../appbar/shared/appbar.service';
 })
 export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() public pipContainer;
-    @ViewChild('universalSidenav') sidenav: MatSidenav;
-    @ViewChild('fixedRightnav') rightnav: MatSidenav;
+    @ViewChild('universalSidenav', { static: true }) sidenav: MatSidenav;
+    @ViewChild('fixedRightnav', { static: true }) rightnav: MatSidenav;
 
     private listener: any;
     private element: any;

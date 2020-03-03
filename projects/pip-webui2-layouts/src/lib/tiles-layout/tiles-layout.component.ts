@@ -1,19 +1,6 @@
 declare var require: any;
 
-import {
-    Component,
-    EventEmitter,
-    Renderer,
-    ElementRef,
-    Input,
-    Output,
-    OnInit,
-    OnDestroy,
-    OnChanges,
-    ChangeDetectorRef,
-    AfterViewInit,
-    SimpleChanges
-} from '@angular/core';
+import { Component, EventEmitter, ElementRef, Input, Output, OnInit, OnDestroy, OnChanges, ChangeDetectorRef, AfterViewInit, SimpleChanges, Renderer2 } from '@angular/core';
 import { addResizeListener, removeResizeListener } from '../media/resize-layout.function';
 
 const masonry = require('masonry-layout');
@@ -47,11 +34,11 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy, AfterViewInit
     };
 
     constructor(
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elRef: ElementRef,
         private cd: ChangeDetectorRef
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-tiles-layout', true);
+        renderer.addClass(elRef.nativeElement, 'pip-tiles-layout');
         this.listener = () => { this.onResize(true); };
     }
 
