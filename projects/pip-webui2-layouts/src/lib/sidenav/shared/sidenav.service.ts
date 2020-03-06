@@ -1,247 +1,214 @@
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { MatSidenav } from '@angular/material/sidenav';
+import { Injectable, Inject, Optional } from '@angular/core';
+import { Observable, BehaviorSubject, of, combineLatest } from 'rxjs';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { cloneDeep, defaultsDeep } from 'lodash';
 
-import { PipMediaService } from '../../media/shared/media.service';
-import { each } from '../../shared/layouts.utils';
+import { PipSidenavView, PIP_SIDENAV_CONFIG, PipSidenavPlacement, PipSidenavConfig } from './models';
+import { switchMap, map, shareReplay, distinctUntilChanged, tap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PipSidenavService {
-    public _floatingSidenav: MatSidenav;
-    public _fixedSidenav: MatSidenav;
-    public _universalSidenav: MatSidenav;
-    private _mode$: BehaviorSubject<string> = new BehaviorSubject('side');
-    private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-    private _floatingSidenavAliases: string[] = ['xs', 'sm'];
-    private _universalSidenavAliases: string[] = ['lt-sm', 'sm'];
-    private _small = false;
-    private _small$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+    private _currentView: PipSidenavView;
+    private _defaultView$: BehaviorSubject<PipSidenavView> = new BehaviorSubject<PipSidenavView>({
+        name: 'default',
+        placement: PipSidenavPlacement.Main,
+        mode: 'over',
+        width: 200,
+        widthCollapsed: 64
+    });
     private _active$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-    private _isUniversal$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _collapsed$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _views$: BehaviorSubject<PipSidenavView[]> = new BehaviorSubject<PipSidenavView[]>([]);
+
+    public active$ = this._active$.asObservable();
+    public collapsed$ = this._collapsed$.asObservable();
+    public opened$ = this._opened$.asObservable();
+    public views$ = this._views$.asObservable();
+    public currentView$: Observable<PipSidenavView>;
 
     public constructor(
-        private media: PipMediaService
-    ) { }
-
-    public set floatingSidenavAliases(aliases: string[]) {
-        this._floatingSidenavAliases = aliases;
+        private media: MediaObserver,
+        @Optional() @Inject(PIP_SIDENAV_CONFIG) sc: PipSidenavConfig
+    ) {
+        if (sc) {
+            if (sc.views && sc.views.length) {
+                const defaultView = sc.views.find(v => v.name === 'default');
+                if (defaultView) { this.defaultView = defaultView; }
+                const correctViews = sc.views?.filter(v => v.alias) ?? [];
+                if (correctViews && correctViews.length) { this.views = correctViews; }
+            }
+            if (sc.opened) { this._opened$.next(true); }
+        }
+        this.currentView$ = combineLatest(this._defaultView$.asObservable(), this.views$).pipe(
+            switchMap(([defaultView, views]) => {
+                const correctViews = views?.filter(v => v.alias) ?? [];
+                if (!views || !correctViews.length) { return of(defaultView); }
+                return this.media.asObservable().pipe(
+                    map((changes: MediaChange[]) => {
+                        for (const change of changes) {
+                            for (const view of correctViews) {
+                                if (change.mqAlias === view.alias) {
+                                    return view;
+                                }
+                            }
+                        }
+                        return defaultView;
+                    })
+                );
+            }),
+            distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
+            tap(v => this._currentView = v),
+            shareReplay()
+        );
     }
 
-    public get small() {
-        return this._small;
+    //#region Properties
+    public get defaultView$(): Observable<PipSidenavView> {
+        return this._defaultView$.asObservable();
     }
 
-    public set small(sm: boolean) {
-        this._small$.next(sm);
-        this._small = sm;
+    public get defaultView(): PipSidenavView {
+        return new Proxy(this._defaultView$.value, {
+            set: (target, p, value) => {
+                const nv = cloneDeep(this._defaultView$.value);
+                nv[p] = value;
+                this._defaultView$.next(nv);
+                return true;
+            },
+            defineProperty() { throw new Error(); },
+            deleteProperty() { throw new Error(); }
+        });
     }
 
-    public get small$(): Observable<boolean> {
-        return this._small$;
+    public set defaultView(defaultView: PipSidenavView) {
+        this._defaultView$.next(defaultView);
     }
 
-    public get floatingSidenavAliases() {
-        return this._floatingSidenavAliases;
-    }
-
-    public get universalSidenav(): MatSidenav {
-        return this._universalSidenav;
-    }
-
-    public set universalSidenav(sidenav: MatSidenav) {
-        this._universalSidenav = sidenav;
-    }
-
-    public get universalSidenavAliases() {
-        return this._universalSidenavAliases;
-    }
-
-    public set universalSidenavAliases(aliases: string[]) {
-        this._universalSidenavAliases = aliases;
-    }
-
-    public get isUniversal(): boolean {
-        return this._isUniversal$.getValue();
-    }
-
-    public set isUniversal(val: boolean) {
-        this._isUniversal$.next(val);
-    }
-
-    public get floatingSidenav(): MatSidenav {
-        return this._floatingSidenav;
-    }
-
-    public set floatingSidenav(sidenav: MatSidenav) {
-        this._floatingSidenav = sidenav;
-    }
-
-    public get fixedSidenav(): MatSidenav {
-        return this._fixedSidenav;
-    }
-
-    public set fixedSidenav(sidenav: MatSidenav) {
-        this._fixedSidenav = sidenav;
-    }
-
-    public get mode(): string {
-        return this._mode$.getValue();
-    }
-
-    public get mode$(): Observable<string> {
-        return this._mode$;
-    }
-
-    public set mode(s: string) {
-        this._mode$.next(s);
-    }
-
-    public get opened(): boolean {
-        return this._opened$.getValue();
-    }
-
-    public get opened$(): Observable<boolean> {
-        return this._opened$;
-    }
-
-    public set opened(open: boolean) {
-        this._opened$.next(open);
-    }
-
-    public get active$(): Observable<boolean> {
-        return this._active$;
+    public get active(): boolean {
+        return this._active$.value;
     }
 
     public set active(active: boolean) {
         this._active$.next(active);
     }
 
-    public isActive(): boolean {
-        if (this._active$.getValue() === true) { return true; } else {
-            console.log('Sidenav is not active');
-            return false;
+    public get collapsed(): boolean {
+        return this._collapsed$.value;
+    }
+
+    public set collapsed(collapsed: boolean) {
+        this._collapsed$.next(collapsed);
+    }
+
+    public get opened(): boolean {
+        return this._opened$.value;
+    }
+
+    public set opened(opened: boolean) {
+        this._opened$.next(opened);
+    }
+    public get views(): PipSidenavView[] {
+        return new Proxy(this._views$.value, {
+            set() { throw new Error(); },
+            defineProperty() { throw new Error(); },
+            deleteProperty() { throw new Error(); }
+        });
+    }
+
+    public set views(views: PipSidenavView[]) {
+        const vts = cloneDeep(views);
+        if (vts) {
+            const di = vts.findIndex(v => v.name === 'default');
+            if (di !== -1) {
+                this.defaultView = vts[di];
+                vts.splice(di, 1);
+            }
         }
+        this._views$.next(vts);
     }
 
-    private toggleSmall() {
-        this._small === true ? this.small = false : this.small = true;
+    public get allViews$(): Observable<PipSidenavView[]> {
+        return combineLatest(
+            this.defaultView$,
+            this.views$
+        ).pipe(
+            map(([dv, vs]) => vs && vs.length ? [dv, ...vs] : [dv])
+        );
     }
 
-    public toggleNav(sidenav?: MatSidenav) {
-        if (!this.isActive()) { return; }
+    public get currentView(): PipSidenavView {
+        return this._currentView;
+    }
+    //#endregion
 
-        if (sidenav) {
-            sidenav.toggle();
-        } else if (this.isUniversal) {
-            this.toggleUniversavNav();
-        } else {
-            this.isFloating() ? this.toggleFloatingNav() :  this.toggleFixedNav();
-        }
+    //#region Methods
+    public expand() {
+        if (!this.active) { return; }
+        this.collapsed = true;
     }
 
-    public toggleOpened() {
-        if (!this.isActive()) { return; }
-        this.opened = !this.opened;
+    public collapse() {
+        if (!this.active) { return; }
+        this.collapsed = false;
     }
 
-    public openNav(sidenav?: MatSidenav) {
-        if (!this.isActive()) { return; }
+    public toggleCollapse() {
+        if (!this.active) { return; }
+        this.collapsed = !this.collapsed;
+    }
 
-        if (sidenav) {
-            sidenav.open();
-        } else if (this.isUniversal) {
-            this.openUniversavNav();
-        } else {
-            this.isFloating() ? this.openFloatingNav() : this.openFixedNav();
-        }
+    public open() {
+        if (!this.active || this.opened) { return; }
         this.opened = true;
     }
 
-    public closeNav(sidenav?: MatSidenav) {
-        if (!this.isActive()) { return; }
-
-        if (sidenav) {
-            sidenav.close();
-        } else if (this.isUniversal) {
-            this.closeUniversavNav();
-        } else {
-            this.isFloating() ? this.closeFloatingNav() : this.closeFixedNav();
-        }
+    public close() {
+        if (!this.active || !this.opened) { return; }
         this.opened = false;
     }
 
-    public toggleFloatingNav() {
-        if (!this.isActive()) { return; }
+    public toggle() {
+        if (!this.active) { return; }
+        this.opened = !this.opened;
+    }
 
-        if (this._floatingSidenav) {
-            this._floatingSidenav.toggle();
-            this.opened = !this._floatingSidenav.opened;
+    public createView(view: PipSidenavView) {
+        if (view?.name === 'default') { return; }
+        const views = this._views$.value;
+        views.push(defaultsDeep(view, {
+            width: 200,
+            widthCollapsed: 64
+        } as PipSidenavView));
+        this._views$.next(views);
+    }
+
+    public updateView(view: PipSidenavView) {
+        const populatedView = defaultsDeep(cloneDeep(view), {
+            width: 200,
+            widthCollapsed: 64
+        } as PipSidenavView);
+        if (populatedView?.name === 'default') {
+            this.defaultView = populatedView;
         } else {
-            console.log('Floating sidenav not found');
+            const views = this._views$.value.map(v => v.name === populatedView.name ? populatedView : v);
+            this._views$.next(views);
         }
     }
 
-    public openFloatingNav() {
-        this._floatingSidenav ? this._floatingSidenav.open() : console.log('Floating sidenav not found');
+    public removeViewAt(position: number) {
+        const views = this._views$.value;
+        if (position < 0 || position >= views.length) { return; }
+        views.splice(position, 1);
+        this._views$.next(views);
     }
 
-    public closeFloatingNav() {
-        this._floatingSidenav ? this._floatingSidenav.close() : console.log('Floating sidenav not found');
+    public removeView(name: string) {
+        const views = this._views$.value.filter(v => v.name === name);
+        this._views$.next(views);
     }
-
-    public toggleFixedNav() {
-        this._fixedSidenav ? this.toggleSmall() : console.log('Fixed sidenav not found');
-    }
-
-    public openFixedNav() {
-        this._fixedSidenav ? this.small = false : console.log('Fixed sidenav not found');
-    }
-
-    public closeFixedNav() {
-        this._fixedSidenav ? this.small = true : console.log('Fixed sidenav not found');
-    }
-
-    public toggleUniversavNav() {
-        this._universalSidenav ? this._universalSidenav.toggle() : console.log('Universal sidenav was not found');
-    }
-
-    public openUniversavNav() {
-        this._universalSidenav ? this._universalSidenav.open() : console.log('Universal sidenav was not found');
-    }
-
-    public closeUniversavNav() {
-        this._universalSidenav ? this._universalSidenav.close() : console.log('Universal sidenav was not found');
-    }
-
-    public changeStateNav(sidenav: MatSidenav = this._floatingSidenav) {
-        if (sidenav) {
-
-        } else {
-            console.log('Sidenav not found');
-        }
-    }
-
-    public isUniversalFloating() {
-        let is = false;
-
-        for (const alias of this._universalSidenavAliases) {
-            if (this.media.isMainActive(alias)) {
-                is = true;
-                break;
-            }
-        }
-
-        return is;
-    }
-
-    public isFloating() {
-        let is = false;
-
-        each(this._floatingSidenavAliases, (alias: string) => {
-            if (this.media.isMainActive(alias)) { is = true; }
-        });
-
-        return is;
-    }
-
+    //#endregion
 }

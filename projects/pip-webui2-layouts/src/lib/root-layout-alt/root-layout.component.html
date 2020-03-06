@@ -1,0 +1,47 @@
+<mat-sidenav-container (backdropClick)="backdropClick()" *ngIf="options$ | async as ctx" class="pip-root-container"
+    [ngClass]="containerCls(ctx, 'root')">
+    <mat-sidenav [ngStyle]="{'width': ctx.sidenav?.width + 'px'}" [opened]="ctx.sidenav?.opened"
+        [mode]="ctx.sidenav?.view?.mode" *ngIf="ctx.sidenav?.view?.placement === 'root'" class="pip-sidenav"
+        [fixedInViewport]="ctx.sidenav?.view?.fixedInViewport" [fixedTopGap]="ctx.sidenav?.view?.fixedTopGap"
+        [fixedBottomGap]="ctx.sidenav?.view?.fixedBottomGap" position="start">
+        <ng-container *ngTemplateOutlet="sidenavContentTpl"></ng-container>
+    </mat-sidenav>
+    <mat-sidenav [ngStyle]="{'width': ctx.rightnav?.width + 'px'}" [opened]="ctx.rightnav?.opened"
+        [mode]="ctx.rightnav?.view?.mode" *ngIf="ctx.rightnav?.view?.placement === 'root'" class="pip-rightnav"
+        [fixedInViewport]="ctx.rightnav?.view?.fixedInViewport" [fixedTopGap]="ctx.rightnav?.view?.fixedTopGap"
+        [fixedBottomGap]="ctx.rightnav?.view?.fixedBottomGap" position="end">
+        <ng-container *ngTemplateOutlet="rightnavContentTpl"></ng-container>
+    </mat-sidenav>
+    <mat-sidenav-content class="pip-root-content"
+        [ngStyle]="{'margin-left': ctx.sidenav?.rcm + 'px', 'margin-right': ctx.rightnav?.rcm + 'px'}">
+        <ng-content class="pip-root-header" select="pip-root-header"></ng-content>
+        <mat-sidenav-container class="pip-main-container" [ngClass]="containerCls(ctx, 'main')"
+            (backdropClick)="backdropClick()">
+            <mat-sidenav [ngStyle]="{'width': ctx.sidenav?.width + 'px'}" [opened]="ctx.sidenav?.opened"
+                [mode]="ctx.sidenav?.view?.mode" *ngIf="ctx.sidenav?.view?.placement === 'main'" class="pip-sidenav"
+                [fixedInViewport]="ctx.sidenav?.view?.fixedInViewport" [fixedTopGap]="ctx.sidenav?.view?.fixedTopGap"
+                [fixedBottomGap]="ctx.sidenav?.view?.fixedBottomGap" position="start">
+                <ng-container *ngTemplateOutlet="sidenavContentTpl"></ng-container>
+            </mat-sidenav>
+            <mat-sidenav [ngStyle]="{'width': ctx.rightnav?.width + 'px'}" [opened]="ctx.rightnav?.opened"
+                [mode]="ctx.rightnav?.view?.mode" *ngIf="ctx.rightnav?.view?.placement === 'main'" class="pip-rightnav"
+                [fixedInViewport]="ctx.rightnav?.view?.fixedInViewport" [fixedTopGap]="ctx.rightnav?.view?.fixedTopGap"
+                [fixedBottomGap]="ctx.rightnav?.view?.fixedBottomGap" position="end">
+                <ng-container *ngTemplateOutlet="rightnavContentTpl"></ng-container>
+            </mat-sidenav>
+
+            <mat-sidenav-content #mainContent class="pip-main-content"
+                [ngStyle]="{'margin-left': ctx.sidenav?.mcm + 'px', 'margin-right': ctx.rightnav?.mcm + 'px'}">
+                <ng-content select="pip-root-content"></ng-content>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+        <ng-content class="pip-root-footer" select="pip-root-footer"></ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #sidenavContentTpl>
+    <ng-content select="pip-sidenav"></ng-content>
+</ng-template>
+<ng-template #rightnavContentTpl>
+    <ng-content select="pip-rightnav"></ng-content>
+</ng-template>

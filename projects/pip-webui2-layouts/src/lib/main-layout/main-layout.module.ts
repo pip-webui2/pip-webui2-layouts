@@ -9,16 +9,13 @@ import { PipMainLayoutComponent } from './main-layout.component';
   declarations: [
     PipMainLayoutComponent
   ],
+  exports: [
+    PipMainLayoutComponent
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
     MatSidenavModule
-  ],
-  exports: [
-    PipMainLayoutComponent
-  ],
-  providers: [
-    PipMainLayoutComponent
   ]
 })
 export class PipMainLayoutModule { }

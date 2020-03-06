@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { PipRightnavService } from './shared/rightnav.service';
+import { PIP_RIGHTNAV_CONFIG, PipRightnavConfig } from './shared/models';
 
 @NgModule({
   imports: [
@@ -11,11 +11,14 @@ import { PipRightnavService } from './shared/rightnav.service';
   ]
 })
 export class PipRightnavModule {
-  static forRoot(): ModuleWithProviders<PipRightnavModule> {
+  static withConfig(config: PipRightnavConfig): ModuleWithProviders {
     return {
       ngModule: PipRightnavModule,
       providers: [
-        PipRightnavService
+        {
+          provide: PIP_RIGHTNAV_CONFIG,
+          useValue: config?.views ?? []
+        }
       ]
     };
   }

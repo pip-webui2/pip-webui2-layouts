@@ -1,159 +1,214 @@
-import { Injectable } from '@angular/core';
-import { MediaObserver } from '@angular/flex-layout';
-import { MatSidenav } from '@angular/material/sidenav';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Injectable, Inject, Optional } from '@angular/core';
+import { Observable, BehaviorSubject, of, combineLatest } from 'rxjs';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { cloneDeep, defaultsDeep } from 'lodash';
 
-import { each } from '../../shared/layouts.utils';
+import { PipRightnavView, PIP_RIGHTNAV_CONFIG, PipRightnavPlacement, PipRightnavConfig } from './models';
+import { switchMap, map, shareReplay, distinctUntilChanged, tap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PipRightnavService {
-    public _floatingRightnav: MatSidenav;
-    public _fixedRightnav: MatSidenav;
-    private _onlyFloating = true;
-    private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-    private _floatingRightnavAliases: string[] = ['xs', 'sm'];
-    private _fixedRightnavMode$ = new BehaviorSubject<string>('side');
+
+    private _currentView: PipRightnavView;
+    private _defaultView$: BehaviorSubject<PipRightnavView> = new BehaviorSubject<PipRightnavView>({
+        name: 'default',
+        placement: PipRightnavPlacement.Root,
+        mode: 'side',
+        width: 200,
+        widthCollapsed: 64
+    });
+    private _active$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+    private _collapsed$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _views$: BehaviorSubject<PipRightnavView[]> = new BehaviorSubject<PipRightnavView[]>([]);
+
+    public active$ = this._active$.asObservable();
+    public collapsed$ = this._collapsed$.asObservable();
+    public opened$ = this._opened$.asObservable();
+    public views$ = this._views$.asObservable();
+    public currentView$: Observable<PipRightnavView>;
 
     public constructor(
-        private media: MediaObserver
-    ) { }
-
-    public set floatingRightnavAliases(aliases: string[]) {
-        this._floatingRightnavAliases = aliases;
+        private media: MediaObserver,
+        @Optional() @Inject(PIP_RIGHTNAV_CONFIG) sc: PipRightnavConfig
+    ) {
+        if (sc) {
+            if (sc.views && sc.views.length) {
+                const defaultView = sc.views.find(v => v.name === 'default');
+                if (defaultView) { this.defaultView = defaultView; }
+                const correctViews = sc.views?.filter(v => v.alias) ?? [];
+                if (correctViews && correctViews.length) { this.views = correctViews; }
+            }
+            if (sc.opened) { this._opened$.next(true); }
+        }
+        this.currentView$ = combineLatest(this._defaultView$.asObservable(), this.views$).pipe(
+            switchMap(([defaultView, views]) => {
+                const correctViews = views?.filter(v => v.alias) ?? [];
+                if (!views || !correctViews.length) { return of(defaultView); }
+                return this.media.asObservable().pipe(
+                    map((changes: MediaChange[]) => {
+                        for (const change of changes) {
+                            for (const view of correctViews) {
+                                if (change.mqAlias === view.alias) {
+                                    return view;
+                                }
+                            }
+                        }
+                        return defaultView;
+                    })
+                );
+            }),
+            distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
+            tap(v => this._currentView = v),
+            shareReplay()
+        );
     }
 
-    public get floatingRightnavAliases() {
-        return this._floatingRightnavAliases;
+    //#region Properties
+    public get defaultView$(): Observable<PipRightnavView> {
+        return this._defaultView$.asObservable();
     }
 
-    public set onlyFloating(only: boolean) {
-        this._onlyFloating = only;
+    public get defaultView(): PipRightnavView {
+        return new Proxy(this._defaultView$.value, {
+            set: (target, p, value) => {
+                const nv = cloneDeep(this._defaultView$.value);
+                nv[p] = value;
+                this._defaultView$.next(nv);
+                return true;
+            },
+            defineProperty() { throw new Error(); },
+            deleteProperty() { throw new Error(); }
+        });
     }
 
-    public get onlyFloating() {
-        return this._onlyFloating;
+    public set defaultView(defaultView: PipRightnavView) {
+        this._defaultView$.next(defaultView);
     }
 
-    public get floatingRightnav(): MatSidenav {
-        return this._floatingRightnav;
+    public get active(): boolean {
+        return this._active$.value;
     }
 
-    public set floatingRightnav(rightnav: MatSidenav) {
-        this._floatingRightnav = rightnav;
+    public set active(active: boolean) {
+        this._active$.next(active);
     }
 
-    public set fixedRightnav(rightnav: MatSidenav) {
-        this._fixedRightnav = rightnav;
+    public get collapsed(): boolean {
+        return this._collapsed$.value;
     }
 
-    public get fixedRightnav(): MatSidenav {
-        return this._fixedRightnav;
-    }
-
-    public get fixedRightnavMode$(): Observable<string> {
-        return this._fixedRightnavMode$.asObservable();
-    }
-
-    public get fixedRightnavMode(): string {
-        return this._fixedRightnavMode$.getValue();
-    }
-
-    public set fixedRightnavMode(mode: string) {
-        this._fixedRightnavMode$.next(mode);
-    }
-
-    public get opened$(): Observable<boolean> {
-        return this._opened$;
+    public set collapsed(collapsed: boolean) {
+        this._collapsed$.next(collapsed);
     }
 
     public get opened(): boolean {
-        return this._opened$.getValue();
+        return this._opened$.value;
     }
 
-    public set opened(open: boolean) {
-        this._opened$.next(open);
+    public set opened(opened: boolean) {
+        this._opened$.next(opened);
     }
-
-    public toggleRightnav(rightnav?: MatSidenav) {
-        if (rightnav) {
-            rightnav.toggle();
-        } else {
-            this.isFloating() ? this.toggleFloatingRightnav() : this.toggleFixedRightnav();
-        }
-    }
-
-    public openRightnav(rightnav?: MatSidenav) {
-        if (rightnav) {
-            rightnav.open();
-        } else {
-            this.isFloating() ? this.openFloatingRightnav() : this.openFixedRightnav();
-        }
-    }
-
-    public closeRightnav(rightnav?: MatSidenav) {
-        if (rightnav) {
-            rightnav.close();
-        } else {
-            this.isFloating() ? this.closeFloatingRightnav() : this.closeFixedRightnav();
-        }
-    }
-
-    public toggleFloatingRightnav() {
-        if (this._floatingRightnav) {
-            this._floatingRightnav.toggle();
-            this.opened = this._floatingRightnav.opened;
-        } else {
-            console.log('rightnav not found');
-        }
-    }
-
-    public toggleFixedRightnav() {
-        if (this._fixedRightnav) {
-            this._fixedRightnav.toggle();
-            this.opened = this._fixedRightnav.opened;
-        } else {
-            console.log('rightnav not found');
-        }
-    }
-
-    public openFloatingRightnav() {
-        this._floatingRightnav ? this._floatingRightnav.open() : console.log('rightnav not found');
-        this.opened = true;
-    }
-
-    public closeFloatingRightnav() {
-        this._floatingRightnav ? this._floatingRightnav.close() : console.log('rightnav not found');
-        this.opened = false;
-    }
-
-    public openFixedRightnav() {
-        this._fixedRightnav ? this._fixedRightnav.open() : console.log('rightnav not found');
-        this.opened = true;
-    }
-
-    public closeFixedRightnav() {
-        this._fixedRightnav ? this._fixedRightnav.close() : console.log('rightnav not found');
-        this.opened = false;
-    }
-
-    public changeStateRightnav(rightnav: MatSidenav = this._floatingRightnav) {
-        if (rightnav) {
-
-        } else {
-            console.log('rightnav not found');
-        }
-    }
-
-    private isFloating() {
-        if (this._onlyFloating === true) { return true; }
-
-        let is = false;
-
-        each(this._floatingRightnavAliases, (alias: string) => {
-            if (this.media.isActive(alias)) { is = true; }
+    public get views(): PipRightnavView[] {
+        return new Proxy(this._views$.value, {
+            set() { throw new Error(); },
+            defineProperty() { throw new Error(); },
+            deleteProperty() { throw new Error(); }
         });
-
-        return is;
     }
 
+    public set views(views: PipRightnavView[]) {
+        const vts = cloneDeep(views);
+        if (vts) {
+            const di = vts.findIndex(v => v.name === 'default');
+            if (di !== -1) {
+                this.defaultView = vts[di];
+                vts.splice(di, 1);
+            }
+        }
+        this._views$.next(vts);
+    }
+
+    public get allViews$(): Observable<PipRightnavView[]> {
+        return combineLatest(
+            this.defaultView$,
+            this.views$
+        ).pipe(
+            map(([dv, vs]) => vs && vs.length ? [dv, ...vs] : [dv])
+        );
+    }
+
+    public get currentView(): PipRightnavView {
+        return this._currentView;
+    }
+    //#endregion
+
+    //#region Methods
+    public expand() {
+        if (!this.active) { return; }
+        this.collapsed = true;
+    }
+
+    public collapse() {
+        if (!this.active) { return; }
+        this.collapsed = false;
+    }
+
+    public toggleCollapse() {
+        if (!this.active) { return; }
+        this.collapsed = !this.collapsed;
+    }
+
+    public open() {
+        if (!this.active || this.opened) { return; }
+        this.opened = true;
+    }
+
+    public close() {
+        if (!this.active || !this.opened) { return; }
+        this.opened = false;
+    }
+
+    public toggle() {
+        if (!this.active) { return; }
+        this.opened = !this.opened;
+    }
+
+    public createView(view: PipRightnavView) {
+        if (view?.name === 'default') { return; }
+        const views = this._views$.value;
+        views.push(defaultsDeep(view, {
+            width: 200,
+            widthCollapsed: 64
+        } as PipRightnavView));
+        this._views$.next(views);
+    }
+
+    public updateView(view: PipRightnavView) {
+        const populatedView = defaultsDeep(cloneDeep(view), {
+            width: 200,
+            widthCollapsed: 64
+        } as PipRightnavView);
+        if (populatedView?.name === 'default') {
+            this.defaultView = populatedView;
+        } else {
+            const views = this._views$.value.map(v => v.name === populatedView.name ? populatedView : v);
+            this._views$.next(views);
+        }
+    }
+
+    public removeViewAt(position: number) {
+        const views = this._views$.value;
+        if (position < 0 || position >= views.length) { return; }
+        views.splice(position, 1);
+        this._views$.next(views);
+    }
+
+    public removeView(name: string) {
+        const views = this._views$.value.filter(v => v.name === name);
+        this._views$.next(views);
+    }
+    //#endregion
 }

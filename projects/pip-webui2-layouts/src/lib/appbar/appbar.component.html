@@ -3,7 +3,8 @@
     <mat-toolbar-row>
         <ng-content></ng-content>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="appbar.fallbackToSelect && !media.isMainActive(appbar.fallbackSize)">
+    <mat-toolbar-row
+        *ngIf="appbar.tabs && appbar.tabs.length > 0 && appbar.fallbackToSelect && !media.isMainActive(appbar.fallbackSize)">
         <mat-form-field>
             <mat-select (selectionChange)="navigate($event.value)" [value]="appbar.activeTab$ | async">
                 <mat-option *ngFor="let link of appbar?.tabs; let idx = index" [value]="link">

@@ -6,7 +6,6 @@ import { PipThemesService, Theme } from 'pip-webui2-themes';
 import { PipMediaService, PipSidenavService, PipRightnavService } from 'pip-webui2-layouts';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { AppTranslations } from './app.strings';
 import { ExmapleListItem } from './examples-list/shared/ExampleListItem';
 
 @Component({
@@ -19,33 +18,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   public themes: Theme[];
   public theme: Theme;
-  public languages: string[] = [];
-  public language = 'en';
+  public languages = ['en', 'ru'];
+  public language: string;
   public onBackClick: Function = null;
   public listIndex = 0;
-
-  public themesLocalNames: any = {
-    'candy-theme': 'Candy',
-    'unicorn-dark-theme': 'Unicorn Dark',
-    'pip-blue-theme': 'Blue',
-    'pip-grey-theme': 'Grey',
-    'pip-pink-theme': 'Pink',
-    'pip-green-theme': 'Green',
-    'pip-navy-theme': 'Navy',
-    'pip-amber-theme': 'Amber',
-    'pip-orange-theme': 'Orange',
-    'pip-dark-theme': 'Dark',
-    'pip-black-theme': 'Black',
-    'bootbarn-warm-theme': 'Bootbarn Warm',
-    'bootbarn-cool-theme': 'Bootbarn Cool',
-    'bootbarn-mono-theme': 'Bootbarn Mono',
-    'mst-black-theme': 'MST Black',
-    'mst-black-dark-theme': 'MST Black Dark',
-    'mst-mono-theme': 'MST Mono',
-    'mst-orange-theme': 'MST Orange',
-    'mst-orange-dark-theme': 'MST Orange Dark',
-    'mst-elegant-theme': 'MST Elegant'
-  };
 
   public list: ExmapleListItem[] = [
     { name: 'Media query', id: 'media', route: 'media', icon: 'visibility' },
@@ -56,6 +32,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     { name: 'Card', id: 'card', route: 'card', icon: 'view_array' },
     { name: 'Scrollable', id: 'scrollable', route: 'scrollable', icon: 'view_day' },
     { name: 'Tabs', id: 'tabs', route: 'tabs', icon: 'view_week' },
+    { name: 'Navigation', id: 'navigation', route: 'navigation', icon: 'navigation' },
   ];
 
   public constructor(
@@ -67,22 +44,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     private router: Router,
     private themesService: PipThemesService
   ) {
-    media.activate();
     this.themes = this.themesService.themesArray;
+    this.theme = this.themesService.currentTheme;
 
-    translate.setDefaultLang(this.language);
-    translate.use(this.language);
-    this.languages = translate.getLangs();
-    this.translate.setTranslation('en', AppTranslations.en, true);
-    this.translate.setTranslation('ru', AppTranslations.ru, true);
+    // Translations init
+    this.translate.addLangs(this.languages);
+    this.translate.setDefaultLang('en');
+
+    const browserLang = translate.getBrowserLang();
+    this.translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
+    this.language = this.translate.currentLang;
   }
 
-  public ngOnInit() {
-
-    this.sidenav.small$.subscribe((small) => {
-      this.cd.detectChanges();
-    });
-  }
+  public ngOnInit() { }
 
   public ngAfterViewInit() {
     setTimeout(() => {
@@ -90,14 +64,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public selectTheme(theme: Theme) {
-    this.theme = theme;
-    this.themesService.selectTheme(theme.name);
+  public changeLanguage(language: string) {
+    this.language = language;
+    this.translate.use(language);
   }
 
-  public changeLanguage(lang) {
-    this.language = lang;
-    this.translate.use(lang);
+  public changeTheme(theme: Theme) {
+    this.theme = theme;
+    this.themesService.selectTheme(theme.name);
   }
 
   public get showIcon$(): Observable<string> {
@@ -106,7 +80,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   public onListItemIndexChanged(index: number) {
     this.listIndex = index;
-    this.sidenav.closeFloatingNav();
+    this.sidenav.close();
   }
 
   public set showIcon(icon: string) {
@@ -118,17 +92,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public onMenuClick() {
-    this.sidenav.toggleNav();
+    this.sidenav.toggle();
   }
 
   public onInfoClick() {
     const v = this._showIcon$.value;
-    this.rightnav.toggleRightnav();
+    this.rightnav.toggle();
     this._showIcon$.next(v);
-  }
-
-  public onThemeClick(theme) {
-    this.selectTheme(theme);
   }
 
   private setListIndex() {

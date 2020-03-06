@@ -1,0 +1,7 @@
+@mixin pip-webui2-layouts-app-mixin($theme) {
+    $background: map-get($theme, 'background');
+
+    .pip-sidenav .mat-nav-list .mat-list-item.selected {
+        background-color: map-get($background, 'hover');
+    }
+}

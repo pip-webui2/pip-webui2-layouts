@@ -1,0 +1,37 @@
+{
+    "TITLE": "PipWebUI2 Layouts Showcase",
+    "LANGUAGE": {
+        "EN": "English",
+        "RU": "Russian"
+    },
+    "PAGE": {
+        "NAVIGATION": {
+            "RIGHTNAV": "Right navigation",
+            "RIGHTNAV_ALIAS": "Active alias",
+            "RIGHTNAV_BOTTOM_GAP": "Bottom gap",
+            "RIGHTNAV_COLLAPSEABLE": "Could be collapsed to lesser size",
+            "RIGHTNAV_COLLAPSED": "Is collapsed",
+            "RIGHTNAV_FIXED": "Fixed",
+            "RIGHTNAV_MODE": "Mode of navigation",
+            "RIGHTNAV_OPENED": "Opened",
+            "RIGHTNAV_PLACEMENT": "Place navigation in",
+            "RIGHTNAV_SIZE_COLLAPSED": "Size (collapsed)",
+            "RIGHTNAV_SIZE": "Size",
+            "RIGHTNAV_TOP_GAP": "Top gap",
+            "RIGHTNAV_VIEW": "View",
+            "SIDENAV": "Side navigation",
+            "SIDENAV_ALIAS": "Active alias",
+            "SIDENAV_BOTTOM_GAP": "Bottom gap",
+            "SIDENAV_COLLAPSEABLE": "Could be collapsed to lesser size",
+            "SIDENAV_COLLAPSED": "Is collapsed",
+            "SIDENAV_FIXED": "Fixed",
+            "SIDENAV_MODE": "Mode of navigation",
+            "SIDENAV_OPENED": "Opened",
+            "SIDENAV_PLACEMENT": "Place navigation in",
+            "SIDENAV_SIZE_COLLAPSED": "Size (collapsed)",
+            "SIDENAV_SIZE": "Size",
+            "SIDENAV_TOP_GAP": "Top gap",
+            "SIDENAV_VIEW": "View"
+        }
+    }
+}

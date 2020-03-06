@@ -1,73 +1,73 @@
-import { Injectable } from '@angular/core';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { Injectable, OnDestroy, Inject } from '@angular/core';
+import { MediaChange, MediaObserver, BreakPointRegistry } from '@angular/flex-layout';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 
 import { MediaMainChange } from './media-main-change.model';
 
+/** @dynamic */
 @Injectable()
-export class PipMediaService {
+export class PipMediaService implements OnDestroy {
+
+    private _mainLayoutBreakpoints: any = {};
+    private _mainChange$: BehaviorSubject<MediaMainChange> = new BehaviorSubject<MediaMainChange>({ aliases: [] });
+    private _subs = new Subscription();
+
     constructor(
+        @Inject(DOCUMENT) private document: Document,
+        private breakpoints: BreakPointRegistry,
         private media: MediaObserver
     ) {
-        this.media.media$.subscribe((change: MediaChange) => {
-            this.updateBodyLayoutBreakpoints();
-        });
-        this.updateBodyLayoutBreakpoints();
-        this.setMainLayoutBreakpoints();
+        this._setMainLayoutBreakpoints();
+        this._subs.add(this.media.asObservable().subscribe((changes: MediaChange[]) => {
+            const body = this.document.body;
+            for (const alias of this.breakpoints.aliases) {
+                body.classList[this.media.isActive(alias) ? 'add' : 'remove']('pip-' + alias);
+            }
+        }));
     }
 
-    private mainLayoutBreakpoints: any = {};
-    private mainChange$: BehaviorSubject<MediaMainChange> = new BehaviorSubject<MediaMainChange>({ aliases: [] });
+    ngOnDestroy() { this._subs.unsubscribe(); }
 
-    // TODO: deprecated
-    public activate() { }
-
-    private updateBodyLayoutBreakpoints() {
-        const body = document.body;
-        for (const alias of this.media['breakpoints'].aliases) {
-            body.classList[this.media.isActive(alias) ? 'add' : 'remove']('pip-' + alias);
-        }
+    private _isMainInclude(width: number, alias: string) {
+        return this._mainLayoutBreakpoints[alias].max >= width && this._mainLayoutBreakpoints[alias].min <= width;
     }
 
-    public updateMainLayoutBreakpoints(width: number) {
-        const body = document.body;
-        const aliases = [];
-        for (const alias of this.media['breakpoints'].aliases) {
-            this.mainLayoutBreakpoints[alias].active = this._isMainInclude(width, alias);
-            body.classList[this.mainLayoutBreakpoints[alias].active ? 'add' : 'remove']('pip-main-' + alias);
-            if (this.mainLayoutBreakpoints[alias].active) { aliases.push(alias); }
-        }
-
-        this.mainChange$.next({ aliases: aliases });
-    }
-
-    private setMainLayoutBreakpoints() {
+    private _setMainLayoutBreakpoints() {
         const regExp = new RegExp(/\([a-z-:' '0-9]+\)/g);
-        this.mainLayoutBreakpoints = {};
+        this._mainLayoutBreakpoints = {};
 
-        for (const item of this.media['breakpoints'].items) {
+        for (const item of this.breakpoints.items) {
             const matches = item.mediaQuery.match(regExp);
-            this.mainLayoutBreakpoints[item.alias] = { min: 0, max: 10000, active: false };
+            this._mainLayoutBreakpoints[item.alias] = { min: 0, max: 10000, active: false };
 
             for (const match of matches) {
                 const num = match.match(new RegExp(/[0-9]+/g));
                 if (num) {
-                    if (match.includes('max-width')) { this.mainLayoutBreakpoints[item.alias].max = Number(num); }
-                    if (match.includes('min-width')) { this.mainLayoutBreakpoints[item.alias].min = Number(num); }
+                    if (match.includes('max-width')) { this._mainLayoutBreakpoints[item.alias].max = Number(num); }
+                    if (match.includes('min-width')) { this._mainLayoutBreakpoints[item.alias].min = Number(num); }
                 }
             }
         }
     }
 
-    private _isMainInclude(width: number, alias: string) {
-        return this.mainLayoutBreakpoints[alias].max >= width && this.mainLayoutBreakpoints[alias].min <= width;
+    public updateMainLayoutBreakpoints(width: number) {
+        const body = this.document.body;
+        const aliases = [];
+        for (const alias of this.breakpoints.aliases) {
+            this._mainLayoutBreakpoints[alias].active = this._isMainInclude(width, alias);
+            body.classList[this._mainLayoutBreakpoints[alias].active ? 'add' : 'remove']('pip-main-' + alias);
+            if (this._mainLayoutBreakpoints[alias].active) { aliases.push(alias); }
+        }
+
+        this._mainChange$.next({ aliases: aliases });
     }
 
     public asObservableMain(): Observable<MediaMainChange> {
-        return this.mainChange$;
+        return this._mainChange$.asObservable();
     }
 
-    public isMainActive(alias) {
-        return this.mainLayoutBreakpoints[alias] && this.mainLayoutBreakpoints[alias].active;
+    public isMainActive(alias: string) {
+        return this._mainLayoutBreakpoints[alias] && this._mainLayoutBreakpoints[alias].active;
     }
 }

@@ -18,7 +18,11 @@ const appRoutes: Routes = [
     { path: 'card', component: CardLayoutExampleComponent },
     { path: 'scrollable', component: ScrollableLayoutExampleComponent },
     { path: 'tabs', loadChildren: () => import('./tabs-example/tabs-example.module').then(m => m.TabsExampleModule) },
-    { path: '**', redirectTo: 'document' }
+    {
+        path: 'navigation',
+        loadChildren: () => import('./navigation-example/navigation-example.module').then(m => m.NavigationExampleModule)
+    },
+    { path: '**', redirectTo: 'navigation' }
 ];
 
 @NgModule({

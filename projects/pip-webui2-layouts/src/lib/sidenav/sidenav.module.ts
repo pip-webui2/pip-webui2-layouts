@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { PipSidenavService } from './shared/sidenav.service';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { PIP_SIDENAV_CONFIG, PipSidenavConfig } from './shared/models';
 
 @NgModule({
   imports: [
@@ -12,11 +11,14 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
   ]
 })
 export class PipSidenavModule {
-  static forRoot(): ModuleWithProviders {
+  static withConfig(config: PipSidenavConfig): ModuleWithProviders {
     return {
       ngModule: PipSidenavModule,
       providers: [
-        PipSidenavService
+        {
+          provide: PIP_SIDENAV_CONFIG,
+          useValue: config
+        }
       ]
     };
   }

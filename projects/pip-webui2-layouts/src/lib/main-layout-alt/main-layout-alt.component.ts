@@ -61,10 +61,10 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
             }
         }));
         this.listener = () => { this.onResize(); };
-        this.sidenavService.fixedSidenav = null;
-        this.sidenavService.isUniversal = true;
+        // this.sidenavService.fixedSidenav = null;
+        // this.sidenavService.isUniversal = true;
         this.sidenavService.opened = false;
-        this.sidenavService.mode = 'over';
+        // this.sidenavService.mode = 'over';
         this.activeSidenav$ = combineLatest(this.sidenavService.opened$, this.sidenavService.active$)
             .pipe(
                 map(([opened, active]) => {
@@ -92,26 +92,26 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
             this.mainMedia.updateMainLayoutBreakpoints(this.element.offsetWidth);
         });
         this.rightnavService.opened$.subscribe((opened: boolean) => {
-            if (this.rightnavService._fixedRightnav) { this.onResize(); }
+            // if (this.rightnavService._fixedRightnav) { this.onResize(); }
             this.cd.detectChanges();
         });
 
         this.media.media$.subscribe((change: MediaChange) => {
-            if (this.rightnavService.onlyFloating === true) { return; }
+            // if (this.rightnavService.onlyFloating === true) { return; }
 
-            if (this.sidenavService.floatingSidenavAliases.includes(change.mqAlias)) {
-                if (this.rightnavService.fixedRightnav
-                    && this.rightnavService.fixedRightnav.opened
-                    && this.rightnavService.floatingRightnav) {
-                    this.rightnavService.closeFixedRightnav();
-                    this.rightnavService.floatingRightnav.open();
-                }
-            } else {
-                if (this.rightnavService.floatingRightnav && this.rightnavService.floatingRightnav.opened) {
-                    if (this.rightnavService.fixedRightnav) { this.rightnavService.fixedRightnav.open(); }
-                    this.rightnavService.floatingRightnav.close();
-                }
-            }
+            // if (this.sidenavService.floatingSidenavAliases.includes(change.mqAlias)) {
+            //     if (this.rightnavService.fixedRightnav
+            //         && this.rightnavService.fixedRightnav.opened
+            //         && this.rightnavService.floatingRightnav) {
+            //         this.rightnavService.closeFixedRightnav();
+            //         this.rightnavService.floatingRightnav.open();
+            //     }
+            // } else {
+            //     if (this.rightnavService.floatingRightnav && this.rightnavService.floatingRightnav.opened) {
+            //         if (this.rightnavService.fixedRightnav) { this.rightnavService.fixedRightnav.open(); }
+            //         this.rightnavService.floatingRightnav.close();
+            //     }
+            // }
         });
     }
 
@@ -121,27 +121,27 @@ export class PipMainLayoutAltComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     ngAfterViewInit() {
-        this.uFloating$.next(this.sidenavService.isUniversalFloating());
-        this._subs.add(this.mainMedia.asObservableMain()
-            .subscribe((change: MediaMainChange) => {
-                const floating = this.sidenavService.isUniversalFloating();
-                if (this.uFloating$.getValue() !== floating) {
-                    setTimeout(() => this.uFloating$.next(floating), 0);
-                }
-            }));
-        this.onResize();
-        this.sidenavService.universalSidenav = this.sidenav;
-        this.rightnavService.fixedRightnav = this.rightnav;
+        // this.uFloating$.next(this.sidenavService.isUniversalFloating());
+        // this._subs.add(this.mainMedia.asObservableMain()
+        //     .subscribe((change: MediaMainChange) => {
+        //         const floating = this.sidenavService.isUniversalFloating();
+        //         if (this.uFloating$.getValue() !== floating) {
+        //             setTimeout(() => this.uFloating$.next(floating), 0);
+        //         }
+        //     }));
+        // this.onResize();
+        // this.sidenavService.universalSidenav = this.sidenav;
+        // this.rightnavService.fixedRightnav = this.rightnav;
     }
 
     public backdropClick(): void {
-        this.sidenavService.closeNav();
+        // this.sidenavService.closeNav();
     }
 
     private onResize() {
-        const rightnavWidth = this.rightnavService._fixedRightnav && this.rightnavService._fixedRightnav.opened
-            ? this.rightnavService._fixedRightnav['_elementRef'].nativeElement.offsetWidth
-            : 0;
-        this.mainMedia.updateMainLayoutBreakpoints(this.element.offsetWidth - rightnavWidth);
+        // const rightnavWidth = this.rightnavService._fixedRightnav && this.rightnavService._fixedRightnav.opened
+        //     ? this.rightnavService._fixedRightnav['_elementRef'].nativeElement.offsetWidth
+        //     : 0;
+        // this.mainMedia.updateMainLayoutBreakpoints(this.element.offsetWidth - rightnavWidth);
     }
 }

@@ -1,5 +1,6 @@
 /* Import or define your theme-based mixins */
 @import '../dist/pip-webui2-layouts/styles';
+@import './app/app.component.mixin';
 
 @mixin application-mixin($theme) {
     /*
@@ -15,7 +16,7 @@
     */
 }
 
-
 /* And call them! */
 @include application-mixin($theme);
 @include pip-webui2-layouts-mixin($theme);
+@include pip-webui2-layouts-app-mixin($theme);

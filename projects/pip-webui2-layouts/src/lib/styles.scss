@@ -1,11 +1,11 @@
 @import './document-layout/document-layout.global-styles.scss';
 @import './tiles-layout/tiles-layout.global-styles.scss';
-@import './rightnav/rightnav.global-styles.scss';
+// @import './rightnav/rightnav.global-styles.scss';
 
 @import './document-layout/document-layout.component.mixin';
 @import './tiles-layout/tiles-layout.component.mixin';
 
 @mixin pip-webui2-layouts-mixin($theme) {
     @include document-layout-mixin($theme);
-    @include tiles-layout-mixin($theme);
+    @include tile-layout-mixin($theme);
 }

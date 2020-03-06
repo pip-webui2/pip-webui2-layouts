@@ -1,0 +1,37 @@
+{
+    "TITLE": "PipWebUI2 Layouts Презентация",
+    "LANGUAGE": {
+        "EN": "Английский",
+        "RU": "Русский"
+    },
+    "PAGE": {
+        "NAVIGATION": {
+            "RIGHTNAV": "Правая навигация",
+            "RIGHTNAV_ALIAS": "Область срабатывания",
+            "RIGHTNAV_BOTTOM_GAP": "Нижний отступ",
+            "RIGHTNAV_COLLAPSEABLE": "Может быть свернута до меньшего размера",
+            "RIGHTNAV_COLLAPSED": "Свернута",
+            "RIGHTNAV_FIXED": "Фиксировання",
+            "RIGHTNAV_MODE": "Режим навигации",
+            "RIGHTNAV_OPENED": "Открытая",
+            "RIGHTNAV_PLACEMENT": "Разместить в",
+            "RIGHTNAV_SIZE_COLLAPSED": "Размер (свернутый)",
+            "RIGHTNAV_SIZE": "Размер",
+            "RIGHTNAV_TOP_GAP": "Верхний отступ",
+            "RIGHTNAV_VIEW": "Представление",
+            "SIDENAV": "Боковая навигация",
+            "SIDENAV_ALIAS": "Область срабатывания",
+            "SIDENAV_BOTTOM_GAP": "Нижний отступ",
+            "SIDENAV_COLLAPSEABLE": "Может быть свернута до меньшего размера",
+            "SIDENAV_COLLAPSED": "Свернута",
+            "SIDENAV_FIXED": "Фиксировання",
+            "SIDENAV_MODE": "Режим навигации",
+            "SIDENAV_OPENED": "Открытая",
+            "SIDENAV_PLACEMENT": "Разместить в",
+            "SIDENAV_SIZE_COLLAPSED": "Размер (свернутый)",
+            "SIDENAV_SIZE": "Размер",
+            "SIDENAV_TOP_GAP": "Верхний отступ",
+            "SIDENAV_VIEW": "Представление"
+        }
+    }
+}
