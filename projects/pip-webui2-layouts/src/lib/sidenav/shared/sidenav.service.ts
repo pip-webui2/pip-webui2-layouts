@@ -1,20 +1,17 @@
-import { Injectable, Inject, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of, combineLatest } from 'rxjs';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { cloneDeep, defaultsDeep } from 'lodash';
 
-import { PipSidenavView, PIP_SIDENAV_CONFIG, PipSidenavPlacement, PipSidenavConfig } from './models';
+import { PipSidenavView, PipSidenavPosition, PipSidenavConfig } from './models/index';
 import { switchMap, map, shareReplay, distinctUntilChanged, tap } from 'rxjs/operators';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class PipSidenavService {
+abstract class PipSidenavService {
 
     private _currentView: PipSidenavView;
     private _defaultView$: BehaviorSubject<PipSidenavView> = new BehaviorSubject<PipSidenavView>({
         name: 'default',
-        placement: PipSidenavPlacement.Main,
+        position: PipSidenavPosition.Main,
         mode: 'over',
         width: 200,
         widthCollapsed: 64
@@ -32,7 +29,7 @@ export class PipSidenavService {
 
     public constructor(
         private media: MediaObserver,
-        @Optional() @Inject(PIP_SIDENAV_CONFIG) sc: PipSidenavConfig
+        sc: PipSidenavConfig
     ) {
         if (sc) {
             if (sc.views && sc.views.length) {
@@ -212,3 +209,9 @@ export class PipSidenavService {
     }
     //#endregion
 }
+
+@Injectable()
+export class PipSidenavStartService extends PipSidenavService {}
+
+@Injectable()
+export class PipSidenavEndService extends PipSidenavService {}

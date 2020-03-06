@@ -1,9 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import {
-  PipRightnavService, PipSidenavService,
-  PipRightnavPlacement, PipSidenavPlacement,
-  PipRightnavView, PipSidenavView
+  PipSidenavStartService, PipSidenavEndService, PipSidenavPosition
 } from 'pip-webui2-layouts';
 import { Subscription, Observable, BehaviorSubject, merge, combineLatest, empty } from 'rxjs';
 import { debounceTime, map, switchMap, filter, withLatestFrom, take, tap, distinctUntilChanged } from 'rxjs/operators';
@@ -33,7 +31,7 @@ export class NavigationExampleComponent implements OnDestroy {
     collapsed: boolean,
     opened: boolean
   }>;
-  public sidenavPlacements = Object.values(PipSidenavPlacement);
+  public sidenavPositions = Object.values(PipSidenavPosition);
   public sidenavView$: Observable<string>;
   public sidenavViews$: Observable<FormGroup>;
   public sidenavForm: FormGroup;
@@ -45,7 +43,7 @@ export class NavigationExampleComponent implements OnDestroy {
     collapsed: boolean,
     opened: boolean
   }>;
-  public rightnavPlacements = Object.values(PipRightnavPlacement);
+  public rightnavPositions = Object.values(PipSidenavPosition);
   public rightnavView$: Observable<string>;
   public rightnavViews$: Observable<FormGroup>;
   public rightnavForm: FormGroup;
@@ -60,8 +58,8 @@ export class NavigationExampleComponent implements OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    public rs: PipRightnavService,
-    public ss: PipSidenavService
+    public se: PipSidenavEndService,
+    public ss: PipSidenavStartService
   ) {
     // Sidenav
     this.sidenavView$ = merge(
@@ -69,7 +67,7 @@ export class NavigationExampleComponent implements OnDestroy {
       this.ss.currentView$.pipe(map(v => v?.name ?? 'default'))
     ).pipe(distinctUntilChanged());
     this.sidenavForm = this.fb.group({
-      placement: null,
+      position: null,
       alias: null,
       mode: null,
       fixed: null,
@@ -97,7 +95,7 @@ export class NavigationExampleComponent implements OnDestroy {
       map(([view, views]) => views?.find(v => v.name === view))
     ).subscribe(view => {
       this.sidenavForm.patchValue({
-        placement: view.placement,
+        position: view.position,
         alias: view.alias,
         mode: view.mode,
         fixed: view.fixedInViewport,
@@ -119,7 +117,7 @@ export class NavigationExampleComponent implements OnDestroy {
         withLatestFrom(this.sidenavView$),
         map(([val, view]) => ({
           name: view,
-          placement: val.placement,
+          position: val.position,
           alias: val.alias,
           mode: val.mode,
           fixedInViewport: val.fixed,
@@ -134,10 +132,10 @@ export class NavigationExampleComponent implements OnDestroy {
     // Rightnav
     this.rightnavView$ = merge(
       this.rightnavViewManual$.asObservable(),
-      this.rs.currentView$.pipe(map(v => v?.name ?? 'default'))
+      this.se.currentView$.pipe(map(v => v?.name ?? 'default'))
     ).pipe(distinctUntilChanged());
     this.rightnavForm = this.fb.group({
-      placement: null,
+      position: null,
       alias: null,
       mode: null,
       fixed: null,
@@ -149,9 +147,9 @@ export class NavigationExampleComponent implements OnDestroy {
     });
     this.rightnavContext$ = combineLatest(
       this.rightnavView$,
-      this.rs.allViews$,
-      this.rs.collapsed$,
-      this.rs.opened$
+      this.se.allViews$,
+      this.se.collapsed$,
+      this.se.opened$
     ).pipe(map(([view, views, collapsed, opened]) => ({
       view,
       views: views.map(v => v.name),
@@ -161,11 +159,11 @@ export class NavigationExampleComponent implements OnDestroy {
     })));
     this.subs.add(this.rightnavView$.pipe(
       filter(v => !!v),
-      withLatestFrom(this.rs.allViews$),
+      withLatestFrom(this.se.allViews$),
       map(([view, views]) => views?.find(v => v.name === view))
     ).subscribe(view => {
       this.rightnavForm.patchValue({
-        placement: view.placement,
+        position: view.position,
         alias: view.alias,
         mode: view.mode,
         fixed: view.fixedInViewport,
@@ -187,7 +185,7 @@ export class NavigationExampleComponent implements OnDestroy {
         withLatestFrom(this.rightnavView$),
         map(([val, view]) => ({
           name: view,
-          placement: val.placement,
+          position: val.position,
           alias: val.alias,
           mode: val.mode,
           fixedInViewport: val.fixed,
@@ -197,7 +195,7 @@ export class NavigationExampleComponent implements OnDestroy {
           width: val.width,
           widthCollapsed: val.widthCollapsed
         }))
-      ).subscribe(v => this.rs.updateView(v)));
+      ).subscribe(v => this.se.updateView(v)));
   }
 
   ngOnDestroy() { this.subs.unsubscribe(); }
@@ -207,7 +205,7 @@ export class NavigationExampleComponent implements OnDestroy {
   toggleSidenav() { this.ss.toggle(); }
 
   changeRightnavView(view: string) { this.rightnavViewManual$.next(view); }
-  toggleRightnavCollapse() { this.rs.toggleCollapse(); }
-  toggleRightnav() { this.rs.toggle(); }
+  toggleRightnavCollapse() { this.se.toggleCollapse(); }
+  toggleRightnav() { this.se.toggle(); }
 
 }

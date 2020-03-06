@@ -1,106 +1,150 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { Component, OnInit, ChangeDetectorRef, HostBinding, OnDestroy } from '@angular/core';
-import { AfterViewInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { BehaviorSubject, Unsubscribable, empty, Subscription, Observable, combineLatest } from 'rxjs';
+import { Component, HostBinding, OnDestroy, Input, ViewChild } from '@angular/core';
+import { MatSidenavContent } from '@angular/material/sidenav';
+import { BehaviorSubject, Subscription, Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { PipSidenavService } from '../sidenav/shared/sidenav.service';
-import { PipRightnavService } from '../rightnav/shared/rightnav.service';
-import { MediaObserver, MediaChange } from '@angular/flex-layout';
-
-import { each } from '../shared/layouts.utils';
-import { map, switchMap } from 'rxjs/operators';
-import { RippleState } from '@angular/material/core';
 import { PipAppbarService } from '../appbar/shared/appbar.service';
-import { PipSidenavPlacement } from '../sidenav/shared/models';
+import { addResizeListener, removeResizeListener, PipMediaService } from '../media/index';
+import { PipSidenavStartService, PipSidenavEndService, PipSidenavView, PipSidenavPosition, PipSidenavSide } from '../sidenav/index';
+
+type RootLayoutOptions = {
+    [name in PipSidenavSide]: {
+        view: PipSidenavView,
+        opened: boolean,
+        collapsed: boolean,
+        width: number,
+        rcm: number,
+        mcm: number
+    }
+};
 
 @Component({
     selector: 'pip-root-layout',
     templateUrl: 'root-layout.component.html',
     styleUrls: ['./root-layout.component.scss']
 })
-export class PipRootLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PipRootLayoutComponent implements OnDestroy {
 
+    private _element: HTMLElement;
+    private _mainLayoutContainer: string;
+    private _mainContent: MatSidenavContent;
     private _subs: { [name: string]: Subscription } = {};
-    private _sidenavMediaQuery: MediaQueryList[] = [];
+    private _resizeListener: () => void;
+
+    public psp = PipSidenavPosition;
+
+    @Input() public set mainLayoutContainer(mainLayoutContainer: string) {
+        this._mainLayoutContainer = mainLayoutContainer;
+        this._updateListeners();
+    }
 
     @HostBinding('class.pip-root-layout') readonly pipRootLayoutCls = true;
     @HostBinding('class.pip-with-tabs') get pipWithTabsCls() { return this.appbar.tabs?.length; }
 
-    @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;
-    @ViewChild('rightnav', { static: false }) rightnav: MatSidenav;
+    @ViewChild('mainContent', { static: false }) set mainContent(mainContent: MatSidenavContent) {
+        this._mainContent = mainContent;
+        this._updateListeners();
+    }
 
     public mode$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
-    public options$: Observable<any>;
+    public options$: Observable<RootLayoutOptions>;
 
     public constructor(
-        public ss: PipSidenavService,
+        public ss: PipSidenavStartService,
+        public se: PipSidenavEndService,
         private appbar: PipAppbarService,
-        private rightnavService: PipRightnavService,
-        private media: MediaObserver,
-        private cd: ChangeDetectorRef,
-        private changeDetectorRef: ChangeDetectorRef,
-        private mediaMatcher: MediaMatcher
+        private mainMedia: PipMediaService,
     ) {
         this.options$ = combineLatest(
             this.ss.currentView$,
             this.ss.opened$,
-            this.ss.collapsed$
+            this.ss.collapsed$,
+            this.se.currentView$,
+            this.se.opened$,
+            this.se.collapsed$
         ).pipe(
-            map(([view, opened, expanded]) => ({ view, opened, dense: !expanded }))
+            map(([
+                sview, sopened, scollapsed,
+                rview, ropened, rcollapsed
+            ]) => {
+                const sw = (sview?.collapseable && scollapsed ? sview?.widthCollapsed : sview?.width) ?? this.ss.defaultView.width;
+                const rw = (rview?.collapseable && rcollapsed ? rview?.widthCollapsed : rview?.width) ?? this.se.defaultView.width;
+                return {
+                    [PipSidenavSide.Start]: {
+                        view: sview,
+                        opened: sopened,
+                        collapsed: scollapsed,
+                        width: sw,
+                        rcm: sopened && sview?.position === PipSidenavPosition.Root && ['side', 'push'].includes(sview.mode) ? sw : 0,
+                        mcm: sopened && sview?.position === PipSidenavPosition.Main && ['side', 'push'].includes(sview.mode) ? sw : 0
+                    },
+                    [PipSidenavSide.End]: {
+                        view: rview,
+                        opened: ropened,
+                        collapsed: rcollapsed,
+                        width: rw,
+                        rcm: ropened && rview?.position === PipSidenavPosition.Root && ['side', 'push'].includes(rview.mode) ? rw : 0,
+                        mcm: ropened && rview?.position === PipSidenavPosition.Main && ['side', 'push'].includes(rview.mode) ? rw : 0
+                    }
+                };
+            })
         );
+        this._resizeListener = () => this._onResizeMain();
     }
 
-    ngOnInit() {
-        // this.ss.opened$.subscribe((opened) => {
-        //     this.cd.detectChanges();
-        // });
-
-        // this.rightnavService.opened$.subscribe(() => {
-        //     this.cd.detectChanges();
-        // });
-
-        // this.media.media$.subscribe((change: MediaChange) => {
-        //     this.mode$.next(this.rightnavService.floatingRightnavAliases.includes(change.mqAlias) ? null : 'side');
-        //     this.cd.detectChanges();
-        // });
-
-        // this.initMode();
+    ngOnDestroy() {
+        Object.keys(this._subs).forEach(k => this._subs[k] && this._subs[k].unsubscribe());
+        if (this._resizeListener && this._element) {
+            removeResizeListener(this._element, this._resizeListener);
+        }
     }
 
-    ngAfterViewInit() {
-        // this.rightnavService.floatingRightnav = this.rightnav;
+    private _onResizeMain() {
+        this.mainMedia.updateMainLayoutBreakpoints(this._element.offsetWidth);
     }
 
-    ngOnDestroy() { Object.keys(this._subs).forEach(k => this._subs[k] && this._subs[k].unsubscribe()); }
+    private _updateListeners() {
+        if (this._element) {
+            removeResizeListener(this._element, this._resizeListener);
+        }
+        if (this._mainContent) {
+            if (this.mainLayoutContainer != null) {
+                const firstSym = this.mainLayoutContainer.substr(0, 1);
 
-    // private initMode() {
-    //     let mode = 'side';
+                const element: any = firstSym === '#'
+                    ? document.getElementById(this.mainLayoutContainer.substring(1, this.mainLayoutContainer.length))
+                    : firstSym === '.'
+                        ? document.getElementsByClassName(this.mainLayoutContainer.substring(1, this.mainLayoutContainer.length))
+                        : document.getElementsByTagName(this.mainLayoutContainer);
+                this._element = firstSym === '#' ? element : element.length > 0
+                    ? element[0]
+                    : this._mainContent.getElementRef().nativeElement;
+            } else {
+                this._element = this._mainContent.getElementRef().nativeElement;
+            }
 
-    //     each(this.rightnavService.floatingRightnavAliases, (alias: string) => {
-    //         if (this.media.isActive(alias)) { mode = null; }
-    //     });
+            addResizeListener(this._element, this._resizeListener);
+            setTimeout(() => {
+                this.mainMedia.updateMainLayoutBreakpoints(this._element.offsetWidth);
+            });
+        }
+    }
 
-    //     this.mode$.next(mode);
-    // }
+    public get mainLayoutContainer() { return this._mainLayoutContainer; }
 
-    public containerClasses(ctx: any) {
+    public containerCls(ctx: RootLayoutOptions, position: PipSidenavPosition) {
         const res = [];
-        if (ctx?.opened) { res.push('pip-sidenav-open'); }
-        if (ctx?.dense) { res.push('pip-sidenav-dense'); }
-        switch (ctx?.view?.placement) {
-            case PipSidenavPlacement.Root:
-                res.push('pip-sidenav-root');
-                break;
-            case PipSidenavPlacement.Main:
-                res.push('pip-sidenav-main');
-                break;
+        for (const side of Object.keys(PipSidenavSide).map(k => PipSidenavSide[k])) {
+            if (ctx[side]?.view?.position === position) {
+                if (ctx[side]?.opened) { res.push(`pip-sidenav-${side}-open`); }
+                if (ctx[side]?.view?.collapseable && ctx[side]?.collapsed) { res.push(`pip-sidenav-${side}-collapsed`); }
+            }
         }
         return res;
     }
 
     public backdropClick(): void {
         this.ss.close();
+        this.se.close();
     }
-
 }

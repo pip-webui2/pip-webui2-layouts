@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PipSidenavService } from 'pip-webui2-layouts';
+import { PipSidenavStartService } from 'pip-webui2-layouts';
 
 @Component({
   selector: 'app-card-layout-example',
@@ -13,7 +13,7 @@ export class CardLayoutExampleComponent implements OnInit, OnDestroy {
   public text = false;
 
   constructor(
-    public sidenav: PipSidenavService
+    public sidenav: PipSidenavStartService
   ) { }
 
   ngOnInit() {

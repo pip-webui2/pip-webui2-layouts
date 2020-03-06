@@ -15,16 +15,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   PipAppbarModule,
-  PipMainLayoutAltModule,
   PipMediaModule,
   PipShadowModule,
   PipNavExpanderModule,
-  PipSidenavModule,
-  PipRightnavModule,
   PipRootLayoutModule,
-  PipMainLayoutModule,
-  PipRootLayoutAltModule,
-  PipSidenavPlacement
+  PipSidenavPosition,
+  PipSidenavStartModule,
+  PipSidenavEndModule
 } from 'pip-webui2-layouts';
 import { PipThemesModule, pipWebUI2ThemesList } from 'pip-webui2-themes';
 
@@ -73,24 +70,36 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       themes: pipWebUI2ThemesList
     }),
     PipAppbarModule.forRoot(),
-    PipMainLayoutModule,
-    PipMainLayoutAltModule,
     PipMediaModule.forRoot(),
     PipShadowModule,
     PipNavExpanderModule,
-    PipSidenavModule.withConfig({
+    PipSidenavStartModule.forRoot({
       views: [
         {
           name: 'mobile',
           alias: 'lt-sm',
-          placement: PipSidenavPlacement.Root,
+          position: PipSidenavPosition.Root,
           mode: 'over'
         }
       ]
     }),
-    PipRightnavModule,
+    PipSidenavEndModule.forRoot({
+      views: [
+        {
+          name: 'default',
+          position: PipSidenavPosition.Root,
+          mode: 'side',
+          width: 350
+        },
+        {
+          name: 'mobile',
+          alias: 'lt-sm',
+          position: PipSidenavPosition.Root,
+          mode: 'over'
+        }
+      ]
+    }),
     PipRootLayoutModule,
-    PipRootLayoutAltModule,
 
     AppRoutingModule,
     CardLayoutExampleModule,

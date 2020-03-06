@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 import { PipThemesService, Theme } from 'pip-webui2-themes';
-import { PipMediaService, PipSidenavService, PipRightnavService } from 'pip-webui2-layouts';
+import { PipMediaService, PipSidenavStartService, PipSidenavEndService } from 'pip-webui2-layouts';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { ExmapleListItem } from './examples-list/shared/ExampleListItem';
 
 @Component({
-  selector: 'app-root',
+  selector: 'pip-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -37,8 +37,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   public constructor(
     public media: PipMediaService,
-    public sidenav: PipSidenavService,
-    private rightnav: PipRightnavService,
+    public sidenav: PipSidenavStartService,
+    private rightnav: PipSidenavEndService,
     private translate: TranslateService,
     private cd: ChangeDetectorRef,
     private router: Router,

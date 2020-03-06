@@ -16,7 +16,6 @@ import { PipRootLayoutComponent } from './root-layout.component';
   ],
   exports: [
     PipRootLayoutComponent
-  ],
-  providers: []
+  ]
 })
 export class PipRootLayoutModule { }

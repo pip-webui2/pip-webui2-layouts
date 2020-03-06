@@ -1,17 +1,17 @@
-<pip-root-layout-alt>
-  <pip-sidenav>
+<pip-root-layout>
+  <pip-sidenav-start>
     <pip-nav-expander></pip-nav-expander>
     <mat-nav-list dense>
       <mat-list-item *ngFor="let item of list" (click)="sidenav?.close()" [routerLink]="item.route"
         routerLinkActive="selected">
         <mat-icon>{{ item.icon }}</mat-icon>
-        <h3 md-line class="pip-sidenav-collapsed-hide">{{ item.name }}</h3>
+        <h3 md-line class="pip-sidenav-start-collapsed-hide">{{ item.name }}</h3>
       </mat-list-item>
     </mat-nav-list>
-  </pip-sidenav>
-  <pip-rightnav>
+  </pip-sidenav-start>
+  <pip-sidenav-end>
     <div fxLayout="column" fxFlex="1 1 100%">
-      <mat-toolbar fxLayout="row" fxFlex="0 0 auto" class="pip-rightnav-title" color="accent">
+      <mat-toolbar fxLayout="row" fxFlex="0 0 auto" class="pip-sidenav-end-title" color="accent">
         <h2 style="margin: 0px">Tigers</h2>
         <div fxFlex="grow"></div>
         <button style="margin-right: -16px" mat-icon-button (click)="onInfoClick()">
@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-  </pip-rightnav>
+  </pip-sidenav-end>
   <pip-root-header>
     <pip-appbar [ngSwitch]="showIcon$ | async">
       <button mat-icon-button class="app-icon" (click)="onMenuClick()" *ngSwitchCase="'menu'">
@@ -107,4 +107,4 @@
   <pip-root-content>
     <router-outlet></router-outlet>
   </pip-root-content>
-</pip-root-layout-alt>
+</pip-root-layout>
