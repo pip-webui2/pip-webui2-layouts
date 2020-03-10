@@ -6,13 +6,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { PipDocumentLayoutModule, PipMediaModule, PipShadowModule } from 'pip-webui2-layouts';
 
 import { DocumentLayoutExampleComponent } from './document-layout-example.component';
+import { DocumentLayoutRoutingModule } from './document-layout.routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     MatToolbarModule, MatButtonModule,
-    PipDocumentLayoutModule, PipMediaModule, PipShadowModule
+    PipDocumentLayoutModule, PipMediaModule, PipShadowModule,
+    DocumentLayoutRoutingModule
   ],
   declarations: [DocumentLayoutExampleComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

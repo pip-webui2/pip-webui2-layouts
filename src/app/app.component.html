@@ -2,11 +2,14 @@
   <pip-sidenav-start>
     <pip-nav-expander></pip-nav-expander>
     <mat-nav-list dense>
-      <mat-list-item *ngFor="let item of list" (click)="sidenav?.close()" [routerLink]="item.route"
-        routerLinkActive="selected">
-        <mat-icon>{{ item.icon }}</mat-icon>
-        <h3 md-line class="pip-sidenav-start-collapsed-hide">{{ item.name }}</h3>
-      </mat-list-item>
+      <ng-container *ngFor="let g of groups">
+        <h3 mat-subheader>{{ g?.name | translate }}</h3>
+        <mat-list-item *ngFor="let item of g.items" (click)="sidenav?.close()" [routerLink]="item.route"
+          routerLinkActive="selected">
+          <mat-icon>{{ item?.icon }}</mat-icon>
+          <h3 md-line class="pip-sidenav-start-collapsed-hide">{{ item.name | translate }}</h3>
+        </mat-list-item>
+      </ng-container>
     </mat-nav-list>
   </pip-sidenav-start>
   <pip-sidenav-end>
@@ -104,7 +107,5 @@
       </button>
     </pip-appbar>
   </pip-root-header>
-  <pip-root-content>
-    <router-outlet></router-outlet>
-  </pip-root-content>
+  <router-outlet></router-outlet>
 </pip-root-layout>

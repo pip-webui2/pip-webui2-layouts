@@ -4,12 +4,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { PipTilesLayoutModule, PipShadowModule } from 'pip-webui2-layouts';
 
 import { TilesLayoutExampleComponent } from './tiles-layout-example.component';
+import { TilesLayoutRoutingModule } from './tiles-layout.routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     MatToolbarModule,
-    PipTilesLayoutModule, PipShadowModule
+    PipTilesLayoutModule, PipShadowModule,
+    TilesLayoutRoutingModule
   ],
   declarations: [TilesLayoutExampleComponent]
 })

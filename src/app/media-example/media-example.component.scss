@@ -1,0 +1,29 @@
+@import '~@angular/material/theming';
+@import "~pip-webui2-themes/assets/themes/pip-amber";
+$accent: map-get($theme, 'accent');
+
+:host {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+    
+    .mat-toolbar {
+        flex: 1 0 auto;
+    }
+
+    .content-wrapper {
+        flex: 1 1 auto;
+        position: relative;
+        overflow: hidden auto;
+        
+        .content {
+            padding: 16px;
+        }
+    }
+
+    .mat-grid-tile.active {
+        background-color: mat-color($accent);
+        color: mat-color($accent, 'default-contrast');
+    }
+}

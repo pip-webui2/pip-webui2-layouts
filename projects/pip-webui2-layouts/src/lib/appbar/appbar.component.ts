@@ -26,6 +26,10 @@ export class PipAppbarComponent implements OnInit {
         return this.router.isActive(this.router.createUrlTree(url), false);
     }
 
+    public getTabName(link: PipAppbarTab) {
+        return link ? (typeof link.name === 'function' ? link.name() : link.name) : '';
+    }
+
     public navigate(link: PipAppbarTab) {
         this.router.navigate(link.route.path);
     }

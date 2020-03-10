@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { PipAppbarService } from '../appbar/shared/appbar.service';
 import { addResizeListener, removeResizeListener, PipMediaService } from '../media/index';
 import { PipSidenavStartService, PipSidenavEndService, PipSidenavView, PipSidenavPosition, PipSidenavSide } from '../sidenav/index';
+import { PipResizeEvent } from '../media/resize.directive';
 
 type RootLayoutOptions = {
     [name in PipSidenavSide]: {
@@ -25,26 +26,21 @@ type RootLayoutOptions = {
 })
 export class PipRootLayoutComponent implements OnDestroy {
 
-    private _element: HTMLElement;
-    private _mainLayoutContainer: string;
-    private _mainContent: MatSidenavContent;
+    // private _element: HTMLElement;
+    // private _mainLayoutContainer: string;
+    // private _mainContent: MatSidenavContent;
     private _subs: { [name: string]: Subscription } = {};
-    private _resizeListener: () => void;
+    // private _resizeListener: () => void;
 
     public psp = PipSidenavPosition;
-
-    @Input() public set mainLayoutContainer(mainLayoutContainer: string) {
-        this._mainLayoutContainer = mainLayoutContainer;
-        this._updateListeners();
-    }
 
     @HostBinding('class.pip-root-layout') readonly pipRootLayoutCls = true;
     @HostBinding('class.pip-with-tabs') get pipWithTabsCls() { return this.appbar.tabs?.length; }
 
-    @ViewChild('mainContent', { static: false }) set mainContent(mainContent: MatSidenavContent) {
-        this._mainContent = mainContent;
-        this._updateListeners();
-    }
+    // @ViewChild('mainContent', { static: false }) set mainContent(mainContent: MatSidenavContent) {
+    //     this._mainContent = mainContent;
+    //     this._updateListeners();
+    // }
 
     public mode$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     public options$: Observable<RootLayoutOptions>;
@@ -89,48 +85,52 @@ export class PipRootLayoutComponent implements OnDestroy {
                 };
             })
         );
-        this._resizeListener = () => this._onResizeMain();
+        // this._resizeListener = () => this._onResizeMain();
     }
 
     ngOnDestroy() {
         Object.keys(this._subs).forEach(k => this._subs[k] && this._subs[k].unsubscribe());
-        if (this._resizeListener && this._element) {
-            removeResizeListener(this._element, this._resizeListener);
-        }
+        // if (this._resizeListener && this._element) {
+        //     removeResizeListener(this._element, this._resizeListener);
+        // }
     }
 
-    private _onResizeMain() {
-        this.mainMedia.updateMainLayoutBreakpoints(this._element.offsetWidth);
+    // private _onResizeMain() {
+    //     this.mainMedia.updateMainLayoutBreakpoints(this._element.offsetWidth);
+    // }
+
+    public onResizeMain(e: PipResizeEvent) {
+        this.mainMedia.updateMainLayoutBreakpoints(e.newWidth);
     }
 
-    private _updateListeners() {
-        if (this._element) {
-            removeResizeListener(this._element, this._resizeListener);
-        }
-        if (this._mainContent) {
-            if (this.mainLayoutContainer != null) {
-                const firstSym = this.mainLayoutContainer.substr(0, 1);
+    // private _updateListeners() {
+    //     if (this._element) {
+    //         removeResizeListener(this._element, this._resizeListener);
+    //     }
+    //     if (this._mainContent) {
+    //         if (this._mainLayoutContainer != null) {
+    //             const firstSym = this._mainLayoutContainer.substr(0, 1);
 
-                const element: any = firstSym === '#'
-                    ? document.getElementById(this.mainLayoutContainer.substring(1, this.mainLayoutContainer.length))
-                    : firstSym === '.'
-                        ? document.getElementsByClassName(this.mainLayoutContainer.substring(1, this.mainLayoutContainer.length))
-                        : document.getElementsByTagName(this.mainLayoutContainer);
-                this._element = firstSym === '#' ? element : element.length > 0
-                    ? element[0]
-                    : this._mainContent.getElementRef().nativeElement;
-            } else {
-                this._element = this._mainContent.getElementRef().nativeElement;
-            }
+    //             const element: any = firstSym === '#'
+    //                 ? document.getElementById(this._mainLayoutContainer.substring(1, this._mainLayoutContainer.length))
+    //                 : firstSym === '.'
+    //                     ? document.getElementsByClassName(this._mainLayoutContainer.substring(1, this._mainLayoutContainer.length))
+    //                     : document.getElementsByTagName(this._mainLayoutContainer);
+    //             this._element = firstSym === '#' ? element : element.length > 0
+    //                 ? element[0]
+    //                 : this._mainContent.getElementRef().nativeElement;
+    //         } else {
+    //             this._element = this._mainContent.getElementRef().nativeElement;
+    //         }
 
-            addResizeListener(this._element, this._resizeListener);
-            setTimeout(() => {
-                this.mainMedia.updateMainLayoutBreakpoints(this._element.offsetWidth);
-            });
-        }
-    }
+    //         addResizeListener(this._element, this._resizeListener);
+    //         setTimeout(() => {
+    //             this.mainMedia.updateMainLayoutBreakpoints(this._element.offsetWidth);
+    //         });
+    //     }
+    // }
 
-    public get mainLayoutContainer() { return this._mainLayoutContainer; }
+    // public get mainLayoutContainer() { return this._mainLayoutContainer; }
 
     public containerCls(ctx: RootLayoutOptions, position: PipSidenavPosition) {
         const res = [];

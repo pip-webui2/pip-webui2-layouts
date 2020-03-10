@@ -2,7 +2,7 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    :host.pip-document-layout {
+    .pip-document-layout {
         color: mat-color($foreground, text) !important;
         background: mat-color($background, card);
 
@@ -11,9 +11,13 @@
         }
     }
 
-    .pip-main-document-lt-lg :host.pip-document-layout {
+    .pip-main-document-lt-lg .pip-document-layout {
         border-left: 1px solid mat-color($foreground, divider) !important;
         border-right: 1px solid mat-color($foreground, divider) !important;
         box-sizing: border-box;
+    }
+
+    :not(.pip-main-document-lt-lg) .pip-document-layout, .pip-toolbar-shadow {
+        box-shadow: 0 1px 5px 0 map-get($foreground, 'disabled-button');
     }
 }

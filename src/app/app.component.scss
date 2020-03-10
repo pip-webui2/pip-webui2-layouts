@@ -25,10 +25,15 @@
 // --------------------------
 
 ::ng-deep .pip-main-content {
-    padding: 16px;
+    overflow: hidden;
 }
 
 .pip-root-layout {
+
+    .mat-list-item h3 {
+        padding-left: 16px;
+    }
+
     ::ng-deep .pip-sidenav-start-collapsed {
         .pip-sidenav-start-collapsed-hide {
             display: none;

@@ -34,8 +34,8 @@
             </mat-sidenav>
 
             <mat-sidenav-content #mainContent class="pip-main-content"
-                [ngStyle]="{'margin-left': ctx.start?.mcm + 'px', 'margin-right': ctx.end?.mcm + 'px'}">
-                <ng-content select="pip-root-content"></ng-content>
+                [ngStyle]="{'margin-left': ctx.start?.mcm + 'px', 'margin-right': ctx.end?.mcm + 'px'}" (pipResize)="onResizeMain($event)">
+                <ng-content class="pip-content"></ng-content>
             </mat-sidenav-content>
         </mat-sidenav-container>
         <ng-content class="pip-root-footer" select="pip-root-footer"></ng-content>

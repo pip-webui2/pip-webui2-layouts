@@ -1,4 +1,8 @@
+@import "./media-example/media-example.component.mixin";
+
 @mixin pip-webui2-layouts-app-mixin($theme) {
+    @include pip-media-example-mixin($theme);
+    
     $background: map-get($theme, 'background');
 
     .pip-sidenav-start .mat-nav-list .mat-list-item.selected {

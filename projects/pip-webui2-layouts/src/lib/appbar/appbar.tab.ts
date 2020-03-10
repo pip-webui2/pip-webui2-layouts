@@ -1,7 +1,7 @@
 import { NavigationExtras } from '@angular/router';
 
 export class PipAppbarTab {
-    name: string;
+    name: string | (() => string);
     route: {
         path: string[],
         extras?: NavigationExtras

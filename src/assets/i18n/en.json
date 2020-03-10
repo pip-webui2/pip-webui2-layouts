@@ -4,7 +4,45 @@
         "EN": "English",
         "RU": "Russian"
     },
+    "MENU": {
+        "BEHAVIORS": {
+            "TITLE": "Behaviors",
+            "FX": "Flex layout directives",
+            "MEDIA": "Media query",
+            "NAVIGATION": "Navigation",
+            "TABS": "Tabs"
+        },
+        "LAYOUTS": {
+            "TITLE": "Layouts",
+            "CARD": "Card",
+            "DOCUMENT": "Document",
+            "MENU": "Menu",
+            "SCROLLABLE": "Scrollable",
+            "TILES": "Tiles"
+        }
+    },
     "PAGE": {
+        "CARD": {
+            "CANCEL": "Cancel",
+            "LOGIN": "Login",
+            "PASSWORD": "Password",
+            "TRANSPARENT": "Transparent",
+            "SIGN_IN": "Sign in",
+            "TEXT": "A lot of text",
+            "SIDENAV": "Active sidenav"
+        },
+        "FX": {
+            "LT1250_1": "Show when main area < 1250 px",
+            "LT1250_2": "Also show when main area < 1250 px",
+            "LTSMO": "And this one should have offset (50px)",
+            "LTSMU": "This text should be underlined if 'lt-sm'"
+        },
+        "MQ": {
+            "TITLE": "Media query",
+            "TIP": "Change size of your browser and try to open sidenavs to change size of main layout area",
+            "DOCUMENT": "Document",
+            "MAIN": "Main layout"
+        },
         "NAVIGATION": {
             "RIGHTNAV": "Right navigation",
             "RIGHTNAV_ALIAS": "Active alias",
@@ -32,6 +70,14 @@
             "SIDENAV_SIZE": "Size",
             "SIDENAV_TOP_GAP": "Top gap",
             "SIDENAV_VIEW": "View"
+        },
+        "TAB": {
+            "FIRST": "First",
+            "FIRST_CONTENT": "This is the content of the First tab",
+            "SECOND": "Second",
+            "SECOND_CONTENT": "This is the content of the Second tab",
+            "TOGGLE_APPBAR_BG": "Toggle appbar background",
+            "TOGGLE_APPBAR_INK": "Toggle appbar ink"
         }
     }
 }

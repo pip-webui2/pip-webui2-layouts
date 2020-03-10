@@ -1979,31 +1979,33 @@ pip-tiles-layout .pip-stretch .pip-tile {
     overflow: hidden; }
 
 /* And call them! */
-/*
-    $primary: map-get($theme, primary);
+.primary-text {
+  color: #bc5679; }
 
-    .primary-text {
-        color: mat-color($primary);
-    }
+.primary-background {
+  background-color: #bc5679;
+  color: white; }
 
-    .primary-background {
-        background-color: mat-color($primary);
-    }
-    */
-:host.pip-document-layout {
+.pip-document-layout {
   color: rgba(0, 0, 0, 0.87) !important;
   background: white; }
-  :host.pip-document-layout ::ng-deep pip-document-footer {
+  .pip-document-layout ::ng-deep pip-document-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.12); }
 
-.pip-main-document-lt-lg :host.pip-document-layout {
+.pip-main-document-lt-lg .pip-document-layout {
   border-left: 1px solid rgba(0, 0, 0, 0.12) !important;
   border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
   box-sizing: border-box; }
+
+:not(.pip-main-document-lt-lg) .pip-document-layout, .pip-toolbar-shadow {
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.26); }
 
 .pip-tile {
   color: rgba(0, 0, 0, 0.87) !important;
   background: white; }
 
-.pip-sidenav .mat-nav-list .mat-list-item.selected {
+pip-media-example .mat-grid-tile.active {
+  background-color: #bc5679; }
+
+.pip-sidenav-start .mat-nav-list .mat-list-item.selected {
   background-color: rgba(0, 0, 0, 0.04); }

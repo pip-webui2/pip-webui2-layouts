@@ -29,9 +29,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CardLayoutExampleModule } from './card-layout-example/card-layout-example.module';
 import { DocumentLayoutExampleModule } from './document-layout-example/document-layout-example.module';
-import { ExamplesListModule } from './examples-list/examples-list.module';
-import { FxLayoutExampleModule } from './fx-layout-example/fx-layout-example.module';
-import { MainLayoutExampleModule } from './main-layout-example/main-layout-example.module';
 import { MainMenuLayoutExampleModule } from './main-menu-layout-example/main-menu-layout-example.module';
 import { ScrollableLayoutExampleModule } from './scrollable-layout-example/scrollable-layout-example.module';
 import { TilesLayoutExampleModule } from './tiles-layout-example/tiles-layout-example.module';
@@ -101,15 +98,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
     PipRootLayoutModule,
 
-    AppRoutingModule,
-    CardLayoutExampleModule,
-    DocumentLayoutExampleModule,
-    ExamplesListModule,
-    FxLayoutExampleModule,
-    MainMenuLayoutExampleModule,
-    MainLayoutExampleModule,
-    ScrollableLayoutExampleModule,
-    TilesLayoutExampleModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

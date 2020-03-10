@@ -1,0 +1,9 @@
+@mixin pip-media-example-mixin($theme) {
+    $primary: map-get($theme, 'primary');
+
+    pip-media-example {
+        .mat-grid-tile.active {
+            background-color: mat-color($primary);
+        }
+    }
+}

@@ -7,13 +7,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PipDocumentLayoutModule, PipTilesLayoutModule, PipMediaModule, PipMenuLayoutModule, PipShadowModule } from 'pip-webui2-layouts';
 
 import { MainMenuLayoutExampleComponent } from './main-menu-layout-example.component';
+import { MainMenuLayoutRoutingModule } from './main-menu-layout.routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     MatListModule, MatSlideToggleModule, MatTabsModule,
-    PipDocumentLayoutModule, PipTilesLayoutModule, PipMediaModule, PipMenuLayoutModule, PipShadowModule
+    PipDocumentLayoutModule, PipTilesLayoutModule, PipMediaModule, PipMenuLayoutModule, PipShadowModule,
+    MainMenuLayoutRoutingModule
   ],
   declarations: [MainMenuLayoutExampleComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

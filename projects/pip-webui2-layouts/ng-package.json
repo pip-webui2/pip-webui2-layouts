@@ -10,7 +10,7 @@
     }
   },
   "whitelistedNonPeerDependencies": [
-    "@ngx-translate",
+    "css-element-queries",
     "masonry-layout",
     "^pip-webui2"
   ]

@@ -4,7 +4,7 @@ import { PipMediaService } from 'pip-webui2-layouts';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-fx-layout-example',
+    selector: 'pip-fx-layout-example',
     templateUrl: './fx-layout-example.component.html',
     styleUrls: ['./fx-layout-example.component.scss']
 })

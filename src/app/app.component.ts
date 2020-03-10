@@ -1,19 +1,27 @@
-import { ChangeDetectorRef, Component, OnInit, AfterViewInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { findIndex } from 'lodash';
 import { PipThemesService, Theme } from 'pip-webui2-themes';
 import { PipMediaService, PipSidenavStartService, PipSidenavEndService } from 'pip-webui2-layouts';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { ExmapleListItem } from './examples-list/shared/ExampleListItem';
+class NavigationListItem {
+  public name: string;
+  public route: string;
+  public icon: string;
+}
+
+class NavigationListGroup {
+  public name: string;
+  public items: NavigationListItem[];
+}
 
 @Component({
   selector: 'pip-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   private _showIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('menu');
 
   public themes: Theme[];
@@ -23,16 +31,26 @@ export class AppComponent implements OnInit, AfterViewInit {
   public onBackClick: Function = null;
   public listIndex = 0;
 
-  public list: ExmapleListItem[] = [
-    { name: 'Media query', id: 'media', route: 'media', icon: 'visibility' },
-    { name: 'Document', id: 'document', route: 'document', icon: 'description' },
-    { name: 'FX layout', id: 'fx', route: 'fx', icon: 'feedback' },
-    { name: 'Tiles', id: 'tiles', route: 'tiles', icon: 'view_module' },
-    { name: 'Menu', id: 'menu', route: 'menu', icon: 'view_quilt' },
-    { name: 'Card', id: 'card', route: 'card', icon: 'view_array' },
-    { name: 'Scrollable', id: 'scrollable', route: 'scrollable', icon: 'view_day' },
-    { name: 'Tabs', id: 'tabs', route: 'tabs', icon: 'view_week' },
-    { name: 'Navigation', id: 'navigation', route: 'navigation', icon: 'navigation' },
+  public groups: NavigationListGroup[] = [
+    {
+      name: 'MENU.BEHAVIORS.TITLE',
+      items: [
+        { name: 'MENU.BEHAVIORS.MEDIA', route: 'media', icon: 'visibility' },
+        { name: 'MENU.BEHAVIORS.FX', route: 'fx', icon: 'feedback' },
+        { name: 'MENU.BEHAVIORS.NAVIGATION', route: 'navigation', icon: 'navigation' },
+        { name: 'MENU.BEHAVIORS.TABS', route: 'tabs', icon: 'view_week' }
+      ]
+    },
+    {
+      name: 'MENU.LAYOUTS.TITLE',
+      items: [
+        { name: 'MENU.LAYOUTS.CARD', route: 'card', icon: 'view_array' },
+        { name: 'MENU.LAYOUTS.DOCUMENT', route: 'document', icon: 'description' },
+        { name: 'MENU.LAYOUTS.MENU', route: 'menu', icon: 'view_quilt' },
+        { name: 'MENU.LAYOUTS.SCROLLABLE', route: 'scrollable', icon: 'view_day' },
+        { name: 'MENU.LAYOUTS.TILES', route: 'tiles', icon: 'view_module' }
+      ]
+    }
   ];
 
   public constructor(
@@ -57,12 +75,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit() { }
-
-  public ngAfterViewInit() {
-    setTimeout(() => {
-      this.setListIndex();
-    });
-  }
 
   public changeLanguage(language: string) {
     this.language = language;
@@ -99,15 +111,5 @@ export class AppComponent implements OnInit, AfterViewInit {
     const v = this._showIcon$.value;
     this.rightnav.toggle();
     this._showIcon$.next(v);
-  }
-
-  private setListIndex() {
-    const url = this.router.url;
-
-    const index = findIndex(this.list, (item) => {
-      return url.includes(item.route);
-    });
-
-    if (index > -1 && this.list.length > 0) { this.listIndex = index; }
   }
 }

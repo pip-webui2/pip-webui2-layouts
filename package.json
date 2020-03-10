@@ -33,6 +33,7 @@
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
     "core-js": "^3.6.4",
+    "css-element-queries": "^1.2.3",
     "lodash": "^4.17.11",
     "masonry-layout": "^4.2.2",
     "node-sass": "^4.13.1",
