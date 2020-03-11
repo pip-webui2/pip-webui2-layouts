@@ -1,49 +1,30 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MediaObserver } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { PipSidenavConfig } from './models/index';
-import { PipSidenavStartService, PipSidenavEndService } from './sidenav.service';
+import { PipSidenavConfig, PIP_SIDENAV_START_CONFIG, PIP_SIDENAV_END_CONFIG } from './models/index';
 
-/** @dynamic */
 @NgModule({
   imports: [
     CommonModule,
     MatSidenavModule
   ]
 })
-export class PipSidenavStartModule {
-  static forRoot(config?: PipSidenavConfig): ModuleWithProviders {
+export class PipSidenavModule {
+  static withConfig(config: {
+    start?: PipSidenavConfig,
+    end?: PipSidenavConfig
+  }): ModuleWithProviders {
     return {
-      ngModule: PipSidenavStartModule,
+      ngModule: PipSidenavModule,
       providers: [
         {
-          provide: PipSidenavStartService,
-          useFactory: function (media) { return new PipSidenavStartService(media, config); },
-          deps: [MediaObserver]
-        }
-      ]
-    };
-  }
-}
-
-/** @dynamic */
-@NgModule({
-  imports: [
-    CommonModule,
-    MatSidenavModule
-  ]
-})
-export class PipSidenavEndModule {
-  static forRoot(config?: PipSidenavConfig): ModuleWithProviders {
-    return {
-      ngModule: PipSidenavEndModule,
-      providers: [
+          provide: PIP_SIDENAV_START_CONFIG,
+          useValue: config.start
+        },
         {
-          provide: PipSidenavEndService,
-          useFactory: function (media) { return new PipSidenavEndService(media, config); },
-          deps: [MediaObserver]
+          provide: PIP_SIDENAV_END_CONFIG,
+          useValue: config.end
         }
       ]
     };

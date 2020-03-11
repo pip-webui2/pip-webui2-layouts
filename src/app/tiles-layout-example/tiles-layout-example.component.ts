@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 
 @Component({
-  selector: 'app-tiles-layout-example',
+  selector: 'pip-tiles-layout-example',
   templateUrl: './tiles-layout-example.component.html',
   styleUrls: ['./tiles-layout-example.component.scss']
 })

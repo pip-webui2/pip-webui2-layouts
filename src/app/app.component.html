@@ -3,7 +3,7 @@
     <pip-nav-expander></pip-nav-expander>
     <mat-nav-list dense>
       <ng-container *ngFor="let g of groups">
-        <h3 mat-subheader>{{ g?.name | translate }}</h3>
+        <h3 mat-subheader class="pip-sidenav-start-collapsed-hide">{{ g?.name | translate }}</h3>
         <mat-list-item *ngFor="let item of g.items" (click)="sidenav?.close()" [routerLink]="item.route"
           routerLinkActive="selected">
           <mat-icon>{{ item?.icon }}</mat-icon>

@@ -6,11 +6,7 @@ import { PipMenuLayoutComponent } from './menu-layout.component';
   declarations: [
     PipMenuLayoutComponent
   ],
-  imports: [],
   exports: [
-    PipMenuLayoutComponent
-  ],
-  providers: [
     PipMenuLayoutComponent
   ]
 })

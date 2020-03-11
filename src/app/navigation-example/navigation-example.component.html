@@ -76,6 +76,21 @@
                 {{ 'PAGE.NAVIGATION.SIDENAV_COLLAPSEABLE' | translate }}
             </mat-slide-toggle>
         </div>
+        <div>
+            <mat-slide-toggle formControlName="collapsed">
+                {{ 'PAGE.NAVIGATION.SIDENAV_COLLAPSED' | translate }}
+            </mat-slide-toggle>
+        </div>
+        <div>
+            <mat-slide-toggle formControlName="opened">
+                {{ 'PAGE.NAVIGATION.SIDENAV_OPENED' | translate }}
+            </mat-slide-toggle>
+        </div>
+        <div>
+            <mat-slide-toggle formControlName="active">
+                {{ 'PAGE.NAVIGATION.SIDENAV_ACTIVE' | translate }}
+            </mat-slide-toggle>
+        </div>
     </div>
     <div *ngIf="rightnavContext$ | async as rctx" [formGroup]="rightnavForm">
         <h2 fxLayoutAlign=" center">
@@ -152,6 +167,21 @@
         <div>
             <mat-slide-toggle formControlName="collapseable">
                 {{ 'PAGE.NAVIGATION.RIGHTNAV_COLLAPSEABLE' | translate }}
+            </mat-slide-toggle>
+        </div>
+        <div>
+            <mat-slide-toggle formControlName="collapsed">
+                {{ 'PAGE.NAVIGATION.RIGHTNAV_COLLAPSED' | translate }}
+            </mat-slide-toggle>
+        </div>
+        <div>
+            <mat-slide-toggle formControlName="opened">
+                {{ 'PAGE.NAVIGATION.RIGHTNAV_OPENED' | translate }}
+            </mat-slide-toggle>
+        </div>
+        <div>
+            <mat-slide-toggle formControlName="active">
+                {{ 'PAGE.NAVIGATION.RIGHTNAV_ACTIVE' | translate }}
             </mat-slide-toggle>
         </div>
     </div>

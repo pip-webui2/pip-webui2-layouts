@@ -70,5 +70,10 @@ export const PIP_BREAKPOINTS: BreakPoint[] = [
         alias: 'document-lt-lg',
         mediaQuery: '(max-width: 1250px)',
         overlapping: true,
+    },
+    {
+        alias: 'document-lg',
+        mediaQuery: '(min-width: 1250px)',
+        overlapping: false,
     }
 ];

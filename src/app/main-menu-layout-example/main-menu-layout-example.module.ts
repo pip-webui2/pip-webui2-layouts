@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
+import { TranslateModule } from '@ngx-translate/core';
 import { PipDocumentLayoutModule, PipTilesLayoutModule, PipMediaModule, PipMenuLayoutModule, PipShadowModule } from 'pip-webui2-layouts';
 
 import { MainMenuLayoutExampleComponent } from './main-menu-layout-example.component';
@@ -14,6 +15,7 @@ import { MainMenuLayoutRoutingModule } from './main-menu-layout.routing.module';
     CommonModule,
     FlexLayoutModule,
     MatListModule, MatSlideToggleModule, MatTabsModule,
+    TranslateModule,
     PipDocumentLayoutModule, PipTilesLayoutModule, PipMediaModule, PipMenuLayoutModule, PipShadowModule,
     MainMenuLayoutRoutingModule
   ],

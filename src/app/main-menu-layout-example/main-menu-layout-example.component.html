@@ -22,9 +22,11 @@
         <pip-document-layout *ngIf="selectedIndex == 0">
           <pip-document-content>
             <h3>Title {{ itemIndex }}</h3>
-            <mat-slide-toggle *ngIf="media.isMainActive('gt-xs')" [(checked)]="isSingle">Single content</mat-slide-toggle>
-            <img style="margin-top: 8px" src="http://s4.thingpic.com/images/pQ/NnndmJd4bex6qPpZAzMJ9mPG.jpeg" width="100%"
-                 alt="">
+            <mat-slide-toggle *ngIf="media.isMainActive('lt-md')" [checked]="isSingle" (change)="goBack()">
+              {{ 'PAGE.MENU.SINGLE' | translate }}
+            </mat-slide-toggle>
+            <img style="margin-top: 8px" src="http://s4.thingpic.com/images/pQ/NnndmJd4bex6qPpZAzMJ9mPG.jpeg"
+              width="100%" alt="">
             <div style="margin-top: 8px">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua.
@@ -72,8 +74,9 @@
           <pip-tiles-layout columnWidth="200">
             <div class="pip-tile pip-tile-narrow" *ngFor="let tile of tiles">
               <h3 style="margin: 16px 8px">{{ tile.title }}</h3>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw6KNcvzNDdDw32Y7Kvnc7zwP6tqwuFLEVJmjsyhQD-X7ls-Z5"
-                   width="100%" alt="">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw6KNcvzNDdDw32Y7Kvnc7zwP6tqwuFLEVJmjsyhQD-X7ls-Z5"
+                width="100%" alt="">
               <div style="margin-top: 8px">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
               </div>

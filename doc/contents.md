@@ -1,0 +1,16 @@
+This is the documentation of `pip-webui2-layouts` module where you could find details about advanced stuff and some tips and tricks.
+## Contents
+* [Layouts](layouts.md)
+  * [Root layout](layouts.md#root-layout)
+  * [Card layout](layouts.md#card-layout)
+  * [Document layout](layouts.md#document-layout)
+  * [Menu layout](layouts.md#menu-layout)
+  * [Scrollable layout](layouts.md#scrollable-layout)
+  * [Tiles layout](layouts.md#tiles-layout)
+* [Behaviors and services](services.md)
+  * [App bar](services.md#app-bar)
+  * [Media](services.md#media)
+  * [Sidenavs (start and end)](services.md#sidenav)
+* [Components](components.md)
+  * [Sidenav expander](components.md#sidenav-expander)
+  * [Shadow](components.md#shadow)

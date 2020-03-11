@@ -4,18 +4,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { PipRootLayoutComponent } from './root-layout.component';
+import { PipMediaModule } from '../media/media.module';
 
 @NgModule({
   declarations: [
     PipRootLayoutComponent
   ],
+  exports: [
+    PipRootLayoutComponent
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    MatSidenavModule
-  ],
-  exports: [
-    PipRootLayoutComponent
+    MatSidenavModule,
+    PipMediaModule
   ]
 })
 export class PipRootLayoutModule { }

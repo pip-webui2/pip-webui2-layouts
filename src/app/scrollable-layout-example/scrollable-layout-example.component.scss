@@ -1,4 +1,7 @@
-pip-scrollable-content {
-    font-family: Roboto;
-    padding: 16px;
+:host {
+    height: 100%;
+
+    .pip-scrollable-content {
+        padding: 16px;
+    }
 }

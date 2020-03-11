@@ -1,6 +1,9 @@
 declare var require: any;
 
-import { Component, EventEmitter, ElementRef, Input, Output, OnInit, OnDestroy, OnChanges, ChangeDetectorRef, AfterViewInit, SimpleChanges, Renderer2 } from '@angular/core';
+import {
+    Component, EventEmitter, ElementRef, Input, Output,
+    OnInit, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, HostBinding
+} from '@angular/core';
 import { addResizeListener, removeResizeListener } from '../media/resize-layout.function';
 
 const masonry = require('masonry-layout');
@@ -11,6 +14,9 @@ const masonry = require('masonry-layout');
     templateUrl: './tiles-layout.component.html'
 })
 export class PipTilesLayoutComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
+
+    @HostBinding('class.pip-tiles-layout') pipTilesLayoutCls = true;
+
     @Input() columnWidth: number | string;
     @Input() stretch: boolean;
     @Input() animation = true;
@@ -22,7 +28,7 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy, AfterViewInit
     private listener: any;
     private sizer: any;
     private prevContainerWidth: any = null;
-    private observer: any;
+    private observer: MutationObserver;
     private debounced: Function;
 
     public tilesOptions: any = {
@@ -34,11 +40,8 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy, AfterViewInit
     };
 
     constructor(
-        private renderer: Renderer2,
-        private elRef: ElementRef,
-        private cd: ChangeDetectorRef
+        private elRef: ElementRef
     ) {
-        renderer.addClass(elRef.nativeElement, 'pip-tiles-layout');
         this.listener = () => { this.onResize(true); };
     }
 
@@ -86,6 +89,9 @@ export class PipTilesLayoutComponent implements OnInit, OnDestroy, AfterViewInit
     }
 
     public ngOnDestroy() {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
         if (this.masonry) {
             this.masonry.destroy();
         }

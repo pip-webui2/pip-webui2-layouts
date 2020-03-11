@@ -1,10 +1,10 @@
-import { Component, Host, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PipMediaService } from 'pip-webui2-layouts';
 
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'app-main-menu-layout-example',
+  selector: 'pip-main-menu-layout-example',
   templateUrl: './main-menu-layout-example.component.html',
   styleUrls: ['./main-menu-layout-example.component.scss']
 })
@@ -23,7 +23,7 @@ export class MainMenuLayoutExampleComponent implements OnInit {
 
   constructor(
     public media: PipMediaService,
-    @Host() private parent: AppComponent
+    private parent: AppComponent
   ) { }
 
   ngOnInit() {
@@ -59,6 +59,10 @@ export class MainMenuLayoutExampleComponent implements OnInit {
         this.parent.showIcon = this._prevIcon;
       };
     }
+  }
+
+  public goBack() {
+    this?.parent?.onBackClick();
   }
 
 }

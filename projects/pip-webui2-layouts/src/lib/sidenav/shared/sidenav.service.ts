@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, of, combineLatest } from 'rxjs';
+import { Injectable, Inject, Optional } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { cloneDeep, defaultsDeep } from 'lodash';
-
-import { PipSidenavView, PipSidenavPosition, PipSidenavConfig } from './models/index';
+import { Observable, BehaviorSubject, of, combineLatest } from 'rxjs';
 import { switchMap, map, shareReplay, distinctUntilChanged, tap } from 'rxjs/operators';
+
+import { PipSidenavView, PipSidenavPosition, PipSidenavConfig, PIP_SIDENAV_START_CONFIG, PIP_SIDENAV_END_CONFIG } from './models/index';
 
 abstract class PipSidenavService {
 
@@ -38,7 +38,8 @@ abstract class PipSidenavService {
                 const correctViews = sc.views?.filter(v => v.alias) ?? [];
                 if (correctViews && correctViews.length) { this.views = correctViews; }
             }
-            if (sc.opened) { this._opened$.next(true); }
+            if (sc.hasOwnProperty('opened')) { this._opened$.next(sc.opened); }
+            if (sc.hasOwnProperty('active')) { this._active$.next(sc.active); }
         }
         this.currentView$ = combineLatest(this._defaultView$.asObservable(), this.views$).pipe(
             switchMap(([defaultView, views]) => {
@@ -58,7 +59,21 @@ abstract class PipSidenavService {
                 );
             }),
             distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
-            tap(v => this._currentView = v),
+            tap(v => {
+                this._currentView = v;
+                if (this.collapsed !== v?.collapsed) {
+                    this.collapsed = v.collapsed;
+                }
+                if (v.hasOwnProperty('opened') && this.opened !== v?.opened) {
+                    this._opened$.next(v.opened);
+                }
+                if (v.hasOwnProperty('active') && this.active !== v?.active) {
+                    this._active$.next(v.active);
+                }
+                if (v.hasOwnProperty('collapsed') && this.collapsed !== v?.collapsed) {
+                    this._collapsed$.next(v.collapsed);
+                }
+            }),
             shareReplay()
         );
     }
@@ -117,7 +132,13 @@ abstract class PipSidenavService {
     }
 
     public set views(views: PipSidenavView[]) {
-        const vts = cloneDeep(views);
+        const vts = cloneDeep(views).map(view => defaultsDeep(view, {
+            collapseable: false,
+            collapsed: false,
+            opened: false,
+            width: 200,
+            widthCollapsed: 64
+        } as PipSidenavView));
         if (vts) {
             const di = vts.findIndex(v => v.name === 'default');
             if (di !== -1) {
@@ -126,6 +147,12 @@ abstract class PipSidenavService {
             }
         }
         this._views$.next(vts);
+    }
+
+    public get allViews(): PipSidenavView[] {
+        const dv = this._defaultView$.value;
+        const vs = this._views$.value;
+        return vs && vs.length ? [dv, ...vs] : [dv];
     }
 
     public get allViews$(): Observable<PipSidenavView[]> {
@@ -177,6 +204,8 @@ abstract class PipSidenavService {
         if (view?.name === 'default') { return; }
         const views = this._views$.value;
         views.push(defaultsDeep(view, {
+            collapseable: false,
+            collapsed: false,
             width: 200,
             widthCollapsed: 64
         } as PipSidenavView));
@@ -185,6 +214,8 @@ abstract class PipSidenavService {
 
     public updateView(view: PipSidenavView) {
         const populatedView = defaultsDeep(cloneDeep(view), {
+            collapseable: false,
+            collapsed: false,
             width: 200,
             widthCollapsed: 64
         } as PipSidenavView);
@@ -197,21 +228,31 @@ abstract class PipSidenavService {
     }
 
     public removeViewAt(position: number) {
-        const views = this._views$.value;
+        const views = this._views$.value ?? [];
         if (position < 0 || position >= views.length) { return; }
         views.splice(position, 1);
         this._views$.next(views);
     }
 
     public removeView(name: string) {
-        const views = this._views$.value.filter(v => v.name === name);
+        const views = (this._views$.value ?? []).filter(v => v.name === name);
         this._views$.next(views);
     }
     //#endregion
 }
 
-@Injectable()
-export class PipSidenavStartService extends PipSidenavService {}
+@Injectable({ providedIn: 'root' })
+export class PipSidenavStartService extends PipSidenavService {
+    constructor(
+        media: MediaObserver,
+        @Optional() @Inject(PIP_SIDENAV_START_CONFIG) sc: PipSidenavConfig
+    ) { super(media, sc); }
+}
 
-@Injectable()
-export class PipSidenavEndService extends PipSidenavService {}
+@Injectable({ providedIn: 'root' })
+export class PipSidenavEndService extends PipSidenavService {
+    constructor(
+        media: MediaObserver,
+        @Optional() @Inject(PIP_SIDENAV_END_CONFIG) sc: PipSidenavConfig
+    ) { super(media, sc); }
+}
