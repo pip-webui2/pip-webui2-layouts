@@ -1,3 +1,4 @@
+import { PipSidenavSide } from './models/PipSidenavSide';
 import { Injectable, Inject, Optional } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { cloneDeep, defaultsDeep } from 'lodash';
@@ -6,7 +7,24 @@ import { switchMap, map, shareReplay, distinctUntilChanged, tap } from 'rxjs/ope
 
 import { PipSidenavView, PipSidenavPosition, PipSidenavConfig, PIP_SIDENAV_START_CONFIG, PIP_SIDENAV_END_CONFIG } from './models/index';
 
-abstract class PipSidenavService {
+@Injectable({
+    providedIn: 'root'
+})
+export class PipSidenavService {
+    private services: { [side in PipSidenavSide]?: PipSidenavController } = {};
+
+    constructor(media: MediaObserver,
+        @Optional() @Inject(PIP_SIDENAV_START_CONFIG) ssc: PipSidenavConfig,
+        @Optional() @Inject(PIP_SIDENAV_END_CONFIG) sec: PipSidenavConfig) {
+        this.services[PipSidenavSide.Start] = new PipSidenavController(media, ssc);
+        this.services[PipSidenavSide.End] = new PipSidenavController(media, sec);
+    }
+
+    get start(): PipSidenavController { return this.services[PipSidenavSide.Start]; }
+    get end(): PipSidenavController { return this.services[PipSidenavSide.End]; }
+}
+
+export class PipSidenavController {
 
     private _currentView: PipSidenavView;
     private _defaultView$: BehaviorSubject<PipSidenavView> = new BehaviorSubject<PipSidenavView>({
@@ -41,7 +59,7 @@ abstract class PipSidenavService {
             if (sc.hasOwnProperty('opened')) { this._opened$.next(sc.opened); }
             if (sc.hasOwnProperty('active')) { this._active$.next(sc.active); }
         }
-        this.currentView$ = combineLatest(this._defaultView$.asObservable(), this.views$).pipe(
+        this.currentView$ = combineLatest([this._defaultView$.asObservable(), this.views$]).pipe(
             switchMap(([defaultView, views]) => {
                 const correctViews = views?.filter(v => v.alias) ?? [];
                 if (!views || !correctViews.length) { return of(defaultView); }
@@ -100,29 +118,15 @@ abstract class PipSidenavService {
         this._defaultView$.next(defaultView);
     }
 
-    public get active(): boolean {
-        return this._active$.value;
-    }
+    public get active(): boolean { return this._active$.value; }
+    public set active(active: boolean) { this._active$.next(active); }
 
-    public set active(active: boolean) {
-        this._active$.next(active);
-    }
+    public get collapsed(): boolean { return this._collapsed$.value; }
+    public set collapsed(collapsed: boolean) { this._collapsed$.next(collapsed); }
 
-    public get collapsed(): boolean {
-        return this._collapsed$.value;
-    }
+    public get opened(): boolean { return this._opened$.value; }
+    public set opened(opened: boolean) { this._opened$.next(opened); }
 
-    public set collapsed(collapsed: boolean) {
-        this._collapsed$.next(collapsed);
-    }
-
-    public get opened(): boolean {
-        return this._opened$.value;
-    }
-
-    public set opened(opened: boolean) {
-        this._opened$.next(opened);
-    }
     public get views(): PipSidenavView[] {
         return new Proxy(this._views$.value, {
             set() { throw new Error(); },
@@ -156,10 +160,10 @@ abstract class PipSidenavService {
     }
 
     public get allViews$(): Observable<PipSidenavView[]> {
-        return combineLatest(
+        return combineLatest([
             this.defaultView$,
             this.views$
-        ).pipe(
+        ]).pipe(
             map(([dv, vs]) => vs && vs.length ? [dv, ...vs] : [dv])
         );
     }
@@ -239,20 +243,4 @@ abstract class PipSidenavService {
         this._views$.next(views);
     }
     //#endregion
-}
-
-@Injectable({ providedIn: 'root' })
-export class PipSidenavStartService extends PipSidenavService {
-    constructor(
-        media: MediaObserver,
-        @Optional() @Inject(PIP_SIDENAV_START_CONFIG) sc: PipSidenavConfig
-    ) { super(media, sc); }
-}
-
-@Injectable({ providedIn: 'root' })
-export class PipSidenavEndService extends PipSidenavService {
-    constructor(
-        media: MediaObserver,
-        @Optional() @Inject(PIP_SIDENAV_END_CONFIG) sc: PipSidenavConfig
-    ) { super(media, sc); }
 }

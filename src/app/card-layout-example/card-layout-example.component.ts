@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PipSidenavStartService } from 'pip-webui2-layouts';
+import { PipSidenavService } from 'pip-webui2-layouts';
 
 @Component({
   selector: 'pip-card-layout-example',
@@ -13,12 +13,12 @@ export class CardLayoutExampleComponent {
   public text = false;
 
   constructor(
-    public sidenav: PipSidenavStartService
+    public sidenav: PipSidenavService
   ) { }
 
   public onSidenavClick() {
     this.sidenavActive = !this.sidenavActive;
-    this.sidenav.active = this.sidenavActive;
+    this.sidenav.start.active = this.sidenavActive;
   }
 
 }

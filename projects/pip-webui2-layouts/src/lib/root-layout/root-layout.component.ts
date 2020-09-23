@@ -1,11 +1,10 @@
-import { Component, HostBinding, OnDestroy, Input, ViewChild } from '@angular/core';
-import { BehaviorSubject, Subscription, Observable, combineLatest } from 'rxjs';
+import { Component, HostBinding, OnDestroy } from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { PipAppbarService } from '../appbar/shared/appbar.service';
 import { PipMediaService } from '../media/index';
-import { PipSidenavStartService, PipSidenavEndService, PipSidenavView, PipSidenavPosition, PipSidenavSide } from '../sidenav/index';
 import { PipResizeEvent } from '../media/resize.directive';
+import { PipSidenavPosition, PipSidenavService, PipSidenavSide, PipSidenavView } from '../sidenav/index';
 
 type RootLayoutOptions = {
     [name in PipSidenavSide]: {
@@ -36,29 +35,28 @@ export class PipRootLayoutComponent implements OnDestroy {
     public options$: Observable<RootLayoutOptions>;
 
     public constructor(
-        public ss: PipSidenavStartService,
-        public se: PipSidenavEndService,
+        public sidenav: PipSidenavService,
         private appbar: PipAppbarService,
         private mainMedia: PipMediaService,
     ) {
         this.options$ = combineLatest(
-            this.ss.currentView$,
-            this.ss.opened$,
-            this.ss.collapsed$,
-            this.se.currentView$,
-            this.se.opened$,
-            this.se.collapsed$
+            this.sidenav.start.currentView$,
+            this.sidenav.start.opened$,
+            this.sidenav.start.collapsed$,
+            this.sidenav.end.currentView$,
+            this.sidenav.end.opened$,
+            this.sidenav.end.collapsed$
         ).pipe(
             map(([
                 sview, sopened, scollapsed,
                 rview, ropened, rcollapsed
             ]) => {
                 const sw = scollapsed
-                    ? sview?.widthCollapsed ?? this.ss.defaultView.widthCollapsed
-                    : sview?.width ?? this.ss.defaultView.width;
+                    ? sview?.widthCollapsed ?? this.sidenav.start.defaultView.widthCollapsed
+                    : sview?.width ?? this.sidenav.start.defaultView.width;
                 const rw = rcollapsed
-                    ? rview?.widthCollapsed ?? this.se.defaultView.widthCollapsed
-                    : rview?.width ?? this.se.defaultView.width;
+                    ? rview?.widthCollapsed ?? this.sidenav.end.defaultView.widthCollapsed
+                    : rview?.width ?? this.sidenav.end.defaultView.width;
                 return {
                     [PipSidenavSide.Start]: {
                         view: sview,
@@ -101,7 +99,7 @@ export class PipRootLayoutComponent implements OnDestroy {
     }
 
     public backdropClick(): void {
-        this.ss.close();
-        this.se.close();
+        this.sidenav.start.close();
+        this.sidenav.end.close();
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import {
-  PipSidenavStartService, PipSidenavEndService, PipSidenavPosition
+  PipSidenavService, PipSidenavPosition
 } from 'pip-webui2-layouts';
 import { Subscription, Observable, BehaviorSubject, merge, combineLatest, empty } from 'rxjs';
 import { debounceTime, map, switchMap, filter, withLatestFrom, take, tap, distinctUntilChanged } from 'rxjs/operators';
@@ -58,13 +58,12 @@ export class NavigationExampleComponent implements OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    public se: PipSidenavEndService,
-    public ss: PipSidenavStartService
+    public sidenav: PipSidenavService
   ) {
     // Sidenav
     this.sidenavView$ = merge(
       this.sidenavViewManual$.asObservable(),
-      this.ss.currentView$.pipe(map(v => v?.name ?? 'default'))
+      this.sidenav.start.currentView$.pipe(map(v => v?.name ?? 'default'))
     ).pipe(distinctUntilChanged());
     this.sidenavForm = this.fb.group({
       position: null,
@@ -82,9 +81,9 @@ export class NavigationExampleComponent implements OnDestroy {
     });
     this.sidenavContext$ = combineLatest(
       this.sidenavView$,
-      this.ss.allViews$,
-      this.ss.collapsed$,
-      this.ss.opened$
+      this.sidenav.start.allViews$,
+      this.sidenav.start.collapsed$,
+      this.sidenav.start.opened$
     ).pipe(map(([view, views, collapsed, opened]) => ({
       view,
       views: views.map(v => v.name),
@@ -94,7 +93,7 @@ export class NavigationExampleComponent implements OnDestroy {
     })));
     this.subs.add(this.sidenavView$.pipe(
       filter(v => !!v),
-      withLatestFrom(this.ss.allViews$),
+      withLatestFrom(this.sidenav.start.allViews$),
       map(([view, views]) => views?.find(v => v.name === view))
     ).subscribe(view => {
       this.sidenavForm.patchValue({
@@ -136,12 +135,12 @@ export class NavigationExampleComponent implements OnDestroy {
           width: val.width,
           widthCollapsed: val.widthCollapsed
         }))
-      ).subscribe(v => this.ss.updateView(v)));
+      ).subscribe(v => this.sidenav.start.updateView(v)));
 
     // Rightnav
     this.rightnavView$ = merge(
       this.rightnavViewManual$.asObservable(),
-      this.se.currentView$.pipe(map(v => v?.name ?? 'default'))
+      this.sidenav.end.currentView$.pipe(map(v => v?.name ?? 'default'))
     ).pipe(distinctUntilChanged());
     this.rightnavForm = this.fb.group({
       position: null,
@@ -159,9 +158,9 @@ export class NavigationExampleComponent implements OnDestroy {
     });
     this.rightnavContext$ = combineLatest(
       this.rightnavView$,
-      this.se.allViews$,
-      this.se.collapsed$,
-      this.se.opened$
+      this.sidenav.end.allViews$,
+      this.sidenav.end.collapsed$,
+      this.sidenav.end.opened$
     ).pipe(map(([view, views, collapsed, opened]) => ({
       view,
       views: views.map(v => v.name),
@@ -171,7 +170,7 @@ export class NavigationExampleComponent implements OnDestroy {
     })));
     this.subs.add(this.rightnavView$.pipe(
       filter(v => !!v),
-      withLatestFrom(this.se.allViews$),
+      withLatestFrom(this.sidenav.end.allViews$),
       map(([view, views]) => views?.find(v => v.name === view))
     ).subscribe(view => {
       this.rightnavForm.patchValue({
@@ -213,17 +212,17 @@ export class NavigationExampleComponent implements OnDestroy {
           width: val.width,
           widthCollapsed: val.widthCollapsed
         }))
-      ).subscribe(v => this.se.updateView(v)));
+      ).subscribe(v => this.sidenav.end.updateView(v)));
   }
 
   ngOnDestroy() { this.subs.unsubscribe(); }
 
   changeSidenavView(view: string) { this.sidenavViewManual$.next(view); }
-  toggleSidenavCollapse() { this.ss.toggleCollapse(); }
-  toggleSidenav() { this.ss.toggle(); }
+  toggleSidenavCollapse() { this.sidenav.start.toggleCollapse(); }
+  toggleSidenav() { this.sidenav.start.toggle(); }
 
   changeRightnavView(view: string) { this.rightnavViewManual$.next(view); }
-  toggleRightnavCollapse() { this.se.toggleCollapse(); }
-  toggleRightnav() { this.se.toggle(); }
+  toggleRightnavCollapse() { this.sidenav.end.toggleCollapse(); }
+  toggleRightnav() { this.sidenav.end.toggle(); }
 
 }

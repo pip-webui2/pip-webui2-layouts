@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { PipMediaService } from '../media/shared/media.service';
-import { PipSidenavStartService, PipSidenavEndService, PipSidenavSide } from '../sidenav';
+import { PipSidenavService, PipSidenavSide } from '../sidenav/index';
 
 @Component({
     selector: 'pip-nav-expander',
@@ -25,27 +25,19 @@ export class PipNavExpanderComponent {
 
     constructor(
         public media: PipMediaService,
-        public se: PipSidenavEndService,
-        public ss: PipSidenavStartService
+        public sidenav: PipSidenavService
     ) {
         this.icon$ = this._side$.asObservable().pipe(
-            switchMap(side => side === PipSidenavSide.Start ? this.ss.collapsed$ : this.se.collapsed$),
+            switchMap(side => side === PipSidenavSide.Start ? this.sidenav.start.collapsed$ : this.sidenav.end.collapsed$),
             map(e => e ? this.expandIcon : this.collapseIcon)
         );
         this.show$ = this._side$.asObservable().pipe(
-            switchMap(side => side === PipSidenavSide.Start ? this.ss.currentView$ : this.se.currentView$),
+            switchMap(side => side === PipSidenavSide.Start ? this.sidenav.start.currentView$ : this.sidenav.end.currentView$),
             map(v => v.collapseable)
         );
     }
 
     toggleCollapse() {
-        switch (this._side$.value) {
-            case PipSidenavSide.Start:
-                this.ss.toggleCollapse();
-                break;
-            case PipSidenavSide.End:
-                this.se.toggleCollapse();
-                break;
-        }
+        this.sidenav[this._side$.value].toggleCollapse();
     }
 }

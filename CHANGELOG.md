@@ -1,3 +1,10 @@
+## <a name="2.0.0-rc.2"></a> 2.0.0-rc.2 (2020-09-22)
+
+## Breaking Changes
+* `PipSidenavStartService` and `PipSidenavEndService` now merged to `PipSidenavService`
+
+---
+
 ## <a name="2.0.0-rc.1"></a> 2.0.0-rc.1 (2020-02-27)
 
 There's plenty changes mostly based on theme building process and sidenav implementation. There's list of features below, but for documentation you should check [this article](./doc/contents.md).
@@ -5,7 +12,7 @@ There's plenty changes mostly based on theme building process and sidenav implem
 ## Features
 ### Layouts
 * `pip-root-layout` - base layout;
-* `pip-card-lqyout` - layout with a single card;
+* `pip-card-layout` - layout with a single card;
 * `pip-document-layout` - layout where content has restricted width based on document width;
 * `pip-menu-layout` - layout with left menu;
 * `pip-scrollable` - layout with scrollable content;

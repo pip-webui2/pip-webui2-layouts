@@ -16,7 +16,7 @@ const PipBreakPointsProvider = {
   exports: [PipShowHideDirective, PipResizeDirective]
 })
 export class PipMediaModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<PipMediaModule> {
     return {
       ngModule: PipMediaModule,
       providers: [

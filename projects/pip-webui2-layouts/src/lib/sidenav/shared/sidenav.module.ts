@@ -1,8 +1,7 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
-import { PipSidenavConfig, PIP_SIDENAV_START_CONFIG, PIP_SIDENAV_END_CONFIG } from './models/index';
+import { PipSidenavConfig, PIP_SIDENAV_END_CONFIG, PIP_SIDENAV_START_CONFIG } from './models/index';
 
 @NgModule({
   imports: [
@@ -14,7 +13,7 @@ export class PipSidenavModule {
   static withConfig(config: {
     start?: PipSidenavConfig,
     end?: PipSidenavConfig
-  }): ModuleWithProviders {
+  }): ModuleWithProviders<PipSidenavModule> {
     return {
       ngModule: PipSidenavModule,
       providers: [

@@ -1,6 +1,6 @@
 {
   "name": "pip-webui2-layouts",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -37,8 +37,8 @@
     "lodash": "^4.17.11",
     "masonry-layout": "^4.2.2",
     "node-sass": "^4.13.1",
-    "pip-webui2-themes": "^2.0.0-rc.2",
-    "rxjs": "~6.5.4",
+    "pip-webui2-themes": "^2.0.0-rc.3",
+    "rxjs": "~6.6.3",
     "scss-bundle": "^2.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

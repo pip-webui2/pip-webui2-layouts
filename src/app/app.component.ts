@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PipThemesService, Theme } from 'pip-webui2-themes';
-import { PipMediaService, PipSidenavStartService, PipSidenavEndService } from 'pip-webui2-layouts';
+import { PipMediaService, PipSidenavService } from 'pip-webui2-layouts';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 class NavigationListItem {
@@ -55,8 +55,7 @@ export class AppComponent implements OnInit {
 
   public constructor(
     public media: PipMediaService,
-    public sidenav: PipSidenavStartService,
-    private rightnav: PipSidenavEndService,
+    public sidenav: PipSidenavService,
     private translate: TranslateService,
     private cd: ChangeDetectorRef,
     private router: Router,
@@ -92,7 +91,7 @@ export class AppComponent implements OnInit {
 
   public onListItemIndexChanged(index: number) {
     this.listIndex = index;
-    this.sidenav.close();
+    this.sidenav.start.close();
   }
 
   public set showIcon(icon: string) {
@@ -104,12 +103,12 @@ export class AppComponent implements OnInit {
   }
 
   public onMenuClick() {
-    this.sidenav.toggle();
+    this.sidenav.start.toggle();
   }
 
   public onInfoClick() {
     const v = this._showIcon$.value;
-    this.rightnav.toggle();
+    this.sidenav.end.toggle();
     this._showIcon$.next(v);
   }
 }
