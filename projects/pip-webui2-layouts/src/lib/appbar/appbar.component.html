@@ -1,4 +1,5 @@
-<mat-toolbar [color]="appbar.bgColor"
+<ng-container *ngIf="appbar.active">
+    <mat-toolbar [color]="appbar.bgColor"
     [ngClass]="{'with-select': appbar.fallbackToSelect && !media.isMainActive(appbar.fallbackSize)}">
     <mat-toolbar-row>
         <ng-content></ng-content>
@@ -20,3 +21,4 @@
         [active]="isActive(link.route.path)">{{ getTabName(link) }}
     </a>
 </nav>
+</ng-container>

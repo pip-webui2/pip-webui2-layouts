@@ -1,3 +1,10 @@
+## <a name="2.0.0-rc.3"></a> 2.0.0-rc.3 (2020-09-24)
+
+## New Features
+* `PipAppbarService` now has property `active` to completely hide appbar.
+
+---
+
 ## <a name="2.0.0-rc.2"></a> 2.0.0-rc.2 (2020-09-22)
 
 ## Breaking Changes

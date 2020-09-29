@@ -8,6 +8,7 @@ import { PipAppbarTab } from '../appbar.tab';
 @Injectable()
 export class PipAppbarService {
 
+    public active = true;
     public color = 'primary';
     public bgColor = 'primary';
     public fallbackToSelect: boolean;
