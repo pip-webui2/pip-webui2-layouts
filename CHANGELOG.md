@@ -1,3 +1,12 @@
+## <a name="2.0.0-rc.4"></a> 2.0.0-rc.4 (2020-10-01)
+
+Updated to Angular 10
+
+## Bug fixes
+* Fixed sidenav missed property
+
+---
+
 ## <a name="2.0.0-rc.3"></a> 2.0.0-rc.3 (2020-09-24)
 
 ## New Features
@@ -17,6 +26,7 @@
 There's plenty changes mostly based on theme building process and sidenav implementation. There's list of features below, but for documentation you should check [this article](./doc/contents.md).
 
 ## Features
+### Layouts
 ### Layouts
 * `pip-root-layout` - base layout;
 * `pip-card-layout` - layout with a single card;

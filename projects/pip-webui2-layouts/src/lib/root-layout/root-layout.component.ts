@@ -43,13 +43,15 @@ export class PipRootLayoutComponent implements OnDestroy {
             this.sidenav.start.currentView$,
             this.sidenav.start.opened$,
             this.sidenav.start.collapsed$,
+            this.sidenav.start.active$,
             this.sidenav.end.currentView$,
             this.sidenav.end.opened$,
-            this.sidenav.end.collapsed$
+            this.sidenav.end.collapsed$,
+            this.sidenav.end.active$
         ).pipe(
             map(([
-                sview, sopened, scollapsed,
-                rview, ropened, rcollapsed
+                sview, sopened, scollapsed, sactive,
+                rview, ropened, rcollapsed, eactive
             ]) => {
                 const sw = scollapsed
                     ? sview?.widthCollapsed ?? this.sidenav.start.defaultView.widthCollapsed
@@ -64,7 +66,8 @@ export class PipRootLayoutComponent implements OnDestroy {
                         collapsed: scollapsed,
                         width: sw,
                         rcm: sopened && sview?.position === PipSidenavPosition.Root && ['side', 'push'].includes(sview.mode) ? sw : 0,
-                        mcm: sopened && sview?.position === PipSidenavPosition.Main && ['side', 'push'].includes(sview.mode) ? sw : 0
+                        mcm: sopened && sview?.position === PipSidenavPosition.Main && ['side', 'push'].includes(sview.mode) ? sw : 0,
+                        active: sactive
                     },
                     [PipSidenavSide.End]: {
                         view: rview,
@@ -72,7 +75,8 @@ export class PipRootLayoutComponent implements OnDestroy {
                         collapsed: rcollapsed,
                         width: rw,
                         rcm: ropened && rview?.position === PipSidenavPosition.Root && ['side', 'push'].includes(rview.mode) ? rw : 0,
-                        mcm: ropened && rview?.position === PipSidenavPosition.Main && ['side', 'push'].includes(rview.mode) ? rw : 0
+                        mcm: ropened && rview?.position === PipSidenavPosition.Main && ['side', 'push'].includes(rview.mode) ? rw : 0,
+                        active: eactive
                     }
                 };
             })

@@ -1,6 +1,6 @@
 {
   "name": "pip-webui2-layouts",
-  "version": "2.0.0-rc.3",
+  "version": "2.0.0-rc.4",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -9,7 +9,8 @@
   "dependencies": {
     "css-element-queries": "^1.2.3",
     "masonry-layout": "^4.2.2",
-    "pip-webui2-themes": "^2.0.0-rc.3"
+    "pip-webui2-themes": "^2.0.0-rc.3",
+    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",
