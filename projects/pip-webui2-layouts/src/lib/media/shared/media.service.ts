@@ -34,7 +34,7 @@ export class PipMediaService implements OnDestroy {
     }
 
     private _setMainLayoutBreakpoints() {
-        const regExp = new RegExp(/\([a-z-:' '0-9]+\)/g);
+        const regExp = new RegExp(/\([a-z-]*: [0-9|\.]+px\)/g);
         this._mainLayoutBreakpoints = {};
 
         for (const item of this.breakpoints.items) {
@@ -42,7 +42,7 @@ export class PipMediaService implements OnDestroy {
             this._mainLayoutBreakpoints[item.alias] = { min: 0, max: 10000, active: false };
 
             for (const match of matches) {
-                const num = match.match(new RegExp(/[0-9]+/g));
+                const num = match.match(new RegExp(/[0-9|\.]+/g));
                 if (num) {
                     if (match.includes('max-width')) { this._mainLayoutBreakpoints[item.alias].max = Number(num); }
                     if (match.includes('min-width')) { this._mainLayoutBreakpoints[item.alias].min = Number(num); }

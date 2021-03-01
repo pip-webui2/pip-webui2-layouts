@@ -1,3 +1,12 @@
+## <a name="2.0.0-rc.5"></a> 2.0.0-rc.5 (2021-03-01)
+
+Fixed floating point layout breakpoints
+
+## Bug fixes
+* Fixed floating point layout breakpoints
+
+---
+
 ## <a name="2.0.0-rc.4"></a> 2.0.0-rc.4 (2020-10-01)
 
 Updated to Angular 10
