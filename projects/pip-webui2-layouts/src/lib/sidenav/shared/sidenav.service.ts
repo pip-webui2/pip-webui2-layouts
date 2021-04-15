@@ -37,6 +37,7 @@ export class PipSidenavController {
     private _active$: BehaviorSubject<boolean> = new BehaviorSubject(true);
     private _collapsed$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     private _opened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _toggleable$: BehaviorSubject<boolean> = new BehaviorSubject(true);
     private _views$: BehaviorSubject<PipSidenavView[]> = new BehaviorSubject<PipSidenavView[]>([]);
 
     public active$ = this._active$.asObservable();
@@ -87,6 +88,8 @@ export class PipSidenavController {
                 }
                 if (v.hasOwnProperty('active') && this.active !== v?.active) {
                     this._active$.next(v.active);
+                } else if (!v.hasOwnProperty('active') && !this.active) {
+                    this._active$.next(true);
                 }
                 if (v.hasOwnProperty('collapsed') && this.collapsed !== v?.collapsed) {
                     this._collapsed$.next(v.collapsed);
