@@ -1,3 +1,12 @@
+## <a name="2.0.0-rc.6"></a> 2.0.0-rc.6 (2021-04-15)
+
+Fixed sidenav visibility
+
+## Bug fixes
+* Fixed sidenav visibility
+
+---
+
 ## <a name="2.0.0-rc.5"></a> 2.0.0-rc.5 (2021-03-01)
 
 Fixed floating point layout breakpoints
