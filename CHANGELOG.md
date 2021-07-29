@@ -1,3 +1,12 @@
+## <a name="2.0.0-rc.7"></a> 2.0.0-rc.7 (2021-07-29)
+
+Reduce number of class updates for main layout
+
+## Bug fixes
+* Reduce number of class updates for main layout
+
+---
+
 ## <a name="2.0.0-rc.6"></a> 2.0.0-rc.6 (2021-04-15)
 
 Fixed sidenav visibility
